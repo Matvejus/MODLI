@@ -136,7 +136,7 @@ class TransportMethod(models.Model):
     fuel = models.CharField(max_length = 100, blank = True, null = True, choices = Fuel.choices)
 
     def __str__(self):
-        return f"{self.transport}/{self.tonnage}/{self.fuel}"
+        return f"{self.transport}/{self.tonnage}/{self.fuel}   "
 
 
 class TransportToNetherlands(models.Model):
