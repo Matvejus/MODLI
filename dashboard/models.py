@@ -120,7 +120,7 @@ class SterilizationToHospitalPackagingCoveringMaterial(models.Model):
     material = models.ManyToManyField(PackagingMaterial, related_name='sterilization_to_hospital_covering_material_packaging')
 
     def __str__(self):
-        return str(self.gown.name)
+        return str(self.gown.name )
 
 
 class TransportMethod(models.Model):
