@@ -1,0 +1,50 @@
+body {
+    background-color: #f3f5f7;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  
+  .card {
+    background-color: #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 300px;
+    height: 375px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .card .about {
+    height: 150px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .card .about h3,
+  .card .about .lead {
+    font-weight: 300;
+    margin: 0;
+  }
+  
+  .card .about h3 {
+    font-size: 24px;
+  }
+  
+  .card .about .lead {
+    color: #aaa;
+  }
+  
+  .tooltip-placeholder {
+    background-color: #fff;
+    border-radius: 4px;
+    font-family: monospace;
+    color: #aaa;
+    font-size: 10px;
+    position: fixed;
+    padding: 4px 0;
+    display: none;
+    z-index: 2;
+  }
+  

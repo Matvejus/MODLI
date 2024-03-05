@@ -17,8 +17,7 @@
 {% endblock scripts %}
 
 {% block content %}
-<body class="bg-green-100">
-
+<body class = 'bg-cyan-400'>
 <div class ="grid h-screen grid-rows-2 grid-cols-2">
     <div id="specs" class="flex flex-col justify-center items-center h-full">
         <div class="mb-8">
@@ -49,20 +48,17 @@
     <div id="StockChart" class="col-span-2">
         <canvas id="myChart"></canvas>
     </div>
-
 </div>
-
 </body>
-
 
 {% endblock content %}
 
 <script>
     var ctx = document.getElementById("myChart").getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'line',
+        type: 'radar',
         data: {
-            labels: ["January", "February", "March"],
+            labels: ["Cost", "Emissions", "Inventory"],
             datasets: [{
                 label: 'Series 1',
                 data: [0, 100, 0],
