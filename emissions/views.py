@@ -26,14 +26,16 @@ def lowest_emissions(combinations):
 
 def optimal(combinations):
     best_combo = float('inf')
-    best =[]
+    best = None
 
     for c in combinations:
-        total = c['cost']+c['total_emissions']
+        total = c['cost'] + c['total_emissions']
         if total < best_combo:
-            best.append(total)
+            best = c
             best_combo = total
+
     return best
+    
 
 
 
@@ -65,7 +67,6 @@ def calculator(request):
             elif lowest_cost_boolean and lowest_emissions_boolean:
                 best_combination = optimal(gowns)
                 context = {'gowns': best_combination}
-
                 return render(request, 'calculator.html', context)
 
     return render(request, 'calculator.html')
