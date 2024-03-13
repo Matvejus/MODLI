@@ -1,0 +1,255 @@
+{%load static%}
+{% block page_title %}<title>Dashboard</title>{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/tw-elements.min.css' %}">
+{% endblock css_files %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="{% static 'djf_surveys/css/tailwindcss-3.3.1.js' %}"></script>
+<script src="{% static 'djf_surveys/css/tailwindcss-plugin-3.3.1.js' %}"></script>
+<script src="{% static 'djf_surveys/te-starter/js/tw-elements.umd.min.js' %}"></script>
+{% endblock scripts %}
+
+{% block content %}
+
+
+<form method="post" action="{% url 'calculator' %}">
+    {% csrf_token %}
+    <form>
+      <div class='px-4 py-5 flex flex-row flex-auto text-center content-center align-center'>
+        <div>
+        <input type="number" name="amount" class='peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:ring-2 focus:ring-blue-400' placeholder="Needed gowns">
+        </div>
+        <div class='px-4 flex flex-col justify-center items-center'>
+          <label for="cheapest">Cheapest</label>
+          <input type="checkbox" id="cheapest" name="lowest_cost">
+      </div>
+        <div class='flex px-5 flex-col justify-center items-center'>
+          <label for="lowest-emissions">Lowest emissions</label>
+          <input type="checkbox" id="lowest-emissions" name='lowest_emissions'>
+        </div>
+      </div>
+      <div class = 'px-4'>
+      <button class="bg-blue-700 hover:bg-blue-500 text-black font-bold py-2 px-6 border border-blue-700 rounded" type="submit">Submit</button>
+      </div>
+    </form>
+
+  <section class="grid grid-cols-2 grid-rows-2 px-4 gap-6 py-5">
+    <div class="p-8 bg-white shadow rounded-lg">
+      <div class='flex items-center justify-center gap-6'>
+        <div class="w-1/2 flex flex-col justify-center items-center ">
+          <span class="text-2xl font-bold">€{{gowns.0.cost}}</span>
+          <span class="block text-gray-500">Total cost</span>
+        </div>
+        <div class="w-1/2 flex flex-col justify-center items-center ">
+          <span class="text-2xl font-bold">€{{gowns.0.washing_cost}}</span>
+          <span class="block text-gray-500">Washing cost</span>
+        </div>
+      </div>
+    </div>
+    <div class="p-8 bg-white shadow rounded-lg">
+      <div class='flex items-center justify-center gap-6'>
+        <div class="w-1/2 flex flex-col justify-center items-center ">
+          <span class="text-2xl font-bold">{{gowns.0.reusables}}</span>
+          <span class="block text-gray-500">Reusable gowns</span>
+        </div>
+        <div class="w-1/2 flex flex-col justify-center items-center ">
+          <span class="text-2xl font-bold">{{gowns.0.disposable}}</span>
+          <span class="block text-gray-500">Single Use</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-2 p-8 bg-white shadow rounded-lg w-full">
+      <div class='px-6 flex items-center justify-between'>
+        <div class='w-1/4 flex flex-col justify-center items-center '>
+            <span class="text-2xl font-bold">{{gowns.0.emissions.nre}} MJ</span>
+            <span class="block text-gray-500">NRE</span>
+        </div>
+        <div class='w-1/4 flex flex-col justify-center items-center '>
+            <span class="text-2xl font-bold">{{gowns.0.emissions.co2}} KG</span>
+            <span class="block text-gray-500">Co2</span>
+        </div>
+        <div class='w-1/4 flex flex-col justify-center items-center '>
+            <span class="text-2xl font-bold">{{gowns.0.emissions.blue_water}} KG</span>
+            <span class="block text-gray-500">Blue Water</span>
+        </div>
+        <div class='w-1/4 flex flex-col justify-center items-center '>
+            <span class="text-2xl font-bold">{{gowns.0.emissions.solid_waste}} KG</span>
+            <span class="block text-gray-500">Solid Waste</span>
+        </div>
+    </div>
+    </div>
+  </section>
+
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+  
+    
+  {% comment %} <div>
+    <canvas id="canvas" width="300" height="200"></canvas>
+  </div> {% endcomment %}
+
+>>>>>>> main
+  <script>
+
+    var canvas = document.getElementById("canvas");
+
+    var gradientBlue = canvas.getContext('2d').createLinearGradient(0, 0, 0, 150);
+    gradientBlue.addColorStop(0, 'rgba(85, 85, 255, 0.9)');
+    gradientBlue.addColorStop(1, 'rgba(151, 135, 255, 0.8)');
+    
+    var gradientHoverBlue = canvas.getContext('2d').createLinearGradient(0, 0, 0, 150);
+    gradientHoverBlue.addColorStop(0, 'rgba(65, 65, 255, 1)');
+    gradientHoverBlue.addColorStop(1, 'rgba(131, 125, 255, 1)');
+    
+    var gradientRed = canvas.getContext('2d').createLinearGradient(0, 0, 0, 150);
+    gradientRed.addColorStop(0, 'rgba(255, 85, 184, 0.9)');
+    gradientRed.addColorStop(1, 'rgba(255, 135, 135, 0.8)');
+    
+    var gradientHoverRed = canvas.getContext('2d').createLinearGradient(0, 0, 0, 150);
+    gradientHoverRed.addColorStop(0, 'rgba(255, 65, 164, 1)');
+    gradientHoverRed.addColorStop(1, 'rgba(255, 115, 115, 1)');
+    
+    var redArea = null;
+    var blueArea = null;
+    
+    var shadowed = {
+      beforeDatasetsDraw: function(chart, options) {
+        chart.ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+        chart.ctx.shadowBlur = 40;
+      },
+      afterDatasetsDraw: function(chart, options) {
+        chart.ctx.shadowColor = 'rgba(0, 0, 0, 0)';
+        chart.ctx.shadowBlur = 0;
+      }
+    };
+    
+    Chart.plugins.register({
+      afterEvent: function(chart, e) {
+         // Hardcoded hover areas
+        
+        // Red chart
+        chart.ctx.beginPath();
+        chart.ctx.moveTo(91, 69);
+        chart.ctx.lineTo(152, 80);
+        chart.ctx.lineTo(192, 75);
+        chart.ctx.lineTo(213, 138);
+        chart.ctx.lineTo(148, 168);
+        chart.ctx.lineTo(105, 126);
+        chart.ctx.fill();
+        chart.ctx.closePath();
+        
+        if (chart.ctx.isPointInPath(e.x, e.y)) {
+          var dataset = window.chart.data.datasets[0];
+          dataset.backgroundColor = gradientHoverRed;
+          window.chart.update();
+          canvas.style.cursor = 'pointer';
+        } else {
+          var dataset = window.chart.data.datasets[0];
+          dataset.backgroundColor = gradientRed;
+          window.chart.update();
+          canvas.style.cursor = 'default';
+        }
+        
+        // Blue chart
+        chart.ctx.beginPath();
+        chart.ctx.moveTo(85, 61);
+        chart.ctx.lineTo(149, 66);
+        chart.ctx.lineTo(224, 63);
+        chart.ctx.lineTo(179, 112);
+        chart.ctx.lineTo(152, 177);
+        chart.ctx.lineTo(121, 117);
+        chart.ctx.fill();
+        chart.ctx.closePath();
+        
+        if (chart.ctx.isPointInPath(e.x, e.y)) {
+          var dataset = window.chart.data.datasets[1];
+          dataset.backgroundColor = gradientHoverBlue;
+          window.chart.update();
+          canvas.style.cursor = 'pointer';
+        } else {
+          var dataset = window.chart.data.datasets[1];
+          dataset.backgroundColor = gradientBlue;
+          window.chart.update();
+          canvas.style.cursor = 'default';
+        }
+      }
+    });
+
+    var gown_cost = {{gowns.0.cost}}/1000
+    var gown_nre = {{gowns.0.emissions.nre}}
+    var gown_co2 = {{gowns.0.emissions.co2}}
+    var gown_bluewater = {{gowns.0.emissions.blue_water}}
+    var gown_solidwaste = {{gowns.0.emissions.solid_waste}}
+    
+    window.chart = new Chart(document.getElementById("canvas"), {
+        type: "radar",
+        data: {
+            labels: ["Cost", "NRE", "CO2", "Blue Water", "Solid Waste"],
+            datasets: [{
+                label: "Purchase plan",
+                data: [gown_cost, gown_nre, gown_co2, gown_bluewater, gown_bluewater],
+                fill: true,
+                backgroundColor: gradientBlue,
+                borderColor: 'transparent',
+                pointBackgroundColor: "transparent",
+                pointBorderColor: "transparent",
+                pointHoverBackgroundColor: "transparent",
+                pointHoverBorderColor: "transparent",
+                pointHitRadius: 50,
+            },]
+        },
+        options: {
+          legend: {
+            display: false,
+          },
+          tooltips: {
+            enabled: false,
+            custom: function(tooltip) {
+                var tooltipEl = document.getElementById('tooltip');
+                if (tooltip.body) {
+                  tooltipEl.style.display = 'block';
+                  if (tooltip.body[0].lines && tooltip.body[0].lines[0]) {
+                    tooltipEl.innerHTML = tooltip.body[0].lines[0];
+                  }
+                } else {
+                  setTimeout(function() {
+                    tooltipEl.style.display = 'none';
+                  }, 500);
+                }
+            },
+          },
+          gridLines: {
+            display: false
+          },
+          scale: {
+             ticks: {
+                 maxTicksLimit: 1,
+                display: false,
+             }
+          }
+        },
+        plugins: [shadowed]
+    });
+
+  </script>  
+
+
+
+{% endblock content %}
