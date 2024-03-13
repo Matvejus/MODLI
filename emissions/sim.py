@@ -1,68 +1,11 @@
 from .models import Gown
-<<<<<<< HEAD
 import json
-
-=======
-
-def stock_emissions():
-    reusable = Gown.objects.get(id = 1)
-    disposable = Gown.objects.get(id = 2)
-    reuse =[]
-    disp = []
-    for x in range(1,1001):
-        use_nre = reusable.nre_emissions * x
-        use_co2 = reusable.co2 * x
-        use_blue_water = reusable.blue_water * x
-        purchase_cost = 3*x
-        washing_cost = 0.65*75*x
-        res_coll = {'type': 'reusable',
-                    'amount': x, 
-                    'nre':use_nre,
-                      'co2': use_co2,
-                        'blue_water': use_blue_water,
-                          'cost': purchase_cost,
-                            'washing_cost': washing_cost,
-                            'total_cost': washing_cost+purchase_cost}
-        reuse.append(res_coll)
-
-        disp_nre = disposable.nre_emissions * x
-        disp_co2 = disposable.co2 * x
-        disp_blue_water = disposable.blue_water * x
-        purchase_cost = x
-        disp_coll = {'type': 'disposable',
-                    'amount': x, 
-                    'nre':disp_nre,
-                      'co2': disp_co2,
-                        'blue_water': disp_blue_water,
-                            'total_cost': purchase_cost}
-        disp.append(disp_coll)
-
-    return(reuse, disp)
-
-    dicts
-
-    [{'reusables': amount, 'disposable': amount, 
-      'emissions':{'nre':reusable[nre]+disposable[nre],
-                 'co2':reusalbe[co2]+disposable[co2],
-                 'blue_water': reusable[blue_water]+disposable[blue_water]
-                 },
-        'washing_cost': reusable[washing_cost],
-        'cost': reusable[total_cost]+disposable[total+cost]          
-      }]
-    
-
-import json
->>>>>>> main
 
 def stock_emissions_to_json():
     reusable = Gown.objects.get(id=1)
     disposable = Gown.objects.get(id=2)
     emissions_data = []
 
-<<<<<<< HEAD
-=======
-    # Generate combinations of reusable and disposable items
->>>>>>> main
     for amount_reusable in range(1, 1001):
         for amount_disposable in range(1, 1001):
             emissions = {
@@ -90,14 +33,13 @@ def stock_emissions_to_json():
                 'total_emissions': total_emissions,
             }
             emissions_data.append(data_entry)
+            
+    with open('emissions\data\works.json', 'w') as json_file:
+        json.dump(emissions_data, json_file, indent=4)
 
     # Dump emissions_data to a JSON file
-<<<<<<< HEAD
-    with open('emissions\data\works.json', 'w') as json_file:
-=======
-    with open('works.json', 'w') as json_file:
->>>>>>> main
-        json.dump(emissions_data, json_file, indent=4)
+
+
 
 
 
