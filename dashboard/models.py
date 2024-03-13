@@ -202,6 +202,25 @@ class SingleUseUtilization(models.Model):
         return str(self.gown.name)
 
 
+
+class Production(models.Model):
+    gown = models.ForeignKey(Gown, on_delete = models.CASCADE)
+    covering_material = models.ForeignKey(CoveringMaterial, on_delete = models.CASCADE)
+    
+
+
+
+
+class Washing(models.Model):
+    pass
+
+class Hospital(models.Model):
+    pass
+
+class EndOfUse(models.Model):
+    pass 
+
+
     
 
 
