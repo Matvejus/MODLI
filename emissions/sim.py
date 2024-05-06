@@ -5,6 +5,7 @@ def stock_emissions_to_json():
     reusable = Gown.objects.get(id=1)
     disposable = Gown.objects.get(id=2)
     emissions_data = []
+    ##This doesn't make much sense right? If we have the formula to calculate arbitrary combinations on the spot, why calculate them all to begin with?:
 
     for amount_reusable in range(1, 1001):
         for amount_disposable in range(1, 1001):
