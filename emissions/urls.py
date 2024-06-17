@@ -5,5 +5,5 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path("calc/", views.calculator, name = 'calculator'),
-    path("entry/", TemplateView.as_view(template_name="entrypage.html"))
+    path("entry/", views.gown_list, name='gown_list'),
 ]
