@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Gown
+from dashboard.models import Gown
 import json
 
 
@@ -70,3 +70,15 @@ def calculator(request):
                 return render(request, 'calculator.html', context)
 
     return render(request, 'calculator.html')
+
+
+def gown_list(request):
+    reusable_gowns = Gown.objects.filter(reusable=True).prefetch_related('materials_v1', 'materials_v2')
+    single_use_gowns = Gown.objects.filter(reusable=False).prefetch_related('materials_v1', 'materials_v2')
+
+    context = {
+        'reusable_gowns': reusable_gowns,
+        'single_use_gowns': single_use_gowns,
+    }
+    print(reusable_gowns)
+    return render(request, 'entrypage.html', context)

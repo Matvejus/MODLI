@@ -58,64 +58,69 @@
 
 
         <section id='Gowns' class="px-1 py-2">
-            <div class="p-8 bg-white shadow rounded-lg h-screen">
-                <div class = "py-2">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                        Material of Reusable Gowns    
-                    </label>
+            <div class="p-8 bg-white shadow rounded-lg h-screen">                
+                    <div class = "py-2">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                            Resuable gowns    
+                        </label>
 
-                    <div class="max-w-lg mx-auto">
+                        <div class="max-w-lg mx-auto">
 
-                            <div class="mb-4">
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
-                                    <span class="ml-2 text-gray-700">Cotton</span>
-                                </label>
-                            </div>
-                            <div class="mb-4">
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
-                                    <span class="ml-2 text-gray-700">Polyester</span>
-                                </label>
-                            </div>
-                            <div class="mb-4">
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
-                                    <span class="ml-2 text-gray-700">Nylon</span>
-                                </label>
-                            </div>
+                                <div class="mb-4">
+                                    <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
+                                        <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
+                                        <span class="ml-2 text-gray-700">Re 1</span>
+                                        <span class="ml-2 text-gray-700">5$</span>
+                                        <div id='materials'>
+                                            <span class="ml-2 text-gray-700">Cotton 100%</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
+                                        <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
+                                        <span class="ml-2 text-gray-700">Re 2</span>
+                                        <span class="ml-2 text-gray-700">4$</span>
+                                        <div id='materials'>
+                                            <span class="ml-2 text-gray-700">PET 50%</span>
+                                            <span class="ml-2 text-gray-700">Polyurethane 50%</span>
+                                        </div>
+                                    </label>
+                                </div>
+                    
+                    
+                        </div>
+
+                    </div>
+                    <div class = "py-2">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                            Single use    
+                        </label>
+
+                        <div class="mb-4">
+                            <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
+                                <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
+                                <span class="ml-2 text-gray-700">Single 1</span>
+                                <span class="ml-2 text-gray-700">3$</span>
+                                <div id='materials'>
+                                    <span class="ml-2 text-gray-700">PP+PE 50% SMMS 50%</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="mb-4">
+                            <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
+                                <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
+                                <span class="ml-2 text-gray-700">Single 2</span>
+                                <span class="ml-2 text-gray-700">3$</span>
+                                <div id='materials'>
+                                    <span class="ml-2 text-gray-700">PET 100%</span>
+                                </div>
+                            </label>
+                        </div>
+
                     </div>
 
-                </div>
-                <div class = "py-2">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Material of Disposable Gowns    
-                    </label>
-
-                    <div class="max-w-lg mx-auto">
-
-                            <div class="mb-4">
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
-                                    <span class="ml-2 text-gray-700">Polypropylene</span>
-                                </label>
-                            </div>
-                            <div class="mb-4">
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
-                                    <span class="ml-2 text-gray-700">Polyethylene</span>
-                                </label>
-                            </div>
-                            <div class="mb-4">
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
-                                    <span class="ml-2 text-gray-700">SMS</span>
-                                </label>
-                            </div>
-                    </div>
-                </div>
-
-            <form>   
+            {% comment %} <form>   
                 <div class = "py-4 justify-center items-center">
                     <ul class="likert">
                         <li class="mx-1 block tracking-wide text-gray-700 font-bold"> Durable <input id="radGuiltyStart" type="radio" name="Guilty" value="1" />
@@ -137,7 +142,7 @@
                         <li class="mx-1 block tracking-wide text-gray-700 font-bold"><input id="radGuiltyEnd" type="radio" name="Guilty" value="5" /> Higher protection
                     </ul>
                 </div>
-            </form>
+            </form> {% endcomment %}
 
           
             
