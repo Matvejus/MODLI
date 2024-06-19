@@ -12,226 +12,593 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 <script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-<script src="{% static 'djf_surveys/css/tailwindcss-3.3.1.js' %}"></script>
-<script src="{% static 'djf_surveys/css/tailwindcss-plugin-3.3.1.js' %}"></script>
-<script src="{% static 'djf_surveys/te-starter/js/tw-elements.umd.min.js' %}"></script>
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 {% endblock scripts %}
 
 {% block content %}
 
-
-<form method="post" action="{% url 'calculator' %}">
-    {% csrf_token %}
-    <form>
-      <div class='px-4 py-5 flex flex-row flex-auto text-center content-center align-center'>
-        <div>
-        <input type="number" name="amount" class='peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:ring-2 focus:ring-blue-400' placeholder="Needed gowns">
+ <section id='Totals' class="grid grid-cols-2 grid-rows-2 px-4 gap-6 pt-5">
+    <div class="bg-white shadow rounded-lg">
+        <div class='p-10 flex items-center justify-center gap-6'>
+            <div class="w-1/2 flex flex-col justify-center items-center ">
+                <span class="text-4xl font-bold">€76500</span>
+                <span class="block text-gray-500">Total cost</span>
+            </div>
+            <div class="w-1/2 flex flex-col justify-center items-center ">
+                <span class="text-4xl font-bold">12</span>
+                <span class="block text-gray-500">Planning period months</span>
+            </div>
         </div>
-        <div class='px-4 flex flex-col justify-center items-center'>
-          <label for="cheapest">Cheapest</label>
-          <input type="checkbox" id="cheapest" name="lowest_cost">
-      </div>
-        <div class='flex px-5 flex-col justify-center items-center'>
-          <label for="lowest-emissions">Lowest emissions</label>
-          <input type="checkbox" id="lowest-emissions" name='lowest_emissions'>
-        </div>
-      </div>
-      <div class = 'px-4'>
-      <button class="bg-blue-700 hover:bg-blue-500 text-black font-bold py-2 px-6 border border-blue-700 rounded" type="submit">Submit</button>
-      </div>
-    </form>
-
-  <section class="grid grid-cols-2 grid-rows-2 px-4 gap-6 py-5">
-    <div class="p-8 bg-white shadow rounded-lg">
-      <div class='flex items-center justify-center gap-6'>
-        <div class="w-1/2 flex flex-col justify-center items-center ">
-          <span class="text-2xl font-bold">€{{gowns.0.cost}}</span>
-          <span class="block text-gray-500">Total cost</span>
-        </div>
-        <div class="w-1/2 flex flex-col justify-center items-center ">
-          <span class="text-2xl font-bold">€{{gowns.0.washing_cost}}</span>
-          <span class="block text-gray-500">Washing cost</span>
-        </div>
-      </div>
     </div>
     <div class="p-8 bg-white shadow rounded-lg">
-      <div class='flex items-center justify-center gap-6'>
-        <div class="w-1/2 flex flex-col justify-center items-center ">
-          <span class="text-2xl font-bold">{{gowns.0.reusables}}</span>
-          <span class="block text-gray-500">Reusable gowns</span>
+        <div class='flex items-center justify-center gap-6'>
+            <div class="w-1/2 flex flex-col justify-center items-center ">
+                <span class="text-4xl font-bold">284</span>
+                <span class="block text-gray-500">Reusable gowns</span>
+            </div>
+            <div class="w-1/2 flex flex-col justify-center items-center ">
+                <span class="text-4xl font-bold">624</span>
+                <span class="block text-gray-500">Single Use</span>
+            </div>
         </div>
-        <div class="w-1/2 flex flex-col justify-center items-center ">
-          <span class="text-2xl font-bold">{{gowns.0.disposable}}</span>
-          <span class="block text-gray-500">Single Use</span>
+    </div>
+    <div class="col-span-2 w-full">
+        <div class='px-2 flex justify-between gap-8'>
+            <div class='w-1/4'>
+                <div class="bg-white shadow rounded-lg p-4">
+                    <div class='flex flex-col justify-center items-center'>
+                        <span class="text-4xl font-bold">400 MJ</span>
+                        <span class="block text-gray-500">NRE</span>
+                    </div>
+                </div>
+            </div>
+            <div class='w-1/4'>
+                <div class="bg-white shadow rounded-lg p-4">
+                    <div class='flex flex-col justify-center items-center'>
+                        <span class="text-4xl font-bold">20 KG</span>
+                        <span class="block text-gray-500">Co2</span>
+                    </div>
+                </div>
+            </div>
+            <div class='w-1/4'>
+                <div class="bg-white shadow rounded-lg p-4">
+                    <div class='flex flex-col justify-center items-center'>
+                        <span class="text-4xl font-bold">40 KG</span>
+                        <span class="block text-gray-500">Water</span>
+                    </div>
+                </div>
+            </div>
+            <div class='w-1/4'>
+                <div class="bg-white shadow rounded-lg p-4">
+                    <div class='flex flex-col justify-center items-center'>
+                        <span class="text-4xl font-bold">13 KG</span>
+                        <span class="block text-gray-500">Solid Waste</span>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+</section>
+
+
+<section id='Production' class="px-4 py-2">
+  <div class="p-8 h-600px bg-white shadow rounded-lg">
+    <h2 class='justify-center text-center items-center font-bold'>Production data</h2>
+
+    <!-- Production emissions -->
+    <div x-data="{ openTab: 1 }">
+
+      <!-- Tab Buttons -->
+      <div class="mb-4 flex">
+          <button :class="{ 'border-b-2 border-green-500': openTab === 1 }" @click="openTab = 1" class="px-4 py-2 font-semibold text-gray-900 focus:outline-none">CO2</button>
+          <button :class="{ 'border-b-2 border-green-500': openTab === 2 }" @click="openTab = 2" class="px-4 py-2 font-semibold text-gray-900 focus:outline-none">Energy</button>
+          <button :class="{ 'border-b-2 border-green-500': openTab === 3 }" @click="openTab = 3" class="px-4 py-2 font-semibold text-gray-900 focus:outline-none">Water consumption</button>
+      </div>
+
+      <div x-show="openTab === 1">
+          <div class="grid grid-cols-2">
+              <div class='py-4'>
+                  <canvas id="BarCO2"></canvas>
+              </div>
+              <div class='py-4'>
+                  <canvas id="RECIPE_CO2"></canvas>
+              </div>
+          </div>
+      </div>
+
+      <div x-show="openTab === 2">
+        <div class="grid grid-cols-2">
+          <div class='py-4'>
+              <canvas id="BarEnergy"></canvas>
+          </div>
+          <div class='py-4'>
+              <canvas id="RECIPE_Energy"></canvas>
+          </div>
+      </div>
+      </div>
+
+      <div x-show="openTab === 3">
+          <div class="grid grid-cols-2">
+              <div class='py-4'>
+                  <canvas id="BarWater"></canvas>
+              </div>
+              <div class='py-4'>
+                  <canvas id="RECIPE_Water"></canvas>
+              </div>
+          </div>
       </div>
     </div>
-    <div class="col-span-2 p-8 bg-white shadow rounded-lg w-full">
-      <div class='px-6 flex items-center justify-between'>
-        <div class='w-1/4 flex flex-col justify-center items-center '>
-            <span class="text-2xl font-bold">{{gowns.0.emissions.nre}} MJ</span>
-            <span class="block text-gray-500">NRE</span>
+  </div>
+</section>
+  <section id='Washing' class="px-4 py-1">
+    <div class="p-8 bg-white shadow rounded-lg">
+      <h2 class='justify-center text-center items-center font-bold'>Washing  data</h2>
+      <div class = 'grid grid-cols-5 grid-rows-2 gap-6'>
+        <div class="bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+              <span class="text-4xl font-bold">€24560</span>
+              <span class="block text-gray-500">Washing cost</span>
+          </div>
+        </div>  
+        <div class="row-start-2 bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+              <span class="text-4xl font-bold">52</span>
+              <span class="block text-gray-500">Washing cycles</span>
+          </div>
         </div>
-        <div class='w-1/4 flex flex-col justify-center items-center '>
-            <span class="text-2xl font-bold">{{gowns.0.emissions.co2}} KG</span>
-            <span class="block text-gray-500">Co2</span>
+        <div class="col-start-2 col-span-2 row-span-1 bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+            <span class="text-4xl font-bold">13.8</span>
+            <span class="block text-gray-500">Water used in washing (thousand litres)</span>
         </div>
-        <div class='w-1/4 flex flex-col justify-center items-center '>
-            <span class="text-2xl font-bold">{{gowns.0.emissions.blue_water}} KG</span>
-            <span class="block text-gray-500">Blue Water</span>
+        </div>  
+        <div class="col-start-2 col-span-2 row-start-2 row-span-1 bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+            <span class="text-4xl font-bold">988 MJ</span>
+            <span class="block text-gray-500">Energy used for washing</span>
         </div>
-        <div class='w-1/4 flex flex-col justify-center items-center '>
-            <span class="text-2xl font-bold">{{gowns.0.emissions.solid_waste}} KG</span>
-            <span class="block text-gray-500">Solid Waste</span>
+        </div>  
+        <div class="col-start-4 col-span-2 row-span-1 bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+            <span class="text-4xl font-bold">1560 KM</span>
+            <span class="block text-gray-500">Kilometers driven to laundry and back</span>
         </div>
+        </div>  
+        <div class="col-start-4 col-span-2 row-start-2 row-span-1 bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+            <span class="text-4xl font-bold">0.5 kg</span>
+            <span class="block text-gray-500">Transport emissions CO2 per kg of textile</span>
+        </div>
+        </div>  
+        
+      </div>  
     </div>
-    </div>
-  </section>
+  </section> 
 
+<section id='Socio' class="px-4 py-1">
+  <div class="p-8 h-600px bg-white shadow rounded-lg">
+    <h2 class='justify-center text-center items-center font-bold'>Social</h2>
+    <div class="grid grid-cols-2">
+      <div id="regions_div" style="width: 600px; height: 400px;"></div>
+      <div class = "pt-6" style="width: 600px;">
+        <canvas id="horizontalBarChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+  
+<section id = "charts_production">
   <script>
+    const configBarCo2 = {
+      type: 'bar',
+      data: {
+          labels: ['Fibers', 'Yarn production', 'Fabric production', 'Finishing', 'Manufacturing', 'Transport', 'Use'],
+          datasets: [
+              {
+                  label: 'Cotton',
+                  data: [228.75, 397.90, 690, 422.8, 21.21, 223, 195.29],
+                  backgroundColor: 'green', // Customize the color
+              },
+              {
+                  label: 'Polyester',
+                  data: [2662.28, 2289.272759
+                  , 3195.405248
+                  , 572.507079
+                  , 250.273922
+                  , 578.1881056
+                  , 405.7213485
 
-    var canvas = document.getElementById("canvas");
-
-    var gradientBlue = canvas.getContext('2d').createLinearGradient(0, 0, 0, 150);
-    gradientBlue.addColorStop(0, 'rgba(85, 85, 255, 0.9)');
-    gradientBlue.addColorStop(1, 'rgba(151, 135, 255, 0.8)');
-    
-    var gradientHoverBlue = canvas.getContext('2d').createLinearGradient(0, 0, 0, 150);
-    gradientHoverBlue.addColorStop(0, 'rgba(65, 65, 255, 1)');
-    gradientHoverBlue.addColorStop(1, 'rgba(131, 125, 255, 1)');
-    
-    var gradientRed = canvas.getContext('2d').createLinearGradient(0, 0, 0, 150);
-    gradientRed.addColorStop(0, 'rgba(255, 85, 184, 0.9)');
-    gradientRed.addColorStop(1, 'rgba(255, 135, 135, 0.8)');
-    
-    var gradientHoverRed = canvas.getContext('2d').createLinearGradient(0, 0, 0, 150);
-    gradientHoverRed.addColorStop(0, 'rgba(255, 65, 164, 1)');
-    gradientHoverRed.addColorStop(1, 'rgba(255, 115, 115, 1)');
-    
-    var redArea = null;
-    var blueArea = null;
-    
-    var shadowed = {
-      beforeDatasetsDraw: function(chart, options) {
-        chart.ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
-        chart.ctx.shadowBlur = 40;
+                  ],
+                  backgroundColor: 'blue',
+              },
+              // Add more datasets as needed
+          ],
       },
-      afterDatasetsDraw: function(chart, options) {
-        chart.ctx.shadowColor = 'rgba(0, 0, 0, 0)';
-        chart.ctx.shadowBlur = 0;
-      }
-    };
-    
-    Chart.plugins.register({
-      afterEvent: function(chart, e) {
-         // Hardcoded hover areas
-        
-        // Red chart
-        chart.ctx.beginPath();
-        chart.ctx.moveTo(91, 69);
-        chart.ctx.lineTo(152, 80);
-        chart.ctx.lineTo(192, 75);
-        chart.ctx.lineTo(213, 138);
-        chart.ctx.lineTo(148, 168);
-        chart.ctx.lineTo(105, 126);
-        chart.ctx.fill();
-        chart.ctx.closePath();
-        
-        if (chart.ctx.isPointInPath(e.x, e.y)) {
-          var dataset = window.chart.data.datasets[0];
-          dataset.backgroundColor = gradientHoverRed;
-          window.chart.update();
-          canvas.style.cursor = 'pointer';
-        } else {
-          var dataset = window.chart.data.datasets[0];
-          dataset.backgroundColor = gradientRed;
-          window.chart.update();
-          canvas.style.cursor = 'default';
-        }
-        
-        // Blue chart
-        chart.ctx.beginPath();
-        chart.ctx.moveTo(85, 61);
-        chart.ctx.lineTo(149, 66);
-        chart.ctx.lineTo(224, 63);
-        chart.ctx.lineTo(179, 112);
-        chart.ctx.lineTo(152, 177);
-        chart.ctx.lineTo(121, 117);
-        chart.ctx.fill();
-        chart.ctx.closePath();
-        
-        if (chart.ctx.isPointInPath(e.x, e.y)) {
-          var dataset = window.chart.data.datasets[1];
-          dataset.backgroundColor = gradientHoverBlue;
-          window.chart.update();
-          canvas.style.cursor = 'pointer';
-        } else {
-          var dataset = window.chart.data.datasets[1];
-          dataset.backgroundColor = gradientBlue;
-          window.chart.update();
-          canvas.style.cursor = 'default';
-        }
-      }
-    });
-
-    var gown_cost = {{gowns.0.cost}}/1000
-    var gown_nre = {{gowns.0.emissions.nre}}
-    var gown_co2 = {{gowns.0.emissions.co2}}
-    var gown_bluewater = {{gowns.0.emissions.blue_water}}
-    var gown_solidwaste = {{gowns.0.emissions.solid_waste}}
-    
-    window.chart = new Chart(document.getElementById("canvas"), {
-        type: "radar",
+      options: {
+        plugins: {
+          title: {
+              display: true,
+              text: 'CO2 Chart',
+              padding: {
+                  top: 10,
+                  bottom: 30
+              }
+          }
+      },
+          responsive: true,
+          legend: {
+            display: true,
+            position: "bottom", // Set the position to "bottom"
+            align: "start"
+        },
+      },
+  };
+  
+  const ctxBarCO2 = document.getElementById('BarCO2').getContext('2d');
+  const myChartCO2 = new Chart(ctxBarCO2, configBarCo2);
+  </script>
+  
+  <script>
+    const configRECIPECO2 = {
+        type: 'doughnut',
         data: {
-            labels: ["Cost", "NRE", "CO2", "Blue Water", "Solid Waste"],
-            datasets: [{
-                label: "Purchase plan",
-                data: [gown_cost, gown_nre, gown_co2, gown_bluewater, gown_bluewater],
-                fill: true,
-                backgroundColor: gradientBlue,
-                borderColor: 'transparent',
-                pointBackgroundColor: "transparent",
-                pointBorderColor: "transparent",
-                pointHoverBackgroundColor: "transparent",
-                pointHoverBorderColor: "transparent",
-                pointHitRadius: 50,
-            },]
+            labels: ['Cotton', 'Polyester'],
+            datasets: [
+                {
+                    data: [2179.269857
+                    , 9953.64982
+                    ],
+                    backgroundColor: ['green', 'blue'], // Customize the colors
+                },
+            ],
         },
         options: {
-          legend: {
-            display: false,
-          },
-          tooltips: {
-            enabled: false,
-            custom: function(tooltip) {
-                var tooltipEl = document.getElementById('tooltip');
-                if (tooltip.body) {
-                  tooltipEl.style.display = 'block';
-                  if (tooltip.body[0].lines && tooltip.body[0].lines[0]) {
-                    tooltipEl.innerHTML = tooltip.body[0].lines[0];
-                  }
-                } else {
-                  setTimeout(function() {
-                    tooltipEl.style.display = 'none';
-                  }, 500);
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Cotton vs Polyester',
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
                 }
             },
-          },
-          gridLines: {
-            display: false
-          },
-          scale: {
-             ticks: {
-                 maxTicksLimit: 1,
-                display: false,
-             }
-          }
+            responsive: true,
+            legend: {
+                display: true,
+                position: 'bottom', // Set the position to "bottom"
+                align: 'start'
+            },
         },
-        plugins: [shadowed]
+    };
+  
+    const ctxRECIPECO2 = document.getElementById('RECIPE_CO2').getContext('2d');
+    const myChartRecipeCO2 = new Chart(ctxRECIPECO2, configRECIPECO2);
+  </script>
+  <script>
+    const configBarEnergy = {
+      type: 'bar',
+      data: {
+          labels: ['Fibers', 'Yarn production', 'Fabric production', 'Finishing', 'Manufacturing', 'Transport', 'Use'],
+          datasets: [
+              {
+                  label: 'Cotton',
+                  data: [2477.19945,
+                  5099.138005,
+                  8473.902188,
+                  5553.893801,
+                  -322.4138136,
+                  3115.556741,
+                  2639.570384],
+                  backgroundColor: 'green', // Customize the color
+              },
+              {
+                  label: 'Polyester',
+                  data: [50077.14465,
+                  18666.1504,
+                  27474.32334,
+                  7420.992147,
+                  365.635032,
+                  7936.521668,
+                  5412.829737
+                  ],
+                  backgroundColor: 'blue',
+              },
+              // Add more datasets as needed
+          ],
+      },
+      options: {
+        plugins: {
+          title: {
+              display: true,
+              text: 'CO2 Chart',
+              padding: {
+                  top: 10,
+                  bottom: 30
+              }
+          }
+      },
+          responsive: true,
+          legend: {
+            display: true,
+            position: "bottom", // Set the position to "bottom"
+            align: "start"
+        },
+      },
+  };
+  
+  const ctxBarEnergy = document.getElementById('BarEnergy').getContext('2d');
+  const myCharEnergy = new Chart(ctxBarEnergy, configBarEnergy);
+  </script>
+  
+  <script>
+    const configRECIPE_Energy = {
+        type: 'doughnut',
+        data: {
+            labels: ['Cotton', 'Polyester'],
+            datasets: [
+                {
+                    data: [27036.84675,
+                    117353.597
+                    ],
+                    backgroundColor: ['green', 'blue'], // Customize the colors
+                },
+            ],
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Cotton vs Polyester',
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                }
+            },
+            responsive: true,
+            legend: {
+                display: true,
+                position: 'bottom', // Set the position to "bottom"
+                align: 'start'
+            },
+        },
+    };
+  
+    const ctxRECIPE_Energy = document.getElementById('RECIPE_Energy').getContext('2d');
+    const myChartRecipeEnergy = new Chart(ctxRECIPE_Energy, configRECIPE_Energy);
+  </script>
+  <script>
+    const configBarWater = {
+      type: 'bar',
+      data: {
+          labels: ['Fibers', 'Yarn production', 'Fabric production', 'Finishing', 'Manufacturing', 'Transport', 'Use'],
+          datasets: [
+              {
+                  label: 'Cotton',
+                  data: [110400.8213,
+                  7098.805607,
+                  9484.319705,
+                  36281.61675,
+                  769.4599363,
+                  448.4168054,
+                  4097.973421
+                  ],
+                  backgroundColor: 'green', // Customize the color
+              },
+              {
+                  label: 'Polyester',
+                  data: [33535.74322,
+                  5661.364192,
+                  9047.76729,
+                  4711.382456,
+                  260.5908971,
+                  1050.876628,
+                  5855.872738
+                  ],
+                  backgroundColor: 'blue',
+              },
+              // Add more datasets as needed
+          ],
+      },
+      options: {
+        plugins: {
+          title: {
+              display: true,
+              text: 'CO2 Chart',
+              padding: {
+                  top: 10,
+                  bottom: 30
+              }
+          }
+      },
+          responsive: true,
+          legend: {
+            display: true,
+            position: "bottom", // Set the position to "bottom"
+            align: "start"
+        },
+      },
+  };
+  
+  const ctxBarWater = document.getElementById('BarWater').getContext('2d');
+  const myChartWater = new Chart(ctxBarWater, configBarWater);
+  </script>
+  
+  <script>
+    const configRECIPE_Water = {
+        type: 'doughnut',
+        data: {
+            labels: ['Cotton', 'Polyester'],
+            datasets: [
+                {
+                    data: [40, 60],
+                    backgroundColor: ['green', 'blue'], // Customize the colors
+                },
+            ],
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Cotton vs Polyester',
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                }
+            },
+            responsive: true,
+            legend: {
+                display: true,
+                position: 'bottom', // Set the position to "bottom"
+                align: 'start'
+            },
+        },
+    };
+  
+    const ctxRECIPE_Water = document.getElementById('RECIPE_Water').getContext('2d');
+    const myChartRecipeWater = new Chart(ctxRECIPE_Water, configRECIPE_Water);
+  </script>
+  <script>
+    const configBarLand = {
+      type: 'bar',
+      data: {
+          labels: ['Fibers', 'Yarn production', 'Fabric production', 'Finishing', 'Manufacturing', 'Packaging'],
+          datasets: [
+              {
+                  label: 'Cotton',
+                  data: [12, 20, 30, 40, 50, 60],
+                  backgroundColor: 'green', // Customize the color
+              },
+              {
+                  label: 'Polyester',
+                  data: [15, 25, 35, 45, 55, 65],
+                  backgroundColor: 'blue',
+              },
+              // Add more datasets as needed
+          ],
+      },
+      options: {
+        plugins: {
+          title: {
+              display: true,
+              text: 'CO2 Chart',
+              padding: {
+                  top: 10,
+                  bottom: 30
+              }
+          }
+      },
+          responsive: true,
+          legend: {
+            display: true,
+            position: "bottom", // Set the position to "bottom"
+            align: "start"
+        },
+      },
+  };
+  
+  const ctxBarLand = document.getElementById('BarLand').getContext('2d');
+  const myChartLand = new Chart(ctxBarLand, configBarLand);
+  </script>
+  
+  <script>
+    const configRECIPE_Land = {
+        type: 'doughnut',
+        data: {
+            labels: ['Cotton', 'Polyester'],
+            datasets: [
+                {
+                    data: [40, 60],
+                    backgroundColor: ['green', 'blue'], // Customize the colors
+                },
+            ],
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Cotton vs Polyester',
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                }
+            },
+            responsive: true,
+            legend: {
+                display: true,
+                position: 'bottom', // Set the position to "bottom"
+                align: 'start'
+            },
+        },
+    };
+  
+    const ctxRECIPE_Land = document.getElementById('RECIPE_Land').getContext('2d');
+    const myChartRecipeLand = new Chart(ctxRECIPE_Land, configRECIPE_Land);
+  </script>
+  <script type="text/javascript">
+    google.charts.load('current', {
+      'packages':['geochart'],
     });
+    google.charts.setOnLoadCallback(drawRegionsMap);
 
-  </script>  
+    function drawRegionsMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['Country', 'Jobs'],
+        ['Poland', 700],
+        ['China', 700],
+        ['NL', 700],
+      ]);
 
+      var options = {};
 
+      var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+      chart.draw(data, options);
+    }
+  </script>
+
+  <script>
+    const horizontalBarConfig = {
+      type: 'horizontalBar',
+      data: {
+          labels: ['Netherlands', 'China', 'Poland'], // Updated labels
+          datasets: [
+              {
+                  label: 'Created Hours of Work',
+                  data: [134, 62, 48], // Updated values
+                  backgroundColor: ['red', 'green', 'blue'], // Customize the colors
+              },
+          ],
+      },
+      options: {
+        plugins: {
+          title: {
+              display: true,
+              text: 'Created Hours of Work by Country',
+              padding: {
+                  top: 10,
+                  bottom: 30
+              }
+          }
+      },
+          responsive: true,
+          legend: {
+            display: true,
+            position: "bottom",
+            align: "start"
+        },
+      },
+  };
+  
+  const horizontalBarCtx = document.getElementById('horizontalBarChart').getContext('2d');
+  const horizontalBarChart = new Chart(horizontalBarCtx, horizontalBarConfig);
+</script>
 
 {% endblock content %}
