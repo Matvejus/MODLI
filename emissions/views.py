@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from dashboard.models import Gown
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Gown
+from .forms import GownForm, GownSelectionForm
 import json
-
+from django.core import serializers
 
 def needed_amount(amount):
     with open('emissions\data\works.json', 'r') as file:
@@ -73,12 +74,43 @@ def calculator(request):
 
 
 def gown_list(request):
-    reusable_gowns = Gown.objects.filter(reusable=True).prefetch_related('materials_v1', 'materials_v2')
-    single_use_gowns = Gown.objects.filter(reusable=False).prefetch_related('materials_v1', 'materials_v2')
+    reusable_gowns = Gown.objects.filter(reusable=True)
+    single_use_gowns = Gown.objects.filter(reusable=False)
 
-    context = {
+    if request.method == 'POST':
+        form = GownSelectionForm(request.POST)
+        if form.is_valid():
+            selected_gowns = form.cleaned_data['selected_gowns']
+            serialized_gowns = serializers.serialize('json', selected_gowns)
+            context = {'serialized_gowns': serialized_gowns, "selected_gowns:": selected_gowns}
+            return render(request, 'selected_gowns.html', context)
+    else:
+        form = GownSelectionForm()
+
+    return render(request, 'entrypage.html', {
         'reusable_gowns': reusable_gowns,
         'single_use_gowns': single_use_gowns,
+        'form': form
+    })
+
+def compare(request):
+    return render(request, 'selected_gowns.html')
+
+
+def gown_edit(request, id):
+    gown = get_object_or_404(Gown, id=id)
+    if request.method == 'POST':
+        form = GownForm(request.POST, instance=gown)
+        if form.is_valid():
+            form.save()
+            return redirect('gown_list')
+    else:
+        form = GownForm(instance=gown)
+    context = {
+        'form':form,
+        'gown': gown
     }
-    print(reusable_gowns)
-    return render(request, 'entrypage.html', context)
+    return render(request, 'gown_edit.html', {'form': form})
+
+
+

@@ -58,131 +58,57 @@
 
 
         <section id='Gowns' class="px-1 py-2">
-            <div class="p-8 bg-white shadow rounded-lg h-screen">                
-                    <div class = "py-2">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                            Resuable gowns    
+            <div class="p-8 bg-white shadow rounded-lg h-screen"> 
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="py-2">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            Reusable gowns    
                         </label>
-
+        
+                        {% for gown in reusable_gowns %}
                         <div class="max-w-lg mx-auto">
-
-                                <div class="mb-4">
-                                    <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
-                                        <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
-                                        <div id='materials'>
-                                            <span class="ml-2 text-gray-700">Cotton</span>
-                                        </div>
-                                        <div class = 'px-1 flex flex-full'>
-                                            <input class=" mx-1 flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Cost €">
-                                            <input class=" mx-1 flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Washes">
-                                        </div>
-                                    </label>
-                                </div>
-                              
-
-                                <div class="mb-4">
-                                    <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
-                                        <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
-                                        <div id='materials'>
-                                            <span class="ml-2 text-gray-700">vPET</span>
-                                        </div>
-                                        <div class = 'px-1 flex flex-full'>
-                                            <input class=" mx-1 flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Cost €">
-                                            <input class=" mx-1 flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Washes">
-                                        </div>
-                                    </label>
-                                </div>
-                              
-
-                                <div class="mb-4">
-                                    <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
-                                        <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
-                                        <div id='materials'>
-                                            <span class="ml-2 text-gray-700">rPET</span>
-                                        </div>
-                                        <div class = 'px-1 flex flex-full'>
-                                            <input class=" mx-1 flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Cost €">
-                                            <input class=" mx-1 flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Washes">
-                                        </div>
-                                    </label>
-                                </div>
-                              
-
-                                <div class="mb-4">
-                                    <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
-                                        <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
-                                        <div id='materials'>
-                                            <span class="ml-2 text-gray-700">MMCF</span>
-                                        </div>
-                                        <div class = 'px-1 flex flex-full'>
-                                            <input class=" mx-1 flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Cost €">
-                                            <input class=" mx-1 flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Washes">
-                                        </div>
-                                    </label>
-                                </div>
-                              
-                    
-                    
+                            <div class="mb-4">
+                                <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
+                                    <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600" name="selected_gowns" value="{{ gown.id }}">
+                                    <div id='materials'>
+                                        <span class="ml-2 text-gray-700">{{ gown.name }}</span>
+                                    </div>
+                                    <div class = "px-3">
+                                        <a class="text-center appearance-none w-full bg-blue-600 text-white font-bold py-1 px-2 rounded leading-tight focus:outline-none focus:bg-white" href="{% url 'gown_edit' gown.id %}">Edit</a>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
-
+                        {% endfor %}
                     </div>
-                    <div class = "py-2">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    
+                    <div class="py-2">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Single use    
                         </label>
-
+        
+                        {% for gown in single_use_gowns %}
                         <div class="mb-4">
                             <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
-                                <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
+                                <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600" name="selected_gowns" value="{{ gown.id }}">
                                 <div id='materials'>
-                                    <span class="ml-2 text-gray-700">vPET</span>
+                                    <span class="ml-2 text-gray-700">{{ gown.name }}</span>
                                 </div>
-                                <div class = 'px-1 flex flex-full'>
-                                    <input class="flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Cost €">
+                                <div class = "px-3">
+                                    <a class="text-center appearance-none w-full bg-blue-600 text-white font-bold  py-1 px-2 rounded leading-tight focus:outline-none focus:bg-white" href="{% url 'gown_edit' gown.id %}">Edit</a>
                                 </div>
                             </label>
                         </div>
-
-                        <div class="mb-4">
-                            <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
-                                <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
-                                <div id='materials'>
-                                    <span class="ml-2 text-gray-700">rPET</span>
-                                </div>
-                                <div class = 'px-1 flex flex-full'>
-                                    <input class="flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Cost €">
-                                </div>
-                            </label>
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
-                                <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
-                                <div id='materials'>
-                                    <span class="ml-2 text-gray-700">PE</span>
-                                </div>
-                                <div class = 'px-1 flex flex-full'>
-                                    <input class="flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Cost €">
-                                </div>
-                            </label>
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
-                                <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600">
-                                <div id='materials'>
-                                    <span class="ml-2 text-gray-700">PP</span>
-                                </div>
-                                <div class = 'px-1 flex flex-full'>
-                                    <input class="flex-grow appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Cost €">
-                                </div>
-                            </label>
-                        </div>
-
-                        
-
+                        {% endfor %}
                     </div>
+        
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        View Selected Gowns
+                    </button>
 
+                </form>
+                
                     <div class="py-4 bg-white rounded-lg  w-full max-w-md">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                             Resuable gowns in porfolio    
@@ -294,7 +220,7 @@
                     </div>
 
                     <div>
-                        <a class=" text-center appearance-none block w-full bg-blue-600 text-white font-bold uppercase rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" href="http://localhost:8000/emissions/calc/">Calculate</a>
+                        <a class=" text-center appearance-none block w-full bg-blue-600 text-white font-bold uppercase rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" href="http://localhost:8000/emissions/calc/">compare</a>
                     </div>
 
             </div>
