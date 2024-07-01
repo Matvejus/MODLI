@@ -1,4 +1,5 @@
 {%load static%}
+{% load custom_filters %}
 {% block page_title %}<title>Dashboard</title>{% endblock page_title %}
 
 {% block css_files %}
@@ -18,116 +19,150 @@
 {% endblock scripts %}
 
 {% block content %}
-    <div class="p-8 bg-white shadow rounded-lg h-max w-screen">
+    <div class="p-4 h-max w-screen">
         <h1 class="text-2xl font-bold mb-4">Selected Gowns</h1>
         <div class="overflow-x-auto">
-            <div class = 'py-6 grid grid-cols-2'>
+            <div class = 'mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
                 <div>
-                    <h2 class = "text-2xl font-bold">
+                    <h2 class = "py-4 text-2xl font-bold">
                         CO2
                     </h2>
-                    <table class="min-w-full bg-white">
-                        <thead>
-                            <tr>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">NRE Emissions</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">CO2</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Blue Water</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Solid Waste</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Cost</th>
-                            </tr>
-                        </thead>
-                        <tbody>                          
-                             {% for gown in selected_gowns %}
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.name }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.nre_emissions }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.co2 }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.blue_water }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.solid_waste }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.cost }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div>
                     <canvas id="BarCO2"></canvas> 
                 </div>
-        </div>
-            <div class = 'py-6 grid grid-cols-2'>
-                <div>
-                    <h2 class = "text-2xl font-bold">
-                        Energy
-                    </h2>
+                <div class = 'py-8'>    
                     <table class="min-w-full bg-white">
                         <thead>
                             <tr>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">NRE Emissions</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">CO2</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Blue Water</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Solid Waste</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Cost</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           {% for gown in selected_gowns %}
-                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.name }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.nre_emissions }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.co2 }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.blue_water }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.solid_waste }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.cost }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div>
-                    <canvas id="BarEnergy"></canvas> 
-                </div>
-        </div>
-            <div class = 'py-6 grid grid-cols-2'>
-                <div>
-                    <h2 class = "text-2xl font-bold mb-2">
-                        Water
-                    </h2>
-                    <table class="min-w-full bg-white">
-                        <thead>
-                            <tr>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">NRE Emissions</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">CO2</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Blue Water</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Solid Waste</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Cost</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fibers</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Yarn</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fabric</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Finishing</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Manufacturing</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Transport</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Use</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for gown in selected_gowns %}
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.name }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.nre_emissions }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.co2 }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.blue_water }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.solid_waste }}</td>
-                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.cost }}</td>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.name }}</td>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
+                                {% with emissions=co2_emissions_dict|get_item:gown.id %}
+                                    {% if emissions %}
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fibers }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.yarn_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fabric_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.finishing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.manufacturing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.transport }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.use }}</td>
+                                    {% else %}
+                                        <td class="py-1 px-4 border-b border-gray-300" colspan="7">No Emissions Data Available</td>
+                                    {% endif %}
+                                {% endwith %}
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
+              
+        </div>
+            <div class = ' mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
                 <div>
+                    <h2 class = " mb-4 text-2xl font-bold">
+                        Energy
+                    </h2>
+                    <canvas id="BarEnergy"></canvas> 
+                </div>
+                <div class = 'py-8'>
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fibers</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Yarn production</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fabric production</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Finishing</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Manufacturing</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Transport</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for gown in selected_gowns %}
+                            <tr>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.name }}</td>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
+                                {% with emissions=energy_emissions_dict|get_item:gown.id %}
+                                    {% if emissions %}
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fibers }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.yarn_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fabric_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.finishing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.manufacturing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.transport }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.use }}</td>
+                                    {% else %}
+                                        <td class="py-1 px-4 border-b border-gray-300" colspan="7">No Emissions Data Available</td>
+                                    {% endif %}
+                                {% endwith %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+        </div>
+            <div class = 'mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
+                <div>
+                    <h2 class = "text-2xl font-bold mb-2">
+                        Water
+                    </h2>
                     <canvas id="BarWater"></canvas>
                 </div>
+                <div class = 'py-8'>
+                    
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fibers</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Yarn production</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fabric production</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Finishing</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Manufacturing</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Transport</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for gown in selected_gowns %}
+                            <tr>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.name }}</td>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
+                                {% with emissions=water_emissions_dict|get_item:gown.id %}
+                                    {% if emissions %}
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fibers }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.yarn_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fabric_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.finishing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.manufacturing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.transport }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.use }}</td>
+                                    {% else %}
+                                        <td class="py-1 px-4 border-b border-gray-300" colspan="7">No Emissions Data Available</td>
+                                    {% endif %}
+                                {% endwith %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+               
         </div>
         <a href="{% url 'gown_list' %}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Back to Gown List</a>
     </div>
