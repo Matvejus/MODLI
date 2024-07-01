@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Gown
+from .models import Gown, Emissions
 from .forms import GownForm, GownSelectionForm, GownFormReusable
 import json
 from django.core import serializers
@@ -81,8 +81,15 @@ def gown_list(request):
         form = GownSelectionForm(request.POST)
         if form.is_valid():
             selected_gowns = form.cleaned_data['selected_gowns']
+            # Fetch related Emissions data
+            emissions_data = Emissions.objects.filter(gown__in=selected_gowns)
             serialized_gowns = serializers.serialize('json', selected_gowns)
-            context = {'serialized_gowns': serialized_gowns, "selected_gowns": selected_gowns}
+            serialized_emissions = serializers.serialize('json', emissions_data)
+            context = {
+                'serialized_gowns': serialized_gowns,
+                'serialized_emissions': serialized_emissions,
+                'selected_gowns': selected_gowns
+            }
             return render(request, 'selected_gowns.html', context)
     else:
         form = GownSelectionForm()
@@ -95,28 +102,6 @@ def gown_list(request):
 
 def compare(request):
     return render(request, 'selected_gowns.html')
-
-
-# def gown_list(request):
-#     reusable_gowns = Gown.objects.filter(reusable=True)
-#     single_use_gowns = Gown.objects.filter(reusable=False)
-
-#     if request.method == 'POST':
-#         form = GownSelectionForm(request.POST)
-#         if form.is_valid():
-#             selected_gowns = form.cleaned_data['selected_gowns']
-#             return render(request, 'selected_gowns.html', {'selected_gowns': selected_gowns})
-#     else:
-#         form = GownSelectionForm()
-
-#     return render(request, 'entrypage.html', {
-#         'reusable_gowns': reusable_gowns,
-#         'single_use_gowns': single_use_gowns,
-#         'form': form
-#     })
-
-# def compare(request):
-#     return render(request, 'selected_gowns.html')
 
 
 def gown_edit(request, id):
