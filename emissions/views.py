@@ -81,16 +81,26 @@ def gown_list(request):
         form = GownSelectionForm(request.POST)
         if form.is_valid():
             selected_gowns = form.cleaned_data['selected_gowns']
-            # Fetch related Emissions data
             emissions_data = Emissions.objects.filter(gown__in=selected_gowns)
+            
+            # Create separate dictionaries for each emission type
+            co2_emissions_dict = {emission.gown_id: emission for emission in emissions_data if emission.emission_stage == 'Co2'}
+            energy_emissions_dict = {emission.gown_id: emission for emission in emissions_data if emission.emission_stage == 'ENERGY'}
+            water_emissions_dict = {emission.gown_id: emission for emission in emissions_data if emission.emission_stage == 'WATER'}
+            
             serialized_gowns = serializers.serialize('json', selected_gowns)
             serialized_emissions = serializers.serialize('json', emissions_data)
+            
             context = {
                 'serialized_gowns': serialized_gowns,
                 'serialized_emissions': serialized_emissions,
-                'selected_gowns': selected_gowns
+                'selected_gowns': selected_gowns,
+                'co2_emissions_dict': co2_emissions_dict,
+                'energy_emissions_dict': energy_emissions_dict,
+                'water_emissions_dict': water_emissions_dict,
             }
             return render(request, 'selected_gowns.html', context)
+
     else:
         form = GownSelectionForm()
 
