@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Gown
-from .forms import GownForm, GownSelectionForm
+from .forms import GownForm, GownSelectionForm, GownFormReusable
 import json
 from django.core import serializers
 
@@ -82,7 +82,7 @@ def gown_list(request):
         if form.is_valid():
             selected_gowns = form.cleaned_data['selected_gowns']
             serialized_gowns = serializers.serialize('json', selected_gowns)
-            context = {'serialized_gowns': serialized_gowns, "selected_gowns:": selected_gowns}
+            context = {'serialized_gowns': serialized_gowns, "selected_gowns": selected_gowns}
             return render(request, 'selected_gowns.html', context)
     else:
         form = GownSelectionForm()
@@ -97,20 +97,52 @@ def compare(request):
     return render(request, 'selected_gowns.html')
 
 
+# def gown_list(request):
+#     reusable_gowns = Gown.objects.filter(reusable=True)
+#     single_use_gowns = Gown.objects.filter(reusable=False)
+
+#     if request.method == 'POST':
+#         form = GownSelectionForm(request.POST)
+#         if form.is_valid():
+#             selected_gowns = form.cleaned_data['selected_gowns']
+#             return render(request, 'selected_gowns.html', {'selected_gowns': selected_gowns})
+#     else:
+#         form = GownSelectionForm()
+
+#     return render(request, 'entrypage.html', {
+#         'reusable_gowns': reusable_gowns,
+#         'single_use_gowns': single_use_gowns,
+#         'form': form
+#     })
+
+# def compare(request):
+#     return render(request, 'selected_gowns.html')
+
+
 def gown_edit(request, id):
     gown = get_object_or_404(Gown, id=id)
     if request.method == 'POST':
-        form = GownForm(request.POST, instance=gown)
+        if gown.reusable:
+            form = GownFormReusable(request.POST, instance=gown)
+        else:
+            form = GownForm(request.POST, instance=gown)
+
         if form.is_valid():
             form.save()
             return redirect('gown_list')
+
     else:
-        form = GownForm(instance=gown)
+        if gown.reusable:
+            form = GownFormReusable(instance=gown)
+        else:
+            form = GownForm(instance=gown)
+
+
     context = {
         'form':form,
         'gown': gown
     }
-    return render(request, 'gown_edit.html', {'form': form})
+    return render(request, 'gown_edit.html', context)
 
 
 
