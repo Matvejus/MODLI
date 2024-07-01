@@ -1,0 +1,303 @@
+{%load static%}
+{% block page_title %}<title>Dashboard</title>{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/tw-elements.min.css' %}">
+{% endblock css_files %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+{% endblock scripts %}
+
+{% block content %}
+    <div class="p-8 bg-white shadow rounded-lg h-max w-screen">
+        <h1 class="text-2xl font-bold mb-4">Selected Gowns</h1>
+        <div class="overflow-x-auto">
+            <div class = 'py-6 grid grid-cols-2'>
+                <div>
+                    <h2 class = "text-2xl font-bold mb-2">
+                        CO2
+                    </h2>
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">NRE Emissions</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">CO2</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Blue Water</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Solid Waste</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>                          
+                             {% for gown in selected_gowns %}
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.name }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.nre_emissions }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.co2 }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.blue_water }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.solid_waste }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.cost }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <canvas id="BarCO2"></canvas> 
+                </div>
+        </div>
+            <div class = 'py-6 grid grid-cols-2'>
+                <div>
+                    <h2 class = "text-2xl font-bold mb-2">
+                        Energy
+                    </h2>
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">NRE Emissions</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">CO2</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Blue Water</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Solid Waste</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           {% for gown in selected_gowns %}
+                             <tr>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.name }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.nre_emissions }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.co2 }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.blue_water }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.solid_waste }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.cost }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <canvas id="BarMJ"></canvas> 
+                </div>
+        </div>
+            <div class = 'py-6 grid grid-cols-2'>
+                <div>
+                    <h2 class = "text-2xl font-bold mb-2">
+                        Water
+                    </h2>
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">NRE Emissions</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">CO2</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Blue Water</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Solid Waste</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for gown in selected_gowns %}
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.name }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.nre_emissions }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.co2 }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.blue_water }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.solid_waste }}</td>
+                                <td class="py-2 px-4 border-b border-gray-300">{{ gown.cost }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <canvas id="BarWater"></canvas>
+                </div>
+        </div>
+        <a href="{% url 'gown_list' %}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Back to Gown List</a>
+    </div>
+
+
+    <section id = "charts">
+        <script>
+            // Extracting data from Django template context
+            const gowns = JSON.parse('{{ serialized_gowns|safe }}');
+            console.log(gowns)
+
+            function getRandomColor() {
+                const r = Math.floor(Math.random() * 255);
+                const g = Math.floor(Math.random() * 255);
+                const b = Math.floor(Math.random() * 255);
+                return `rgba(${r}, ${g}, ${b})`;
+            }
+    
+            // Prepare the data for Chart.js
+            const labels = ['NRE Emissions', 'CO2', 'Blue Water', 'Solid Waste', 'Cost'];
+            const datasets = gowns.map(gown => {
+                const gownFields = gown.fields;
+                return {
+                    label: gownFields.name,
+                    data: [
+                        gownFields.nre_emissions, 
+                        gownFields.co2, 
+                        gownFields.blue_water, 
+                        gownFields.solid_waste, 
+                        gownFields.cost
+                    ],
+                    backgroundColor: getRandomColor(),
+                    borderWidth: 1
+                };
+            });
+    
+            // Creating the Chart.js configuration
+            const configBarCo2 = {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: datasets,
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Environmental Impact Metrics',
+                            padding: {
+                                top: 10,
+                                bottom: 30
+                            }
+                        }
+                    },
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        align: 'start'
+                    },
+                },
+            };
+    
+            // Initializing the Chart.js chart
+            const ctxBarCO2 = document.getElementById('BarCO2').getContext('2d');
+            const myChartCO2 = new Chart(ctxBarCO2, configBarCo2);
+        </script>
+    <script>
+          const configBarMJ = {
+            type: 'bar',
+            data: {
+                labels: ['Fibers', 'Yarn production', 'Fabric production', 'Finishing', 'Manufacturing', 'Transport', 'Use'],
+                datasets: [
+                    {
+                        label: 'Cotton',
+                        data: [228.75, 397.90, 690, 422.8, 21.21, 223, 195.29],
+                        backgroundColor: 'green', // Customize the color
+                    },
+                    {
+                        label: 'Polyester',
+                        data: [2662.28, 2289.272759
+                        , 3195.405248
+                        , 572.507079
+                        , 250.273922
+                        , 578.1881056
+                        , 405.7213485
+      
+                        ],
+                        backgroundColor: 'blue',
+                    },
+                    // Add more datasets as needed
+                ],
+            },
+            options: {
+              plugins: {
+                title: {
+                    display: true,
+                    text: 'CO2 Chart',
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                }
+            },
+                responsive: true,
+                legend: {
+                  display: true,
+                  position: "bottom", // Set the position to "bottom"
+                  align: "start"
+              },
+            },
+        };
+        
+        const ctxBarMJ = document.getElementById('BarMJ').getContext('2d');
+        const myChartMJ = new Chart(ctxBarMJ, configBarMJ);
+    </script>
+    <script>
+          const configBarWater = {
+            type: 'bar',
+            data: {
+                labels: ['Fibers', 'Yarn production', 'Fabric production', 'Finishing', 'Manufacturing', 'Transport', 'Use'],
+                datasets: [
+                    {
+                        label: 'Cotton',
+                        data: [228.75, 397.90, 690, 422.8, 21.21, 223, 195.29],
+                        backgroundColor: 'green', // Customize the color
+                    },
+                    {
+                        label: 'Polyester',
+                        data: [2662.28, 2289.272759
+                        , 3195.405248
+                        , 572.507079
+                        , 250.273922
+                        , 578.1881056
+                        , 405.7213485
+      
+                        ],
+                        backgroundColor: 'blue',
+                    },
+                    // Add more datasets as needed
+                ],
+            },
+            options: {
+              plugins: {
+                title: {
+                    display: true,
+                    text: 'CO2 Chart',
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                }
+            },
+                responsive: true,
+                legend: {
+                  display: true,
+                  position: "bottom", // Set the position to "bottom"
+                  align: "start"
+              },
+            },
+        };
+        
+        const ctxBarWater = document.getElementById('BarWater').getContext('2d');
+        const myChartWater = new Chart(ctxBarWater, configBarWater);
+    </script>
+
+</section>
+{% endblock content %}
