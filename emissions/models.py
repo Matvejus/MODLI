@@ -25,6 +25,45 @@ class Gown(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Co22(models.Model):
+    
+    gown = models.ForeignKey(Gown, on_delete = models.CASCADE)
+    fibers = models.FloatField()
+    yarn_production = models.FloatField()
+    fabric_production = models.FloatField()
+    finishing = models.FloatField()
+    manufacturing = models.FloatField()
+    packaging = models.FloatField()
+    transport = models.FloatField()
+    use = models.FloatField()
+    end_of_life = models.FloatField()
+    
+class Energy(models.Model):
+    
+    gown = models.ForeignKey(Gown, on_delete = models.CASCADE)
+    fibers = models.FloatField()
+    yarn_production = models.FloatField()
+    fabric_production = models.FloatField()
+    finishing = models.FloatField()
+    manufacturing = models.FloatField()
+    packaging = models.FloatField()
+    transport = models.FloatField()
+    use = models.FloatField()
+    end_of_life = models.FloatField()
+    
+class Water(models.Model):
+    
+    gown = models.ForeignKey(Gown, on_delete = models.CASCADE)
+    fibers = models.FloatField()
+    yarn_production = models.FloatField()
+    fabric_production = models.FloatField()
+    finishing = models.FloatField()
+    manufacturing = models.FloatField()
+    packaging = models.FloatField()
+    transport = models.FloatField()
+    use = models.FloatField()
+    end_of_life = models.FloatField()
 
 
 
