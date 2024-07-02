@@ -10,7 +10,7 @@ class GownFormReusable(forms.ModelForm):
 
     class Meta:
         model = Gown
-        fields = ['reusable', 'washes', 'cost', 'certificates']
+        fields = ['reusable', 'weight', 'washes', 'cost', 'certificates']
 
 class GownForm(forms.ModelForm):
     certificates = forms.ModelMultipleChoiceField(
@@ -21,7 +21,7 @@ class GownForm(forms.ModelForm):
 
     class Meta:
         model = Gown
-        fields = ['reusable', 'cost', 'certificates']
+        fields = ['reusable', 'weight', 'cost', 'certificates']
 
 
 class GownSelectionForm(forms.Form):

@@ -16,6 +16,7 @@ class Gown(models.Model):
     name = models.CharField(max_length = 100)
     reusable = models.BooleanField()
     cost  = models.FloatField(blank = False, null = False)
+    weight = models.FloatField(blank = False, null = False)
     certificates = models.ManyToManyField(Certification, blank=True)
     washes = models.IntegerField(blank = False, null = False)
 

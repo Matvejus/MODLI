@@ -5,3 +5,7 @@ register = template.Library()
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key)
+
+@register.filter
+def has_certification(gown, certification_name):
+    return gown.certificates.filter(name=certification_name).exists()
