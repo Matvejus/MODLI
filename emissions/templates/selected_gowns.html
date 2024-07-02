@@ -162,6 +162,61 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class = 'mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
+                <div class = 'py-8'>
+                    <h2 class = "text-2xl font-bold mb-2">
+                        Certificates
+                    </h2>
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">OEKO-TEX Made in Green</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fair wear Foundations</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fair for life Kleding</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fabric production</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fairtrade Textile Production Standard</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for gown in selected_gowns %}
+                            <tr>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.name }}</td>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
+                                <td class="py-1 px-4 border-b border-gray-300">
+                                    {% if gown|has_certification:"OEKO-TEX Made in Green" %}
+                                        ✓
+                                    {% else %}
+                                        ✗
+                                    {% endif %}
+                                </td>
+                                <td class="py-1 px-4 border-b border-gray-300">
+                                    {% if gown|has_certification:"Fair wear Foundation" %}
+                                        ✓
+                                    {% else %}
+                                        ✗
+                                    {% endif %}
+                                </td>
+                                <td class="py-1 px-4 border-b border-gray-300">
+                                    {% if gown|has_certification:"Fair for life Kleding" %}
+                                        ✓
+                                    {% else %}
+                                        ✗
+                                    {% endif %}
+                                </td>
+                                <td class="py-1 px-4 border-b border-gray-300">
+                                    {% if gown|has_certification:"Fairtrade Textile Production Standard" %}
+                                        ✓
+                                    {% else %}
+                                        ✗
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
                
         </div>
         <a href="{% url 'gown_list' %}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Back to Gown List</a>
