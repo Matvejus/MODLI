@@ -1,0 +1,270 @@
+{%load static%}
+{% load custom_filters %}
+{% block page_title %}<title>Dashboard</title>{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/tw-elements.min.css' %}">
+{% endblock css_files %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+{% endblock scripts %}
+
+{% block content %}
+    <div class="p-4 h-max w-screen">
+        <h1 class="text-2xl font-bold mb-4">Selected Gowns</h1>
+        <div class="overflow-x-auto">
+            <div class = 'mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
+                <div>
+                    <h2 class = "py-4 text-2xl font-bold">
+                        CO2
+                    </h2>
+                    <canvas id="BarCO2"></canvas> 
+                </div>
+                <div class = 'py-8'>    
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fibers</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Yarn</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fabric</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Finishing</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Manufacturing</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Transport</th>
+                                <th class="py-1 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for gown in selected_gowns %}
+                            <tr>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.name }}</td>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
+                                {% with emissions=co2_emissions_dict|get_item:gown.id %}
+                                    {% if emissions %}
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fibers }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.yarn_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fabric_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.finishing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.manufacturing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.transport }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.use }}</td>
+                                    {% else %}
+                                        <td class="py-1 px-4 border-b border-gray-300" colspan="7">No Emissions Data Available</td>
+                                    {% endif %}
+                                {% endwith %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+              
+        </div>
+            <div class = ' mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
+                <div>
+                    <h2 class = " mb-4 text-2xl font-bold">
+                        Energy
+                    </h2>
+                    <canvas id="BarEnergy"></canvas> 
+                </div>
+                <div class = 'py-8'>
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fibers</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Yarn production</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fabric production</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Finishing</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Manufacturing</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Transport</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for gown in selected_gowns %}
+                            <tr>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.name }}</td>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
+                                {% with emissions=energy_emissions_dict|get_item:gown.id %}
+                                    {% if emissions %}
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fibers }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.yarn_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fabric_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.finishing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.manufacturing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.transport }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.use }}</td>
+                                    {% else %}
+                                        <td class="py-1 px-4 border-b border-gray-300" colspan="7">No Emissions Data Available</td>
+                                    {% endif %}
+                                {% endwith %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+        </div>
+            <div class = 'mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
+                <div>
+                    <h2 class = "text-2xl font-bold mb-2">
+                        Water
+                    </h2>
+                    <canvas id="BarWater"></canvas>
+                </div>
+                <div class = 'py-8'>
+                    
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Name</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fibers</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Yarn production</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fabric production</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Finishing</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Manufacturing</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Transport</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for gown in selected_gowns %}
+                            <tr>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.name }}</td>
+                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
+                                {% with emissions=water_emissions_dict|get_item:gown.id %}
+                                    {% if emissions %}
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fibers }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.yarn_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fabric_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.finishing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.manufacturing }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.transport }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.use }}</td>
+                                    {% else %}
+                                        <td class="py-1 px-4 border-b border-gray-300" colspan="7">No Emissions Data Available</td>
+                                    {% endif %}
+                                {% endwith %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+               
+        </div>
+        <a href="{% url 'gown_list' %}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Back to Gown List</a>
+    </div>
+
+
+<section id = "charts">
+    <script>
+        // Extracting data from Django template context
+        const gowns = JSON.parse('{{ serialized_gowns|safe }}');
+        const emissions = JSON.parse('{{ serialized_emissions|safe }}');
+        console.log(gowns);
+        console.log(emissions);
+    
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 255);
+            const g = Math.floor(Math.random() * 255);
+            const b = Math.floor(Math.random() * 255);
+            return `rgba(${r}, ${g}, ${b})`;
+        }
+    
+        function filterEmissionsByStage(stage) {
+            return emissions.filter(emission => emission.fields.emission_stage === stage);
+        }
+    
+        function prepareDataset(emissionData) {
+            return emissionData.map(emission => {
+                const emissionFields = emission.fields;
+                return {
+                    label: `Gown ID: ${emissionFields.gown}`,
+                    data: [
+                        emissionFields.fibers, 
+                        emissionFields.yarn_production, 
+                        emissionFields.fabric_production, 
+                        emissionFields.finishing, 
+                        emissionFields.manufacturing, 
+                        emissionFields.packaging, 
+                        emissionFields.transport, 
+                        emissionFields.use, 
+                        emissionFields.fibers + emissionFields.yarn_production + emissionFields.fabric_production +
+                        emissionFields.finishing + emissionFields.manufacturing + emissionFields.packaging +
+                        emissionFields.transport + emissionFields.use  // total
+                    ],
+                    backgroundColor: getRandomColor(),
+                    borderWidth: 1
+                };
+            });
+        }
+    
+        // Labels for the stages
+        const labels = ['Fibers', 'Yarn Production', 'Fabric Production', 'Finishing', 'Manufacturing', 'Packaging', 'Transport', 'Use', 'Total'];
+    
+        // Prepare data for each chart
+        const co2Data = prepareDataset(filterEmissionsByStage("Co2"));
+        const energyData = prepareDataset(filterEmissionsByStage("ENERGY"));
+        const waterData = prepareDataset(filterEmissionsByStage("WATER"));
+
+        console.log(co2Data)
+    
+        // Chart configuration function
+        function createChartConfig(title, datasets) {
+            return {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: datasets,
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: title,
+                            padding: {
+                                top: 10,
+                                bottom: 30
+                            }
+                        }
+                    },
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        align: 'start'
+                    },
+                },
+            };
+        }
+    
+        // Creating the Chart.js charts
+        const ctxBarCO2 = document.getElementById('BarCO2').getContext('2d');
+        const myChartCO2 = new Chart(ctxBarCO2, createChartConfig('CO2 Emissions (kg CO2 eq)', co2Data));
+    
+        const ctxBarEnergy = document.getElementById('BarEnergy').getContext('2d');
+        const myChartEnergy = new Chart(ctxBarEnergy, createChartConfig('Energy Usage (MJ)', energyData));
+    
+        const ctxBarWater = document.getElementById('BarWater').getContext('2d');
+        const myChartWater = new Chart(ctxBarWater, createChartConfig('Water Usage (Liters)', waterData));
+    </script>        
+
+</section>
+{% endblock content %}

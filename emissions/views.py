@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from .models import Gown
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Gown, Emissions
+from .forms import GownForm, GownSelectionForm, GownFormReusable
 import json
-
+from django.core import serializers
 
 def needed_amount(amount):
     with open('emissions\data\works.json', 'r') as file:
@@ -70,3 +71,73 @@ def calculator(request):
                 return render(request, 'calculator.html', context)
 
     return render(request, 'calculator.html')
+
+
+def gown_list(request):
+    reusable_gowns = Gown.objects.filter(reusable=True)
+    single_use_gowns = Gown.objects.filter(reusable=False)
+
+    if request.method == 'POST':
+        form = GownSelectionForm(request.POST)
+        if form.is_valid():
+            selected_gowns = form.cleaned_data['selected_gowns']
+            emissions_data = Emissions.objects.filter(gown__in=selected_gowns)
+            
+            # Create separate dictionaries for each emission type
+            co2_emissions_dict = {emission.gown_id: emission for emission in emissions_data if emission.emission_stage == 'Co2'}
+            energy_emissions_dict = {emission.gown_id: emission for emission in emissions_data if emission.emission_stage == 'ENERGY'}
+            water_emissions_dict = {emission.gown_id: emission for emission in emissions_data if emission.emission_stage == 'WATER'}
+            
+            serialized_gowns = serializers.serialize('json', selected_gowns)
+            serialized_emissions = serializers.serialize('json', emissions_data)
+            
+            context = {
+                'serialized_gowns': serialized_gowns,
+                'serialized_emissions': serialized_emissions,
+                'selected_gowns': selected_gowns,
+                'co2_emissions_dict': co2_emissions_dict,
+                'energy_emissions_dict': energy_emissions_dict,
+                'water_emissions_dict': water_emissions_dict,
+            }
+            return render(request, 'selected_gowns.html', context)
+
+    else:
+        form = GownSelectionForm()
+
+    return render(request, 'entrypage.html', {
+        'reusable_gowns': reusable_gowns,
+        'single_use_gowns': single_use_gowns,
+        'form': form
+    })
+
+def compare(request):
+    return render(request, 'selected_gowns.html')
+
+
+def gown_edit(request, id):
+    gown = get_object_or_404(Gown, id=id)
+    if request.method == 'POST':
+        if gown.reusable:
+            form = GownFormReusable(request.POST, instance=gown)
+        else:
+            form = GownForm(request.POST, instance=gown)
+
+        if form.is_valid():
+            form.save()
+            return redirect('gown_list')
+
+    else:
+        if gown.reusable:
+            form = GownFormReusable(instance=gown)
+        else:
+            form = GownForm(instance=gown)
+
+
+    context = {
+        'form':form,
+        'gown': gown
+    }
+    return render(request, 'gown_edit.html', context)
+
+
+
