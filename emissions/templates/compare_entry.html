@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compare Gowns</title>
+</head>
+<body>
+    <form method="post" action="{% url 'compare' %}">
+        {% csrf_token %}
+        <input type="hidden" name="selected_gowns" value="{{ serialized_gowns }}">
+        <label for="number_of_uses">Number of Uses:</label>
+        <input type="number" name="number_of_uses" min="1" value="1">
+        <button type="submit">Compare</button>
+    </form>
+</body>
+</html>
