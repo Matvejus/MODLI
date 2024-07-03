@@ -51,8 +51,8 @@
                                 <td class="py-1 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
                                 {% with emissions=co2_emissions_dict|get_item:gown.id %}
                                     {% if emissions %}
-                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fibers }}</td>
-                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.yarn_production }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fibers }} KG</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.yarn_production }}KG</td>
                                         <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fabric_production }}</td>
                                         <td class="py-1 px-4 border-b border-gray-300">{{ emissions.finishing }}</td>
                                         <td class="py-1 px-4 border-b border-gray-300">{{ emissions.manufacturing }}</td>
@@ -256,9 +256,7 @@
                         emissionFields.packaging, 
                         emissionFields.transport, 
                         emissionFields.use, 
-                        emissionFields.fibers + emissionFields.yarn_production + emissionFields.fabric_production +
-                        emissionFields.finishing + emissionFields.manufacturing + emissionFields.packaging +
-                        emissionFields.transport + emissionFields.use  // total
+    
                     ],
                     backgroundColor: getRandomColor(),
                     borderWidth: 1
@@ -267,7 +265,7 @@
         }
     
         // Labels for the stages
-        const labels = ['Fibers', 'Yarn Production', 'Fabric Production', 'Finishing', 'Manufacturing', 'Packaging', 'Transport', 'Use', 'Total'];
+        const labels = ['Fibers', 'Yarn Production', 'Fabric Production', 'Finishing', 'Manufacturing', 'Packaging', 'Transport', 'Use'];
     
         // Prepare data for each chart
         const co2Data = prepareDataset(filterEmissionsByStage("Co2"));
