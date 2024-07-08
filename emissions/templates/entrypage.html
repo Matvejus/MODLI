@@ -33,14 +33,18 @@
     }
 </style>
 
-<div id = "grid for sections" class = "grid grid-cols-3">
+<div id = "grid for sections" class = " h-max een grid grid-cols-3">
 
         <section id='Planning' class="px-1 py-2">
             <div class="p-8 bg-white shadow rounded-lg h-screen">
+                <h1 class="text-2xl font-bold mb-6 text-center">Circular Procurement Tool</h1>
                 <div class="my-4 max-w-3xl mx-auto bg-white p-8 rounded-lg shadow border border-gray-400">
+                    <div class="mb-8">
+                        <p class="mb-4">
+                            Use this tool to compare the economic, social and environmental impact of different types of isolation gowns. For an overview of variables/metrics that have been considered in the calculation and the sources used, please click <a href='#' class = "text-blue-800 underline">here.</a> 
+                        </p>
+                    </div>
 
-                    <h1 class="text-2xl font-bold mb-6 text-center">MODLI</h1>
-            
                     <div class="mb-8">
                         <h2 class="text-lg font-bold mb-4">1. Gown Comparison:</h2>
                         <p class="mb-4">
@@ -67,6 +71,7 @@
 
         <section id='Gowns' class="px-1 py-2">
             <div class="p-8 bg-white shadow rounded-lg h-screen"> 
+                <h1 class="text-2xl font-bold mb-6 text-center">Compare</h1>
                 <form method="post">
                     {% csrf_token %}
                     <div class="py-2">
@@ -77,7 +82,7 @@
                         {% for gown in reusable_gowns %}
                         <div class="max-w-lg mx-auto">
                             <div class="mb-4">
-                                <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
+                                <label class="bg-grey flex items-center h-10 w-max rounded-lg border shadow border-gray-600">
                                     <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600" name="selected_gowns" value="{{ gown.id }}">
                                     <div id='materials'>
                                         <span class="ml-2 text-gray-700">{{ gown.name }}</span>
@@ -124,32 +129,13 @@
                         Compare Gowns
                     </button>
 
-                </form>
-                
-                    <div class="py-4 bg-white rounded-lg  w-full max-w-md">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                            Resuable gowns in porfolio    
-                        </label>
-                        <div class="mb-4">
-                          <input type="range" id="price-range" class="w-full blue-600 " min="0" max="100" value="50" oninput="updatePrice(this.value)">
-                        </div>
-                        <div class="flex justify-between text-gray-500">
-                          <span id="minPrice">0%</span>
-                          <span id="maxPrice">100%</span>
-                        </div>
-                      </div>
-                      
-                      <script>
-                        function updatePrice(value) {
-                          document.getElementById("minPrice").textContent = value + "%" ;
-                        }
-                      </script>
-            
+                </form>    
             </div>
         </section>
 
         <section id='Operations' class="px-1 py-2">
             <div class="p-8 bg-white shadow rounded-lg h-screen">
+                <h1 class="text-2xl font-bold mb-6 text-center">Create portfolio</h1>
                 <div class = "py-2">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                         Planning period    
@@ -165,7 +151,7 @@
                             </div>
                         </div>
                 </div>
-                <div class="py-2 flex flex-wrap -mx-3 mb-6">
+                <div class="py-2 flex flex-wrap -mx-3">
                     
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
@@ -199,7 +185,7 @@
                     
                 </div>
 
-                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2 py-2" for="grid-first-name">
+                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                     Medical center location
                 </label>
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -224,10 +210,10 @@
                             <input class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Stationsplein">
                         </div>
                     </div>
-                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2 py-2" for="grid-first-name">
+                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                     Laundry location
                 </label>
-                    <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="flex flex-wrap mb-6 -mx-3">
                         
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
@@ -250,13 +236,29 @@
                         </div>
                     </div>
 
+                    <div class=" bg-white rounded-lg  w-full max-w-md">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                            Resuable gowns in porfolio    
+                        </label>
+                        <div class="mb-4">
+                          <input type="range" id="price-range" class="w-full blue-600 " min="0" max="100" value="50" oninput="updatePrice(this.value)">
+                        </div>
+                        <div class="flex justify-between text-gray-500">
+                          <span id="minPrice">0%</span>
+                          <span id="maxPrice">100%</span>
+                        </div>
+                    </div>
+                      
+                      <script>
+                        function updatePrice(value) {
+                          document.getElementById("minPrice").textContent = value + "%" ;
+                        }
+                      </script>
+
                     <div>
                         <a class=" text-center appearance-none block w-full bg-blue-600 text-white font-bold uppercase rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" href="http://localhost:8000/emissions/calc/">Create a portfolio</a>
                     </div>
-
             </div>
-
-       
         </section>
 
 
