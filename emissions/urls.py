@@ -8,5 +8,5 @@ urlpatterns = [
     path("compare/", views.compare, name = 'compare'),
     path("entry/", views.gown_list, name='gown_list'),
     path('gown/edit/<int:id>/', views.gown_edit, name='gown_edit'),
-
+    path('scenario1/', views.scenario1, name = 'scenario1' )
 ]

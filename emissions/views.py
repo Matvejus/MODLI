@@ -4,42 +4,6 @@ from .forms import GownForm, GownSelectionForm, GownFormReusable
 import json
 from django.core import serializers
 
-def needed_amount(amount):
-    with open('emissions\data\works.json', 'r') as file:
-        data = json.load(file)
-
-    amount = int(amount)
-    combinations = [combo for combo in data if combo['total'] == amount]
-    
-    return combinations
-
-def cheapest(combinations):
-    min_price = min(c['cost'] for c in combinations)
-    cheapest = [c for c in combinations if c['cost'] == min_price]
-
-    return cheapest
-
-def lowest_emissions(combinations):
-    min_emissions = min(c['total_emissions'] for c in combinations)
-    lowest_emissions = [c for c in combinations if c['total_emissions'] == min_emissions]
-
-    return lowest_emissions
-
-def optimal(combinations):
-    best_combo = float('inf')
-    best = None
-
-    for c in combinations:
-        total = c['cost'] + c['total_emissions']
-        if total < best_combo:
-            best = c
-            best_combo = total
-
-    return best
-    
-
-
-
 
 def calculator(request):
     context = {}  # Define the context variable here
@@ -77,7 +41,7 @@ def compare(request):
             normalized_emissions = []
             for emission in emissions_data:
                 gown = emission.gown
-                gown_weight_kg = gown.weight / 1000  # Convert grams to kilograms
+                gown_weight_kg = gown.weight / 1000 * 300# Convert grams to kilograms * AMOUNTS OF GOWNS
                 
                 normalized_emission = {
                     'gown_id': gown.id,
@@ -154,6 +118,22 @@ def gown_edit(request, id):
         'gown': gown
     }
     return render(request, 'gown_edit.html', context)
+
+def scenario1(request):
+    value = 2
+    context = {
+        "data":value
+    }
+
+
+
+
+
+
+    return render(request, 'emissions.html', context )
+
+
+
 
 
 
