@@ -19,7 +19,7 @@
 
 {% block content %}
 
- <section id='Scenarios' class="grid px-4 gap-6 pt-5">
+ <section id='Scenarios' class="grid px-2 gap-6 pt-5">
 
     <div class="col-span-2 w-full">
         
@@ -29,10 +29,10 @@
                     <div class='flex flex-col justify-center items-center'>
                         <span class="text-4xl font-bold">Lowest Emisssions</span>
                         <div class='flex mt-4'>
-                            <div class="rounded-lg border border-gray-300 bg-white p-2 mx-2">
+                            <div class="rounded-lg border shadow border-gray-400 bg-white p-2 mx-2">
                                 <span class="text-lg">Reusable: Cotton 100pcs</span>
                             </div>
-                            <div class="rounded-lg border border-gray-300 bg-white p-2 mx-2">
+                            <div class="rounded-lg border shadow border-gray-400 bg-white p-2 mx-2">
                                 <span class="text-lg">Disposable: PET 400pcs</span>
                             </div>
                         </div>
@@ -44,10 +44,10 @@
                     <div class='flex flex-col justify-center items-center'>
                         <span class="text-4xl font-bold">Lowest cost</span>
                         <div class='flex mt-4'>
-                            <div class="rounded-lg border border-gray-300 bg-white p-2 mx-2">
+                            <div class="rounded-lg border shadow border-gray-400 bg-white p-2 mx-2">
                                 <span class="text-lg">Reusable: r-PET 250pcs</span>
                             </div>
-                            <div class="rounded-lg border border-gray-300 bg-white p-2 mx-2">
+                            <div class="rounded-lg border shadow border-gray-400 bg-white p-2 mx-2">
                                 <span class="text-lg">Disposable: 350pcs</span>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
         </div>
     </div>
     <div class="col-span-2 w-full">
-        <div class='px-2 flex justify-between gap-8'>
+        <div class=' flex justify-between gap-8'>
             <div class='w-1/4'>
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class='flex flex-col justify-center items-center'>
@@ -126,7 +126,7 @@
 </section>
 
 
-<section id='Production' class="px-4 py-2">
+<section id='Production' class="px-4">
   <div class="p-8 h-600px bg-white shadow rounded-lg">
     <h2 class='justify-center text-center items-center font-bold'>Production data</h2>
 
@@ -271,7 +271,7 @@
   
   const horizontalBarCtx = document.getElementById('horizontalBarChart').getContext('2d');
   const horizontalBarChart = new Chart(horizontalBarCtx, horizontalBarConfig);
-</script>
+ </script>
 
     <script>
         // Function to create a standardized doughnut chart configuration
