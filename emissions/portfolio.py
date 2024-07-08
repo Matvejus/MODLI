@@ -2,9 +2,6 @@ import gurobipy as gp
 import json
 from gurobipy import GRB
 from enum import Enum
-import os
-
-
 
 class Envpar(Enum):
     CO2EQ = 1
@@ -37,30 +34,21 @@ class Specs:
         self.optimizer = optimizer
 
 def get_gowns(loc=False):
-    # Assuming the script is run from the root directory of your Django project
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    default_location = os.path.join(base_dir, 'emissions', 'data', 'MockGowns.json')
-    location = default_location if not loc else loc
+    location = "../Data/MockGowns1.json" if not loc else loc
     
     with open(location) as f:
         _options = json.load(f)
     
     print(_options)
-    return [Gown(name=gw["name"], reusable=gw["reusable"], impacts=gw["impacts"]) for gw in _options]
+    Options = [Gown(name=gw["name"], reusable=gw["reusable"], impacts=gw["impacts"]) for gw in _options]
+    return Options
 
 def get_impact(gown, stage, env):
     if stage not in Accountables:
         stage = Accountables[0]
-    try:
-        yvar = gown.Impacts["envpars"].index(env.name)  # env.name needs to be the exact name as in 'envpars' list
-        xvar = gown.Impacts["stages"].index(stage.name)  # stage.name needs to be the exact name as in 'stages' list
-        return gown.Impacts["params"][xvar][yvar]
-    except ValueError:
-        print(f"Stage {stage} or Environment {env} not found in gown data.")
-        return None
-    except IndexError:
-        print(f"Data mismatch in parameters for {gown.Name}, please check 'params' matrix dimensions.")
-        return None
+    yvar = gown.Impacts["envpars"].index(env.name)
+    xvar = gown.Impacts["stages"].index(stage.name)
+    return gown.Impacts["params"][xvar][yvar]
 
 Options = get_gowns()
 Specifications = Specs(usage_per_week=100, pickups_per_week=2)
