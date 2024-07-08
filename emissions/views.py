@@ -45,30 +45,7 @@ def calculator(request):
     context = {}  # Define the context variable here
 
     if request.method == 'POST':
-        amount = request.POST.get('amount')
-        lowest_cost_value = request.POST.get('lowest_cost')
-        lowest_emissions_value = request.POST.get('lowest_emissions')
-
-        lowest_emissions_boolean = lowest_emissions_value == 'on'
-        lowest_cost_boolean = lowest_cost_value == 'on'
-
-        if amount:
-            gowns = needed_amount(amount)
-            
-            if lowest_cost_boolean:
-                lowest_cost = cheapest(gowns)
-                context = {'gowns': lowest_cost}
-                return render(request, 'calculator.html', context)
-            
-            elif lowest_emissions_boolean:
-                emissions = lowest_emissions(gowns)
-                context = {'gowns': emissions}
-                return render(request, 'calculator.html', context)
-            
-            elif lowest_cost_boolean and lowest_emissions_boolean:
-                best_combination = optimal(gowns)
-                context = {'gowns': best_combination}
-                return render(request, 'calculator.html', context)
+        return render(request, 'calculator.html', context)
 
     return render(request, 'calculator.html')
 
@@ -78,16 +55,59 @@ def gown_list(request):
     single_use_gowns = Gown.objects.filter(reusable=False)
 
     if request.method == 'POST':
+        return compare(request)
+
+    else:
+        form = GownSelectionForm()
+
+    return render(request, 'entrypage.html', {
+        'reusable_gowns': reusable_gowns,
+        'single_use_gowns': single_use_gowns,
+        'form': form
+    })
+
+def compare(request):
+    if request.method == 'POST':
         form = GownSelectionForm(request.POST)
         if form.is_valid():
             selected_gowns = form.cleaned_data['selected_gowns']
             emissions_data = Emissions.objects.filter(gown__in=selected_gowns)
             
-            # Create separate dictionaries for each emission type
-            co2_emissions_dict = {emission.gown_id: emission for emission in emissions_data if emission.emission_stage == 'Co2'}
-            energy_emissions_dict = {emission.gown_id: emission for emission in emissions_data if emission.emission_stage == 'ENERGY'}
-            water_emissions_dict = {emission.gown_id: emission for emission in emissions_data if emission.emission_stage == 'WATER'}
-            
+            # Process all emissions data by dividing by gown weight in kg and formatting to 2 decimal places
+            normalized_emissions = []
+            for emission in emissions_data:
+                gown = emission.gown
+                gown_weight_kg = gown.weight / 1000  # Convert grams to kilograms
+                
+                normalized_emission = {
+                    'gown_id': gown.id,
+                    'emission_stage': emission.emission_stage,
+                    'fibers': round(emission.fibers * gown_weight_kg, 2),
+                    'yarn_production': round(emission.yarn_production * gown_weight_kg, 2),
+                    'fabric_production': round(emission.fabric_production * gown_weight_kg, 2),
+                    'finishing': round(emission.finishing * gown_weight_kg, 2),
+                    'manufacturing': round(emission.manufacturing * gown_weight_kg, 2),
+                    'packaging': round(emission.packaging * gown_weight_kg, 2),
+                    'transport': round(emission.transport * gown_weight_kg, 2),
+                    'use': round(emission.use * gown_weight_kg, 2),
+                }
+                normalized_emissions.append(normalized_emission)
+
+            # Create dictionaries for each emission type
+            co2_emissions_dict = {}
+            energy_emissions_dict = {}
+            water_emissions_dict = {}
+
+            # Organize the normalized emissions into dictionaries by emission type
+            for norm_emission in normalized_emissions:
+                gown_id = norm_emission['gown_id']
+                if norm_emission['emission_stage'] == Emissions.EmissionStage.CO2:
+                    co2_emissions_dict[gown_id] = norm_emission
+                elif norm_emission['emission_stage'] == Emissions.EmissionStage.ENERGY:
+                    energy_emissions_dict[gown_id] = norm_emission
+                elif norm_emission['emission_stage'] == Emissions.EmissionStage.WATER:
+                    water_emissions_dict[gown_id] = norm_emission
+
             serialized_gowns = serializers.serialize('json', selected_gowns)
             serialized_emissions = serializers.serialize('json', emissions_data)
             
@@ -101,17 +121,13 @@ def gown_list(request):
             }
             return render(request, 'selected_gowns.html', context)
 
-    else:
-        form = GownSelectionForm()
+        # If the form is not valid, handle it (e.g., redirect or return an error)
+        return redirect('entrypage')
 
+    # Handle the case when the request method is not POST, possibly redirect or return an error
     return render(request, 'entrypage.html', {
-        'reusable_gowns': reusable_gowns,
-        'single_use_gowns': single_use_gowns,
-        'form': form
+        'error': 'Invalid request method. Please use the form to select gowns.',
     })
-
-def compare(request):
-    return render(request, 'selected_gowns.html')
 
 
 def gown_edit(request, id):

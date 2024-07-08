@@ -20,12 +20,12 @@
 
 {% block content %}
     <div class="p-4 h-max w-screen">
-        <h1 class="text-2xl font-bold mb-4">Selected Gowns</h1>
+        <h1 class="text-2xl font-bold mb-4">Emissions per 1 gown</h1>
         <div class="overflow-x-auto">
             <div class = 'mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
                 <div>
                     <h2 class = "py-4 text-2xl font-bold">
-                        CO2
+                        CO<sub>2</sub> equivalent - KG
                     </h2>
                     <canvas id="BarCO2"></canvas> 
                 </div>
@@ -48,11 +48,16 @@
                             {% for gown in selected_gowns %}
                             <tr>
                                 <td class="py-1 px-4 border-b border-gray-300">{{ gown.name }}</td>
-                                <td class="py-1 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
+                                {% if gown.reusable %}
+                                    <td class="py-1 px-4 border-b border-gray-300">Yes</td>
+                                {% else %}
+                                    <td class="py-1 px-4 border-b border-gray-300">No</td>
+                                {% endif %}
+                                
                                 {% with emissions=co2_emissions_dict|get_item:gown.id %}
                                     {% if emissions %}
-                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fibers }} KG</td>
-                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.yarn_production }}KG</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fibers }}</td>
+                                        <td class="py-1 px-4 border-b border-gray-300">{{ emissions.yarn_production }}</td>
                                         <td class="py-1 px-4 border-b border-gray-300">{{ emissions.fabric_production }}</td>
                                         <td class="py-1 px-4 border-b border-gray-300">{{ emissions.finishing }}</td>
                                         <td class="py-1 px-4 border-b border-gray-300">{{ emissions.manufacturing }}</td>
@@ -72,7 +77,7 @@
             <div class = ' mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
                 <div>
                     <h2 class = " mb-4 text-2xl font-bold">
-                        Energy
+                        Energy - MJ
                     </h2>
                     <canvas id="BarEnergy"></canvas> 
                 </div>
@@ -119,7 +124,7 @@
             <div class = 'mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
                 <div>
                     <h2 class = "text-2xl font-bold mb-2">
-                        Water
+                        Water - Liters
                     </h2>
                     <canvas id="BarWater"></canvas>
                 </div>
@@ -171,11 +176,11 @@
                     <table class="min-w-full bg-white">
                         <thead>
                             <tr>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">OEKO-TEX Made in Green</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Gown</th>
                                 <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Reusable</th>
+                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">OEKO-TEX Made in Green</th>
                                 <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fair wear Foundations</th>
                                 <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fair for life Kleding</th>
-                                <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fabric production</th>
                                 <th class="py-2 px-4 border-b border-gray-300 text-left text-sm leading-4 text-gray-800 uppercase">Fairtrade Textile Production Standard</th>
                             </tr>
                         </thead>
@@ -219,6 +224,20 @@
                 </div>
                
         </div>
+        <section id='Socio' class=" py-1">
+            <div class="mt-2 py-2 h-600px bg-white shadow rounded-lg">
+                <h2 class = "px-2 text-2xl font-bold mb-2">
+                    Social impacts
+                </h2>
+              <div class="grid grid-cols-2">
+                <div id="regions_div" style="width: 600px; height: 400px;"></div>
+                <div class = "pt-6" style="width: 600px;">
+                  <canvas id="horizontalBarChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </section>
+
         <a href="{% url 'gown_list' %}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Back to Gown List</a>
     </div>
 
@@ -231,11 +250,18 @@
         console.log(gowns);
         console.log(emissions);
     
-        function getRandomColor() {
-            const r = Math.floor(Math.random() * 255);
-            const g = Math.floor(Math.random() * 255);
-            const b = Math.floor(Math.random() * 255);
-            return `rgba(${r}, ${g}, ${b})`;
+        // Function to get specific color based on gown type
+        function getGownColor(gownType) {
+            switch(gownType.toLowerCase()) {
+                case 'cotton':
+                    return 'rgba(0, 128, 0)';  // Green
+                case 'polyester':
+                    return 'rgba(0, 0, 255)';  // Blue
+                case 'lyocell':
+                    return 'rgba(255, 255, 0)';  // Yellow
+                default:
+                    return 'rgba(128, 128, 128)';  // Gray for unknown types
+            }
         }
     
         function filterEmissionsByStage(stage) {
@@ -245,34 +271,35 @@
         function prepareDataset(emissionData) {
             return emissionData.map(emission => {
                 const emissionFields = emission.fields;
+                const gown = gowns.find(g => g.pk === emissionFields.gown);
+                const gownType = gown ? gown.fields.name : 'unknown';
+    
                 return {
-                    label: `Gown ID: ${emissionFields.gown}`,
+                    label: `Gown: ${gownType}`,
                     data: [
                         emissionFields.fibers, 
                         emissionFields.yarn_production, 
                         emissionFields.fabric_production, 
                         emissionFields.finishing, 
                         emissionFields.manufacturing, 
-                        emissionFields.packaging, 
                         emissionFields.transport, 
-                        emissionFields.use, 
-    
+                        emissionFields.use
                     ],
-                    backgroundColor: getRandomColor(),
+                    backgroundColor: getGownColor(gownType),
                     borderWidth: 1
                 };
             });
         }
     
         // Labels for the stages
-        const labels = ['Fibers', 'Yarn Production', 'Fabric Production', 'Finishing', 'Manufacturing', 'Packaging', 'Transport', 'Use'];
+        const labels = ['Fibers', 'Yarn Production', 'Fabric Production', 'Finishing', 'Manufacturing', 'Transport', 'Use'];
     
         // Prepare data for each chart
         const co2Data = prepareDataset(filterEmissionsByStage("Co2"));
         const energyData = prepareDataset(filterEmissionsByStage("ENERGY"));
         const waterData = prepareDataset(filterEmissionsByStage("WATER"));
-
-        console.log(co2Data)
+    
+        console.log(co2Data);
     
         // Chart configuration function
         function createChartConfig(title, datasets) {
@@ -317,7 +344,67 @@
     
         const ctxBarWater = document.getElementById('BarWater').getContext('2d');
         const myChartWater = new Chart(ctxBarWater, createChartConfig('Water Usage (Liters)', waterData));
-    </script>        
+    </script>
+    
+    
+    <script type="text/javascript">
+        google.charts.load('current', {
+          'packages':['geochart'],
+        });
+        google.charts.setOnLoadCallback(drawRegionsMap);
+    
+        function drawRegionsMap() {
+          var data = google.visualization.arrayToDataTable([
+            ['Country', 'Jobs'],
+            ['Poland', 700],
+            ['China', 700],
+            ['NL', 700],
+          ]);
+    
+          var options = {};
+    
+          var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+    
+          chart.draw(data, options);
+        }
+      </script>
+    
+      <script>
+        const horizontalBarConfig = {
+          type: 'horizontalBar',
+          data: {
+              labels: ['Netherlands', 'China', 'Poland'], // Updated labels
+              datasets: [
+                  {
+                      label: 'Created Hours of Work',
+                      data: [134, 62, 48], // Updated values
+                      backgroundColor: ['red', 'green', 'blue'], // Customize the colors
+                  },
+              ],
+          },
+          options: {
+            plugins: {
+              title: {
+                  display: true,
+                  text: 'Created Hours of Work by Country',
+                  padding: {
+                      top: 10,
+                      bottom: 30
+                  }
+              }
+          },
+              responsive: true,
+              legend: {
+                display: true,
+                position: "bottom",
+                align: "start"
+            },
+          },
+      };
+      
+      const horizontalBarCtx = document.getElementById('horizontalBarChart').getContext('2d');
+      const horizontalBarChart = new Chart(horizontalBarCtx, horizontalBarConfig);
+    </script>
 
 </section>
 {% endblock content %}

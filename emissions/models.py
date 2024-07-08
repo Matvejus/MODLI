@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.db.models import IntegerField, Model
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 
@@ -15,10 +17,24 @@ class Gown(models.Model):
 
     name = models.CharField(max_length = 100)
     reusable = models.BooleanField()
-    cost  = models.FloatField(blank = False, null = False)
-    weight = models.FloatField(blank = False, null = False)
-    certificates = models.ManyToManyField(Certification, blank=True)
+    cost  = models.FloatField(blank = False, null = False, verbose_name="Cost per piece")
+    weight = models.FloatField(blank = False, null = False, verbose_name="Weight in grams")
+    certificates = models.ManyToManyField(Certification, blank=True, verbose_name='Sustainability certificates')
     washes = models.IntegerField(blank = False, null = False)
+    comfort = models.IntegerField(
+        validators=[
+            MinValueValidator(0, message='0 - comofort is not included in the optimization.'),
+            MaxValueValidator(5)
+        ],
+        verbose_name="Comfort level (likert scale)"
+    )
+    hygine = models.IntegerField(
+        validators=[
+            MinValueValidator(0, message='0 - hygine is not included in the optimization.'),
+            MaxValueValidator(5)
+        ],
+        verbose_name="Hygine level (likert scale)"
+    )
 
     def __str__(self):
         return self.name
