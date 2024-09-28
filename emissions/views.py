@@ -41,7 +41,7 @@ def compare(request):
             normalized_emissions = []
             for emission in emissions_data:
                 gown = emission.gown
-                gown_weight_kg = gown.weight / 1000 * 300# Convert grams to kilograms * AMOUNTS OF GOWNS
+                gown_weight_kg = gown.weight / 1000 # Convert grams to kilograms * AMOUNTS OF GOWNS to calc emissions
                 
                 normalized_emission = {
                     'gown_id': gown.id,

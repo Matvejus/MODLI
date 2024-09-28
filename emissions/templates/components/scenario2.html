@@ -34,11 +34,11 @@
     <div class="p-8 bg-white shadow rounded-lg">
         <div class='flex items-center justify-center gap-6'>
             <div class="w-1/2 flex flex-col justify-center items-center ">
-                <span class="text-4xl font-bold">284</span>
+                <span class="text-4xl font-bold">250</span>
                 <span class="block text-gray-500">Reusable gowns</span>
             </div>
             <div class="w-1/2 flex flex-col justify-center items-center ">
-                <span class="text-4xl font-bold">624</span>
+                <span class="text-4xl font-bold">500</span>
                 <span class="block text-gray-500">Single Use</span>
             </div>
         </div>
@@ -48,7 +48,7 @@
             <div class='w-1/4'>
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class='flex flex-col justify-center items-center'>
-                        <span class="text-4xl font-bold">400 MJ</span>
+                        <span class="text-4xl font-bold">620 MJ</span>
                         <span class="block text-gray-500">NRE</span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
             <div class='w-1/4'>
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class='flex flex-col justify-center items-center'>
-                        <span class="text-4xl font-bold">20 KG</span>
+                        <span class="text-4xl font-bold">342 KG</span>
                         <span class="block text-gray-500">CO<sub>2</sub></span>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
             <div class='w-1/4'>
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class='flex flex-col justify-center items-center'>
-                        <span class="text-4xl font-bold">40 KG</span>
+                        <span class="text-4xl font-bold">67 Liters</span>
                         <span class="block text-gray-500">Water</span>
                     </div>
                 </div>
@@ -173,17 +173,25 @@
       </div>  
     </div>
   </section> 
-<section id='Socio' class="px-2 py-1">
-  <div class="p-8 h-600px bg-white shadow rounded-lg">
-    <h2 class='justify-center text-center items-center font-bold'>Social</h2>
-    <div class="grid grid-cols-2">
-      <div id="regions_div_2" style="width: 600px; height: 400px"></div>
-      <div class = "pt-6" style="width: 600px;">
-        <canvas id="horizontalBarChart_2"></canvas>
+  <section id='Socio' class=" py-1">
+    <div class="mt-2 py-2 h-600px bg-white shadow rounded-lg">
+        
+      <div class="grid grid-cols-2">
+        <div>
+            <h2 class = "px-2 text-l text-center font-bold mb-2">
+                Local FTE (paid hours)
+            </h2>
+            <div id="regions_div2" style="width: 600px; height: 400px;"></div>
+        </div>
+        <div class = "" style="width: 600px;">
+            <h2 class = "px-2 text-l text-center font-bold mb-2">
+                Economic impacts (€)
+            </h2>
+          <canvas id="horizontalBarChart2"></canvas>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   
 <section id = "charts">
@@ -228,13 +236,13 @@
         
         // Chart initializations
         const ctxRECIPE_CO2_2 = document.getElementById('RECIPE_CO2_2').getContext('2d');
-        const myChartRecipeCO2_2 = new Chart(ctxRECIPE_CO2_2, createDoughnutChartConfig('CO2 Comparison', co2ComparisonData_2, ['Cotton', 'Polyester']));
+        const myChartRecipeCO2_2 = new Chart(ctxRECIPE_CO2_2, createDoughnutChartConfig('CO2 Comparison', co2ComparisonData_2, ['Lyocell', 'r-PET']));
         
         const ctxRECIPE_Energy_2 = document.getElementById('RECIPE_Energy_2').getContext('2d');
-        const myChartRecipeEnergy_2 = new Chart(ctxRECIPE_Energy_2, createDoughnutChartConfig('Energy Comparison', energyComparisonData_2, ['Cotton', 'Polyester']));
+        const myChartRecipeEnergy_2 = new Chart(ctxRECIPE_Energy_2, createDoughnutChartConfig('Energy Comparison', energyComparisonData_2, ['Lyocell', 'r-PET']));
         
         const ctxRECIPE_Water_2 = document.getElementById('RECIPE_Water_2').getContext('2d');
-        const myChartRecipeWater_2 = new Chart(ctxRECIPE_Water_2, createDoughnutChartConfig('Water Comparison', waterComparisonData_2, ['Cotton', 'Polyester']));
+        const myChartRecipeWater_2 = new Chart(ctxRECIPE_Water_2, createDoughnutChartConfig('Water Comparison', waterComparisonData_2, ['Lyocell', 'r-PET']));
         </script>
         
 
@@ -264,12 +272,12 @@
             // Data preparation with two datasets for each category
             const co2Datasets_2 = [
                 {
-                    label: 'Cotton',
+                    label: 'Lyocell',
                     data: [228.75, 397.90, 690, 422.8, 21.21, 223, 195.29],
                     backgroundColor: 'rgba(76, 175, 80, 0.7)'
                 },
                 {
-                    label: 'Polyester',
+                    label: 'r-PET',
                     data: [2662.28, 2289.27, 3195.41, 572.51, 250.27, 578.19, 405.72],
                     backgroundColor: 'rgba(33, 150, 243, 0.7)'
                 }
@@ -277,12 +285,12 @@
             
             const energyDatasets_2 = [
                 {
-                    label: 'Cotton',
+                    label: 'Lyocell',
                     data: [2477.20, 5099.14, 8473.90, 5553.89, -322.41, 3115.56, 2639.57],
                     backgroundColor: 'rgba(76, 175, 80, 0.7)'
                 },
                 {
-                    label: 'Polyester',
+                    label: 'r-PET',
                     data: [50077.14, 18666.15, 27474.32, 7420.99, 365.64, 7936.52, 5412.83],
                     backgroundColor: 'rgba(33, 150, 243, 0.7)'
                 }
@@ -290,12 +298,12 @@
             
             const waterDatasets_2 = [
                 {
-                    label: 'Cotton',
+                    label: 'Lyocell',
                     data: [110400.82, 7098.81, 9484.32, 36281.62, 769.46, 448.42, 4097.97],
                     backgroundColor: 'rgba(76, 175, 80, 0.7)'
                 },
                 {
-                    label: 'Polyester',
+                    label: 'r-PET',
                     data: [33535.74, 5661.36, 9047.77, 4711.38, 260.59, 1050.88, 5855.87],
                     backgroundColor: 'rgba(33, 150, 243, 0.7)'
                 }
@@ -312,63 +320,87 @@
             const myChartWater_2 = new Chart(ctxBarWater_2, createBarChartConfig('Water Usage (Liters)', waterDatasets_2));
         </script>
 
-     <script type="text/javascript">
-        google.charts.load('current', {
-        'packages':['geochart'],
-        });
-        google.charts.setOnLoadCallback(drawRegionsMap);
-
-        function drawRegionsMap() {
-        var data_2 = google.visualization.arrayToDataTable([
-            ['Country', 'Jobs'],
-            ['Poland', 700],
-            ['China', 700],
-            ['NL', 700],
-        ]);
-
-        var options_2 = {};
-
-        var chart_2 = new google.visualization.GeoChart(document.getElementById('regions_div_2'));
-
-        chart_2.draw(data_2, options_2);
-        }
+        <script type="text/javascript">
+            google.charts.load('current', {
+              'packages': ['geochart'],
+              // Note: you will need to get your own mapsApiKey for using the chart with your own API key.
+              'mapsApiKey': 'YOUR_GOOGLE_MAPS_API_KEY'
+            });
+            google.charts.setOnLoadCallback(drawRegionsMap);
+      
+            function drawRegionsMap() {
+              var data = google.visualization.arrayToDataTable([
+                ['Province', 'Value'],
+                ['Drenthe', 600],
+                ['Flevoland', 600],
+                ['Friesland', 600],
+                ['Gelderland', 600],
+                ['Groningen', 600],
+                ['Limburg', 600],
+                ['Noord-Brabant', 600],
+                ['Noord-Holland', 800],
+                ['Overijssel', 600],
+                ['Utrecht', 600],
+                ['Zeeland', 600],
+                ['Zuid-Holland', 600]
+              ]);
+      
+              var options = {
+                region: 'NL',
+                displayMode: 'regions',
+                resolution: 'provinces',
+                colorAxis: {colors: ['#3e7e00', '#326500']} // Customize color gradient
+              };
+      
+              var chart = new google.visualization.GeoChart(document.getElementById('regions_div2'));
+              chart.draw(data, options);
+            }
+          </script>
   </script>
 
-  <script>
-    const horizontalBarConfig_2 = {
-      type: 'horizontalBar',
-      data: {
-          labels: ['Netherlands', 'China', 'Poland'], // Updated labels
-          datasets: [
-              {
-                  label: 'Created Hours of Work',
-                  data: [134, 62, 48], // Updated values
-                  backgroundColor: ['red', 'green', 'blue'], // Customize the colors
-              },
-          ],
-      },
-      options: {
-        plugins: {
-          title: {
-              display: true,
-              text: 'Created Hours of Work by Country',
-              padding: {
-                  top: 10,
-                  bottom: 30
+
+    <script>
+        const horizontalBarConfig2 = {
+          type: 'horizontalBar',
+          data: {
+              labels: ['r-PET', 'Lyocell'], // Updated labels
+              datasets: [
+                  {
+                      label: 'Cost per gown',
+                      data: [3.5, 2.1], // Updated values
+                      backgroundColor: ['green', 'blue'], // Customize the colors
+                  },
+              ],
+          },
+          options: {
+            plugins: {
+              title: {
+                  display: true,
+                  text: 'cost per gown',
+                  padding: {
+                      top: 10,
+                      bottom: 30
+                  }
               }
-          }
-      },
-          responsive: true,
-          legend: {
-            display: true,
-            position: "bottom",
-            align: "start"
-        },
-      },
-  };
-  
-  const horizontalBarCtx_2 = document.getElementById('horizontalBarChart_2').getContext('2d');
-  const horizontalBarChart_2 = new Chart(horizontalBarCtx_2, horizontalBarConfig_2);
- </script>
+          },
+              responsive: true,
+              legend: {
+                display: true,
+                position: "bottom",
+                align: "start"
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+          },
+      };
+      
+      const horizontalBarCtx2 = document.getElementById('horizontalBarChart2').getContext('2d');
+      const horizontalBarChart2 = new Chart(horizontalBarCtx2, horizontalBarConfig2);
+     </script>
             
 </section>  
