@@ -22,7 +22,7 @@
     <div class="bg-white shadow rounded-lg">
         <div class='p-10 flex items-center justify-center gap-6'>
             <div class="w-1/2 flex flex-col justify-center items-center ">
-                <span class="text-4xl font-bold">€80500</span>
+                <span class="text-4xl font-bold">€90500</span>
                 <span class="block text-gray-500">Total cost</span>
             </div>
             <div class="w-1/2 flex flex-col justify-center items-center ">
@@ -48,7 +48,7 @@
             <div class='w-1/4'>
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class='flex flex-col justify-center items-center'>
-                        <span class="text-4xl font-bold">400 MJ</span>
+                        <span class="text-4xl font-bold">620 MJ</span>
                         <span class="block text-gray-500">NRE</span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
             <div class='w-1/4'>
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class='flex flex-col justify-center items-center'>
-                        <span class="text-4xl font-bold">20 KG</span>
+                        <span class="text-4xl font-bold">204 KG</span>
                         <span class="block text-gray-500">CO<sub>2</sub></span>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
             <div class='w-1/4'>
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class='flex flex-col justify-center items-center'>
-                        <span class="text-4xl font-bold">40 KG</span>
+                        <span class="text-4xl font-bold">82 KG</span>
                         <span class="block text-gray-500">Water</span>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
             <div class='w-1/4'>
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class='flex flex-col justify-center items-center'>
-                        <span class="text-4xl font-bold">13 KG</span>
+                        <span class="text-4xl font-bold">11 KG</span>
                         <span class="block text-gray-500">Solid Waste</span>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
 </section>
 <section id='Production' class="px-2">
   <div class="p-8 h-600px bg-white shadow rounded-lg">
-    <h2 class='justify-center text-center items-center font-bold'>Production data</h2>
+    <h2 class='justify-center text-center items-center font-bold text-l'>Production emissions</h2>
 
     <!-- Production emissions -->
     <div x-data="{ openTab: 1 }">
@@ -131,11 +131,11 @@
 </section>
   <section id='Washing' class="px-2 py-1">
     <div class="p-8 bg-white shadow rounded-lg">
-      <h2 class='justify-center text-center items-center font-bold'>Washing  data</h2>
+      <h2 class='justify-center text-center items-center font-bold text-l'>Washing emissions</h2>
       <div class = 'grid grid-cols-5 grid-rows-2 gap-6'>
         <div class="bg-white shadow rounded-lg p-4">
           <div class='flex flex-col justify-center items-center'>
-              <span class="text-4xl font-bold">€24560</span>
+              <span class="text-4xl font-bold">€34560</span>
               <span class="block text-gray-500">Washing cost</span>
           </div>
         </div>  
@@ -153,7 +153,7 @@
         </div>  
         <div class="col-start-2 col-span-2 row-start-2 row-span-1 bg-white shadow rounded-lg p-4">
           <div class='flex flex-col justify-center items-center'>
-            <span class="text-4xl font-bold">988 MJ</span>
+            <span class="text-4xl font-bold">480 MJ</span>
             <span class="block text-gray-500">Energy used for washing</span>
         </div>
         </div>  
@@ -173,45 +173,25 @@
       </div>  
     </div>
   </section> 
-<section id='Socio' class="px-2 py-1">
-  <div class="p-8 h-600px bg-white shadow rounded-lg">
-    <h2 class='justify-center text-center items-center font-bold'>Social</h2>
-    <div class="grid grid-cols-2">
-
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {
-        'packages':['geochart'],
-      });
-      google.charts.setOnLoadCallback(drawRegionsMap);
-
-      function drawRegionsMap() {
-        var data = google.visualization.arrayToDataTable([
-          ['Country', 'Popularity'],
-          ['Germany', 200],
-          ['United States', 300],
-          ['Brazil', 400],
-          ['Canada', 500],
-          ['France', 600],
-          ['RU', 700]
-        ]);
-
-        var options = {};
-
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div555'));
-
-        chart.draw(data, options);
-      }
-    </script>
- 
-    <div id="regions_div555" style="width: 600px; height: 400px"></div>
- 
-      <div class = "pt-6" style="width: 600px;">
-        <canvas id="horizontalBarChart"></canvas>
+  <section id='Socio' class=" py-1">
+    <div class="mt-2 py-2 h-600px bg-white shadow rounded-lg">
+        
+      <div class="grid grid-cols-2">
+        <div>
+            <h2 class = "px-2 text-l text-center font-bold mb-2">
+                Local FTE (paid hours)
+            </h2>
+            <div id="regions_div" style="width: 600px; height: 400px;"></div>
+        </div>
+        <div class = "" style="width: 600px;">
+            <h2 class = "px-2 text-l text-center font-bold mb-2">
+                Economic impacts (€)
+            </h2>
+          <canvas id="horizontalBarChart"></canvas>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   
 <section id = "charts">
@@ -221,12 +201,12 @@
     const horizontalBarConfig = {
       type: 'horizontalBar',
       data: {
-          labels: ['Netherlands', 'China', 'Poland'], // Updated labels
+          labels: ['Cotton', 'PET'], // Updated labels
           datasets: [
               {
-                  label: 'Created Hours of Work',
-                  data: [134, 62, 48], // Updated values
-                  backgroundColor: ['red', 'green', 'blue'], // Customize the colors
+                  label: 'Cost per gown',
+                  data: [3.5, 2.1], // Updated values
+                  backgroundColor: ['green', 'blue'], // Customize the colors
               },
           ],
       },
@@ -234,7 +214,7 @@
         plugins: {
           title: {
               display: true,
-              text: 'Created Hours of Work by Country',
+              text: 'cost per gown',
               padding: {
                   top: 10,
                   bottom: 30
@@ -247,6 +227,13 @@
             position: "bottom",
             align: "start"
         },
+        scales: {
+            xAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
       },
   };
   
@@ -309,7 +296,7 @@
                 return {
                     type: 'bar',
                     data: {
-                        labels: ['Fibers', 'Yarn Production', 'Fabric Production', 'Finishing', 'Manufacturing', 'Packaging', 'Transport', 'Use'],
+                        labels: ['Fibers', 'Yarn Production', 'Fabric Production', 'Finishing', 'Manufacturing', 'Transport', 'Use'],
                         datasets: datasets
                     },
                     options: {
@@ -331,12 +318,12 @@
             const co2Datasets = [
                 {
                     label: 'Cotton',
-                    data: [178.37, 301.67, 420.86, 178.37, 32.88, 223, 195.29],
+                    data: [178.37, 301.67, 420.86, 178.37, 32.88, 84.67, 55.9],
                     backgroundColor: 'rgba(76, 175, 80, 0.7)'
                 },
                 {
                     label: 'PET',
-                    data: [2662.28, 2289.27, 3195.41, 572.51, 250.27, 578.19, 405.72],
+                    data: [368.29, 316.54, 441.6, 79.35, 34.5, 80.21, 56.06],
                     backgroundColor: 'rgba(33, 150, 243, 0.7)'
                 }
             ];
@@ -344,12 +331,12 @@
             const energyDatasets = [
                 {
                     label: 'Cotton',
-                    data: [2477.20, 5099.14, 8473.90, 5553.89, -322.41, 3115.56, 2639.57],
+                    data: [1241.22, 2457.78, 3616.8, 2244.06, 49.32, 1134.36, 764.46],
                     backgroundColor: 'rgba(76, 175, 80, 0.7)'
                 },
                 {
-                    label: 'Polyester',
-                    data: [50077.14, 18666.15, 27474.32, 7420.99, 365.64, 7936.52, 5412.83],
+                    label: 'PET',
+                    data: [6925.88, 2578.88, 3795.0, 1026.38, 51.75, 1095.38, 750.37],
                     backgroundColor: 'rgba(33, 150, 243, 0.7)'
                 }
             ];
@@ -357,12 +344,12 @@
             const waterDatasets = [
                 {
                     label: 'Cotton',
-                    data: [110400.82, 7098.81, 9484.32, 36281.62, 769.46, 448.42, 4097.97],
+                    data: [101681.4, 748.02, 1191.9, 11499.78, 32.88, 139.74, 772.68],
                     backgroundColor: 'rgba(76, 175, 80, 0.7)'
                 },
                 {
-                    label: 'Polyester',
-                    data: [33535.74, 5661.36, 9047.77, 4711.38, 260.59, 1050.88, 5855.87],
+                    label: 'PET',
+                    data: [4631.62, 784.88, 1250.62, 655.5, 34.5, 146.62, 810.75],
                     backgroundColor: 'rgba(33, 150, 243, 0.7)'
                 }
             ];
