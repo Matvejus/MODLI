@@ -71,7 +71,7 @@
 
         <section id='Gowns' class="px-1 py-2">
             <div class="p-8 bg-white shadow rounded-lg h-screen"> 
-                <h1 class="text-2xl font-bold mb-6 text-center">Compare</h1>
+                <h1 class="text-2xl font-bold mb-6 text-center">Compare gowns</h1>
                 <form method="post">
                     {% csrf_token %}
                     <div class="py-2">
@@ -104,12 +104,12 @@
                     
                     <div class="py-2">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                            Single use    
+                            Single-use gowns    
                         </label>
         
                         {% for gown in single_use_gowns %}
                         <div class="mb-4">
-                            <label class="flex items-center h-10 rounded-lg border border-gray-600 bg-white">
+                            <label class="bg-grey flex items-center h-10 w-max rounded-lg border shadow border-gray-400">
                                 <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600" name="selected_gowns" value="{{ gown.id }}">
                                 <div id='materials'>
                                     <span class="ml-2 text-gray-700">{{ gown.name }}</span>
@@ -135,7 +135,7 @@
 
         <section id='Operations' class="px-1 py-2">
             <div class="p-8 bg-white shadow rounded-lg h-screen">
-                <h1 class="text-2xl font-bold mb-6 text-center">Create portfolio</h1>
+                <h1 class="text-2xl font-bold mb-6 text-center">Portfolio optimization</h1>
                 <div class = "py-2">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                         Planning period    
@@ -155,13 +155,13 @@
                     
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                        Gowns per week
+                        Gowns per week used
                       </label>
                       <input class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="350">
                     </div>
                     <div class="w-full md:w-1/2 px-3">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                        Max Gowns per day
+                        Gowns per day used
                       </label>
                       <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="50">
                     </div>
@@ -186,7 +186,7 @@
                 </div>
 
                 <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Medical center location
+                    Healthcare organization location
                 </label>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         
@@ -198,7 +198,7 @@
                         </div>
                         <div class="w-full md:w-1/2 px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                                ZIP code
+                                Postcode
                             </label>
                             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="1012 AB">
                         </div>
@@ -256,7 +256,7 @@
                       </script>
 
                     <div>
-                        <a class=" text-center appearance-none block w-full bg-blue-600 text-white font-bold uppercase rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" href="http://localhost:8000/emissions/calc/">Create a portfolio</a>
+                        <a class=" text-center appearance-none block w-full bg-blue-600 text-white font-bold uppercase rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" href="http://localhost:8000/emissions/calc/">Optimize portfolio</a>
                     </div>
             </div>
         </section>

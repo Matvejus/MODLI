@@ -24,7 +24,7 @@
     <div x-data="{ openTab: 1 }" class="col-span-2 w-full">
         <div class='px-2 flex justify-between gap-8'>
             <!-- Div for Scenario 1 -->
-            <div class="w-1/2" @click="openTab = 1" :class="{ 'border-b-2 border-blue-500 shadow-s': openTab === 1 }">
+            <div class="w-1/2" @click="openTab = 1" :class="{ 'border border-blue-500 rounded-lg shadow-m': openTab === 1 }">
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class='flex flex-col justify-center items-center'>
                         <span class="text-4xl font-bold">Lowest Emissions</span>
@@ -41,16 +41,16 @@
             </div>
 
             <!-- Div for Scenario 2 -->
-            <div class="w-1/2" @click="openTab = 2" :class="{ 'border-b-2 border-blue-500 shadow-s': openTab === 2 }">
+            <div class="w-1/2" @click="openTab = 2" :class="{ 'border border-blue-500 rounded-lg shadow-m': openTab === 2 }">
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class='flex flex-col justify-center items-center'>
                         <span class="text-4xl font-bold">Lowest Cost</span>
                         <div class='flex mt-4'>
                             <div class="rounded-lg border shadow border-gray-400 bg-white p-2 mx-2">
-                                <span class="text-lg">Reusable: r-PET 250pcs</span>
+                                <span class="text-lg">Reusable: Lyocell 250pcs</span>
                             </div>
                             <div class="rounded-lg border shadow border-gray-400 bg-white p-2 mx-2">
-                                <span class="text-lg">Disposable: 500pcs</span>
+                                <span class="text-lg">Disposable: r-PET 500pcs</span>
                             </div>
                         </div>
                     </div>

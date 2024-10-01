@@ -21,6 +21,7 @@
 {% block content %}
     <div class="p-4 h-max w-screen">
         <h1 class="text-2xl font-bold mb-4">Emissions per 1 gown</h1>
+        <h2 class="text-l font-bold mb-4">Enviromental impact</h2>
         <div class="overflow-x-auto">
             <div class = 'mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
                 <div>
@@ -169,8 +170,11 @@
                 </div>
             </div>
             <div class = 'mt-2 py-2 px-2 bg-white shadow rounded-lg flex flex-col'>
-                <div class = 'py-8'>
-                    <h2 class = "text-2xl font-bold mb-2">
+                <div class = 'py-2'>
+                    <h1 class = "text-2xl font-bold mb-2">
+                        Social impacts
+                    </h1>
+                    <h2 class = "text-l font-bold mb-2">
                         Certificates
                     </h2>
                     <table class="min-w-full bg-white">
@@ -191,30 +195,30 @@
                                 <td class="py-1 px-4 border-b border-gray-300">{{ gown.reusable }}</td>
                                 <td class="py-1 px-4 border-b border-gray-300">
                                     {% if gown|has_certification:"OEKO-TEX Made in Green" %}
-                                        ✓
+                                    <p class='text-green-500'> ✓ </p>
                                     {% else %}
-                                        ✗
+                                    <p class='text-red-500'>✗</p>
                                     {% endif %}
                                 </td>
                                 <td class="py-1 px-4 border-b border-gray-300">
                                     {% if gown|has_certification:"Fair wear Foundation" %}
-                                        ✓
+                                    <p class='text-green-500'> ✓ </p>
                                     {% else %}
-                                        ✗
+                                    <p class='text-red-500'>✗</p>
                                     {% endif %}
                                 </td>
                                 <td class="py-1 px-4 border-b border-gray-300">
                                     {% if gown|has_certification:"Fair for life Kleding" %}
-                                        ✓
+                                    <p class='text-green-500'> ✓ </p>
                                     {% else %}
-                                        ✗
+                                    <p class='text-red-500'>✗</p>
                                     {% endif %}
                                 </td>
                                 <td class="py-1 px-4 border-b border-gray-300">
                                     {% if gown|has_certification:"Fairtrade Textile Production Standard" %}
-                                        ✓
+                                    <p class='text-green-500'> ✓ </p>
                                     {% else %}
-                                        ✗
+                                    <p class='text-red-500'>✗</p>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -226,12 +230,18 @@
         </div>
         <section id='Socio' class=" py-1">
             <div class="mt-2 py-2 h-600px bg-white shadow rounded-lg">
-                <h2 class = "px-2 text-2xl font-bold mb-2">
-                    Social impacts
-                </h2>
+                
               <div class="grid grid-cols-2">
-                <div id="regions_div" style="width: 600px; height: 400px;"></div>
-                <div class = "pt-6" style="width: 600px;">
+                <div>
+                    <h2 class = "px-2 text-l text-center font-bold mb-2">
+                        Local FTE (paid hours)
+                    </h2>
+                    <div id="regions_div" style="width: 600px; height: 400px;"></div>
+                </div>
+                <div class = "" style="width: 600px;">
+                    <h2 class = "px-2 text-l text-center font-bold mb-2">
+                        Economic impacts (€)
+                    </h2>
                   <canvas id="horizontalBarChart"></canvas>
                 </div>
               </div>
@@ -348,62 +358,108 @@
     
     <script type="text/javascript">
         google.charts.load('current', {
-          'packages':['geochart'],
+          'packages': ['geochart'],
+          // Note: you will need to get your own mapsApiKey for using the chart with your own API key.
+          'mapsApiKey': 'YOUR_GOOGLE_MAPS_API_KEY'
         });
         google.charts.setOnLoadCallback(drawRegionsMap);
-    
+  
         function drawRegionsMap() {
           var data = google.visualization.arrayToDataTable([
-            ['Country', 'Jobs'],
-            ['Poland', 700],
-            ['China', 700],
-            ['NL', 700],
+            ['Province', 'Value'],
+            ['Drenthe', 600],
+            ['Flevoland', 600],
+            ['Friesland', 600],
+            ['Gelderland', 600],
+            ['Groningen', 600],
+            ['Limburg', 600],
+            ['Noord-Brabant', 600],
+            ['Noord-Holland', 800],
+            ['Overijssel', 600],
+            ['Utrecht', 600],
+            ['Zeeland', 600],
+            ['Zuid-Holland', 600]
           ]);
-    
-          var options = {};
-    
+  
+          var options = {
+            region: 'NL',
+            displayMode: 'regions',
+            resolution: 'provinces',
+            colorAxis: {colors: ['#3e7e00', '#326500']} // Customize color gradient
+          };
+  
           var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-    
           chart.draw(data, options);
         }
       </script>
     
       <script>
         const horizontalBarConfig = {
-          type: 'horizontalBar',
-          data: {
-              labels: ['Netherlands', 'China', 'Poland'], // Updated labels
-              datasets: [
-                  {
-                      label: 'Created Hours of Work',
-                      data: [134, 62, 48], // Updated values
-                      backgroundColor: ['red', 'green', 'blue'], // Customize the colors
-                  },
-              ],
-          },
-          options: {
-            plugins: {
-              title: {
-                  display: true,
-                  text: 'Created Hours of Work by Country',
-                  padding: {
-                      top: 10,
-                      bottom: 30
-                  }
-              }
-          },
-              responsive: true,
-              legend: {
-                display: true,
-                position: "bottom",
-                align: "start"
+            type: 'horizontalBar',
+            data: {
+                labels: [
+                    {% for gown in selected_gowns %}
+                        "{{ gown.name }}",
+                    {% endfor %}
+                ],
+                datasets: [
+                    {
+                        label: 'Cost per piece of gown',
+                        data: [
+                            {% for gown in selected_gowns %}
+                                {{ gown.cost }},
+                            {% endfor %}
+                        ],
+                        backgroundColor: [
+                            {% for gown in selected_gowns %}
+                                {% if "cotton" in gown.name|lower %}
+                                    'green',
+                                {% elif "lyocell" in gown.name|lower %}
+                                    'yellow',
+                                {% elif "polyester" in gown.name|lower %}
+                                    'blue',
+                                {% else %}
+                                    'grey', // Default color if gown material is not specified
+                                {% endif %}
+                            {% endfor %}
+                        ],
+                    },
+                ],
             },
-          },
-      };
-      
-      const horizontalBarCtx = document.getElementById('horizontalBarChart').getContext('2d');
-      const horizontalBarChart = new Chart(horizontalBarCtx, horizontalBarConfig);
+            options: {
+                plugins: {
+                    title: {
+                        display: false,
+                        text: 'Cost gown',
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        }
+                    },
+                },
+                responsive: true,
+                legend: {
+                    labels: {
+                    display: true,
+                    position: "bottom",
+                    align: "start"
+                    }
+                    
+                },
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            },
+        };
+        
+        const horizontalBarCtx = document.getElementById('horizontalBarChart').getContext('2d');
+        const horizontalBarChart = new Chart(horizontalBarCtx, horizontalBarConfig);
     </script>
-
-</section>
+    
+    
+        
 {% endblock content %}
