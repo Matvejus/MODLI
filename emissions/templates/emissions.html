@@ -1,1 +1,46 @@
-{{data}}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Netherlands GeoChart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {
+        'packages': ['geochart'],
+        // Note: you will need to get your own mapsApiKey for using the chart with your own API key.
+        'mapsApiKey': 'YOUR_GOOGLE_MAPS_API_KEY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Province', 'Value'],
+          ['Drenthe', 600],
+          ['Flevoland', 600],
+          ['Friesland', 600],
+          ['Gelderland', 600],
+          ['Groningen', 600],
+          ['Limburg', 600],
+          ['Noord-Brabant', 600],
+          ['Noord-Holland', 800],
+          ['Overijssel', 600],
+          ['Utrecht', 600],
+          ['Zeeland', 600],
+          ['Zuid-Holland', 600]
+        ]);
+
+        var options = {
+          region: 'NL',
+          displayMode: 'regions',
+          resolution: 'provinces',
+          colorAxis: {colors: ['#3e7e00', '#326500']} // Customize color gradient
+        };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="regions_div" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
