@@ -56,8 +56,6 @@ def get_impact(gown, stage, env):
 Options = get_gowns()
 Specifications = Specs(usage_per_week=100, pickups_per_week=2)
 
-print(get_impact(Options[1],stage=Stages.NEWARRIVALS,env=Envpar.WATER))
-
 # Timesteps = input from the dashboard
 timesteps = 150
 Time = range(timesteps)
@@ -113,7 +111,6 @@ def gown_flow(dv, md=md):
 def calculate_costs(dv, cv, md = md):
     total_impacts = cv["TOTAL"]
     partial_impacts = cv["PARTIAL"]
-    print(partial_impacts)
     md.addConstrs(partial_impacts[x][st,cs,t] == dv[st][x,t]*get_impact(x,st,cs) for cs in Envpar for st in Stages for x in Options for t in Time)
     for cs in Envpar:
         md.addConstrs(total_impacts[x][cs] == gp.quicksum(partial_impacts[x][st,cs,t] for st in Stages for t in Time) for x in Options)
@@ -146,6 +143,7 @@ md.setObjective(gp.quicksum(cv["TOTAL"][x][cs] for cs in Specifications.optimize
 
 
 # Optimize the model
+md.update()
 print(md.printStats)
 md.optimize()
 
