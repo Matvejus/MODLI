@@ -3,6 +3,11 @@ from .models import Gown, Emissions
 from .forms import GownForm, GownSelectionForm, GownFormReusable
 import json
 from django.core import serializers
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .serializers import GownSerializer, GownDetailSerializer, EmissionSerializer
+from rest_framework import viewsets
+
 
 
 def calculator(request):
@@ -14,7 +19,7 @@ def calculator(request):
     return render(request, 'calculator.html')
 
 
-def gown_list(request):
+def gowns(request):
     reusable_gowns = Gown.objects.filter(reusable=True)
     single_use_gowns = Gown.objects.filter(reusable=False)
 
@@ -124,13 +129,34 @@ def scenario1(request):
     context = {
         "data":value
     }
-
-
-
-
-
-
     return render(request, 'emissions.html', context )
+
+
+@api_view(['GET'])
+def gown_list(request):
+    gowns = Gown.objects.all()
+    serializer = GownSerializer(gowns, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET', 'POST'])
+def gown_detail(request, pk):
+    try:
+        gown = Gown.objects.get(pk=pk)
+    except Gown.DoesNotExist:
+        return Response(status=404)
+
+    serializer = GownDetailSerializer(gown)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def gown_emissions(request, pk):
+    emissions = Emissions.objects.filter(gown_id=pk)
+    serializer = EmissionSerializer(emissions, many=True)
+    return Response(serializer.data)
+
+
+
+
 
 
 
