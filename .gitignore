@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Django
+*.log
+local_settings.py
+media
+
+# Virtual Environment
+venv/
+env/
+modli_env/
+.env
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# PySCIPOpt and other binary files
+*.dll
+*.so
+*.dylib
+PySCIPOpt.libs/
+*.pyd
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# ... (keep all other existing entries)
+
+# PySCIPOpt specific
+scip.set
+*.lp
+*.mps
+*.cip
+*.zpl
+*.gms
+*.osil
+*.fzn
+*.opb
+*.cnf
+*.sol
+*.out
