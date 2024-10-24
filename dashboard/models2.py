@@ -52,7 +52,7 @@ def create_env_db(gownOptions):
         envDict[o]={}
         for s in Flows:
             envDict[o][s] = {}
-            for e in Envirpar:
+            for e in Envpar:
                 envDict[o][s][e] = 0
     return envDict
 
@@ -62,7 +62,7 @@ def get_parameter(gown,phase,unit):
 def make_decision_vars(Options):
     dct_var = {}
     
-    dct_var[Flows.ARRIVALMOM] =  md.Vars(Options,time,GRB.BINARY) #Indicator if gowns arrive on time
+    dct_var[Flows.ARRIVALMOM] =  md.Vars(Options,Time,GRB.BINARY) #Indicator if gowns arrive on time
     dct_var[Flows.NEWARRIVALS] = md.Vars(Options,Time,GRB.INTEGER) #Newly arrived gowns, usable in the next time-frame.
     dct_var[Flows.HOSPITAL]= md.Vars(Options,Time,GRB.INTEGER) #Gowns that are present for use within the hospital logistics.
     dct_var[Flows.LAUNDRY] = md.Vars(Options,Time,GRB.INTEGER) #Gowns that are at the laundry; we assume they get back to the hospital at the next time-step.

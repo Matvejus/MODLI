@@ -1,0 +1,369 @@
+{%load static%}
+{% block page_title %}<title>Scneario 1</title>{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/tw-elements.min.css' %}">
+{% endblock css_files %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+{% endblock scripts %}
+
+
+<section id='Totals' class="grid grid-cols-2 grid-rows-2 px-2  gap-6 pt-5">
+    <div class="bg-white shadow rounded-lg">
+        <div class='p-10 flex items-center justify-center gap-6'>
+            <div class="w-1/2 flex flex-col justify-center items-center ">
+                <span class="text-4xl font-bold">€90500</span>
+                <span class="block text-gray-500">Total cost</span>
+            </div>
+            <div class="w-1/2 flex flex-col justify-center items-center ">
+                <span class="text-4xl font-bold">12</span>
+                <span class="block text-gray-500">Planning period months</span>
+            </div>
+        </div>
+    </div>
+    <div class="p-8 bg-white shadow rounded-lg">
+        <div class='flex items-center justify-center gap-6'>
+            <div class="w-1/2 flex flex-col justify-center items-center ">
+                <span class="text-4xl font-bold">300</span>
+                <span class="block text-gray-500">Reusable gowns</span>
+            </div>
+            <div class="w-1/2 flex flex-col justify-center items-center ">
+                <span class="text-4xl font-bold">250</span>
+                <span class="block text-gray-500">Single Use</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-2 w-full">
+        <div class=' flex justify-between gap-8'>
+            <div class='w-1/4'>
+                <div class="bg-white shadow rounded-lg p-4">
+                    <div class='flex flex-col justify-center items-center'>
+                        <span class="text-4xl font-bold">620 MJ</span>
+                        <span class="block text-gray-500">NRE</span>
+                    </div>
+                </div>
+            </div>
+            <div class='w-1/4'>
+                <div class="bg-white shadow rounded-lg p-4">
+                    <div class='flex flex-col justify-center items-center'>
+                        <span class="text-4xl font-bold">204 KG</span>
+                        <span class="block text-gray-500">CO<sub>2</sub></span>
+                    </div>
+                </div>
+            </div>
+            <div class='w-1/4'>
+                <div class="bg-white shadow rounded-lg p-4">
+                    <div class='flex flex-col justify-center items-center'>
+                        <span class="text-4xl font-bold">82 KG</span>
+                        <span class="block text-gray-500">Water</span>
+                    </div>
+                </div>
+            </div>
+            <div class='w-1/4'>
+                <div class="bg-white shadow rounded-lg p-4">
+                    <div class='flex flex-col justify-center items-center'>
+                        <span class="text-4xl font-bold">11 KG</span>
+                        <span class="block text-gray-500">Solid Waste</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id='Production' class="px-2">
+  <div class="p-8 h-600px bg-white shadow rounded-lg">
+    <h2 class='justify-center text-center items-center font-bold text-l'>Production emissions</h2>
+
+    <!-- Production emissions -->
+    <div x-data="{ openTab: 1 }">
+
+      <!-- Tab Buttons -->
+      <div class="mb-4 flex">
+          <button :class="{ 'border-b-2 border-green-500': openTab === 1 }" @click="openTab = 1" class="px-4 py-2 font-semibold text-gray-900 focus:outline-none">CO<sub>2</sub></button>
+          <button :class="{ 'border-b-2 border-green-500': openTab === 2 }" @click="openTab = 2" class="px-4 py-2 font-semibold text-gray-900 focus:outline-none">Energy</button>
+          <button :class="{ 'border-b-2 border-green-500': openTab === 3 }" @click="openTab = 3" class="px-4 py-2 font-semibold text-gray-900 focus:outline-none">Water consumption</button>
+      </div>
+
+      <div x-show="openTab === 1">
+          <div class="grid grid-cols-2">
+              <div class='py-4'>
+                  <canvas id="BarCO2"></canvas>
+              </div>
+              <div class='py-4'>
+                  <canvas id="RECIPE_CO2"></canvas>
+              </div>
+          </div>
+      </div>
+
+      <div x-show="openTab === 2">
+        <div class="grid grid-cols-2">
+          <div class='py-4'>
+              <canvas id="BarEnergy"></canvas>
+          </div>
+          <div class='py-4'>
+              <canvas id="RECIPE_Energy"></canvas>
+          </div>
+      </div>
+      </div>
+
+      <div x-show="openTab === 3">
+          <div class="grid grid-cols-2">
+              <div class='py-4'>
+                  <canvas id="BarWater"></canvas>
+              </div>
+              <div class='py-4'>
+                  <canvas id="RECIPE_Water"></canvas>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <section id='Washing' class="px-2 py-1">
+    <div class="p-8 bg-white shadow rounded-lg">
+      <h2 class='justify-center text-center items-center font-bold text-l'>Washing emissions</h2>
+      <div class = 'grid grid-cols-5 grid-rows-2 gap-6'>
+        <div class="bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+              <span class="text-4xl font-bold">€34560</span>
+              <span class="block text-gray-500">Washing cost</span>
+          </div>
+        </div>  
+        <div class="row-start-2 bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+              <span class="text-4xl font-bold">52</span>
+              <span class="block text-gray-500">Washing cycles</span>
+          </div>
+        </div>
+        <div class="col-start-2 col-span-2 row-span-1 bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+            <span class="text-4xl font-bold">13.8</span>
+            <span class="block text-gray-500">Water used in washing (thousand litres)</span>
+        </div>
+        </div>  
+        <div class="col-start-2 col-span-2 row-start-2 row-span-1 bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+            <span class="text-4xl font-bold">480 MJ</span>
+            <span class="block text-gray-500">Energy used for washing</span>
+        </div>
+        </div>  
+        <div class="col-start-4 col-span-2 row-span-1 bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+            <span class="text-4xl font-bold">1560 KM</span>
+            <span class="block text-gray-500">Kilometers driven to laundry and back</span>
+        </div>
+        </div>  
+        <div class="col-start-4 col-span-2 row-start-2 row-span-1 bg-white shadow rounded-lg p-4">
+          <div class='flex flex-col justify-center items-center'>
+            <span class="text-4xl font-bold">0.5 kg</span>
+            <span class="block text-gray-500">Transport emissions CO<sub>2</sub> per kg of textile</span>
+        </div>
+        </div>  
+        
+      </div>  
+    </div>
+  </section> 
+  <section id='Socio' class=" py-1">
+    <div class="mt-2 py-2 h-600px bg-white shadow rounded-lg">
+        
+      <div class="grid grid-cols-2">
+        <div>
+            <h2 class = "px-2 text-l text-center font-bold mb-2">
+                Local FTE (paid hours)
+            </h2>
+            <div id="regions_div" style="width: 600px; height: 400px;"></div>
+        </div>
+        <div class = "" style="width: 600px;">
+            <h2 class = "px-2 text-l text-center font-bold mb-2">
+                Economic impacts (€)
+            </h2>
+          <canvas id="horizontalBarChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+<section id = "charts">
+  
+ 
+  <script>
+    const horizontalBarConfig = {
+      type: 'horizontalBar',
+      data: {
+          labels: ['Cotton', 'PET'], // Updated labels
+          datasets: [
+              {
+                  label: 'Cost per gown',
+                  data: [3.5, 2.1], // Updated values
+                  backgroundColor: ['green', 'blue'], // Customize the colors
+              },
+          ],
+      },
+      options: {
+        plugins: {
+          title: {
+              display: true,
+              text: 'cost per gown',
+              padding: {
+                  top: 10,
+                  bottom: 30
+              }
+          }
+      },
+          responsive: true,
+          legend: {
+            display: true,
+            position: "bottom",
+            align: "start"
+        },
+        scales: {
+            xAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+      },
+  };
+  
+  const horizontalBarCtx = document.getElementById('horizontalBarChart').getContext('2d');
+  const horizontalBarChart = new Chart(horizontalBarCtx, horizontalBarConfig);
+ </script>
+
+    <script>
+        // Function to create a standardized doughnut chart configuration
+        function createDoughnutChartConfig(title, data, labels) {
+            return {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: ['green', 'blue']
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: title,
+                            padding: {
+                                top: 10,
+                                bottom: 30
+                            }
+                        }
+                    },
+                    responsive: true,
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        align: 'start'
+                    },
+                }
+            };
+        }
+        
+        // Data preparation
+        const co2ComparisonData = [2179.269857, 9953.64982]; // Example comparison data
+        const energyComparisonData = [27036.84675, 117353.597]; // Example comparison data
+        const waterComparisonData = [40, 60]; // Example comparison data
+        
+        // Chart initializations
+        const ctxRECIPE_CO2 = document.getElementById('RECIPE_CO2').getContext('2d');
+        const myChartRecipeCO2 = new Chart(ctxRECIPE_CO2, createDoughnutChartConfig('CO2 Comparison', co2ComparisonData, ['Cotton', 'Polyester']));
+        
+        const ctxRECIPE_Energy = document.getElementById('RECIPE_Energy').getContext('2d');
+        const myChartRecipeEnergy = new Chart(ctxRECIPE_Energy, createDoughnutChartConfig('Energy Comparison', energyComparisonData, ['Cotton', 'Polyester']));
+        
+        const ctxRECIPE_Water = document.getElementById('RECIPE_Water').getContext('2d');
+        const myChartRecipeWater = new Chart(ctxRECIPE_Water, createDoughnutChartConfig('Water Comparison', waterComparisonData, ['Cotton', 'Polyester']));
+        </script>
+        
+
+        <script>
+            function createBarChartConfig(title, datasets) {
+                return {
+                    type: 'bar',
+                    data: {
+                        labels: ['Fibers', 'Yarn Production', 'Fabric Production', 'Finishing', 'Manufacturing', 'Transport', 'Use'],
+                        datasets: datasets
+                    },
+                    options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: title,
+                                padding: { top: 10, bottom: 30 }
+                            }
+                        },
+                        responsive: true,
+                        scales: { y: { beginAtZero: true } },
+                        legend: { display: true, position: 'bottom', align: 'start' }
+                    }
+                };
+            }
+            
+            // Data preparation with two datasets for each category
+            const co2Datasets = [
+                {
+                    label: 'Cotton',
+                    data: [178.37, 301.67, 420.86, 178.37, 32.88, 84.67, 55.9],
+                    backgroundColor: 'rgba(76, 175, 80, 0.7)'
+                },
+                {
+                    label: 'PET',
+                    data: [368.29, 316.54, 441.6, 79.35, 34.5, 80.21, 56.06],
+                    backgroundColor: 'rgba(33, 150, 243, 0.7)'
+                }
+            ];
+            
+            const energyDatasets = [
+                {
+                    label: 'Cotton',
+                    data: [1241.22, 2457.78, 3616.8, 2244.06, 49.32, 1134.36, 764.46],
+                    backgroundColor: 'rgba(76, 175, 80, 0.7)'
+                },
+                {
+                    label: 'PET',
+                    data: [6925.88, 2578.88, 3795.0, 1026.38, 51.75, 1095.38, 750.37],
+                    backgroundColor: 'rgba(33, 150, 243, 0.7)'
+                }
+            ];
+            
+            const waterDatasets = [
+                {
+                    label: 'Cotton',
+                    data: [101681.4, 748.02, 1191.9, 11499.78, 32.88, 139.74, 772.68],
+                    backgroundColor: 'rgba(76, 175, 80, 0.7)'
+                },
+                {
+                    label: 'PET',
+                    data: [4631.62, 784.88, 1250.62, 655.5, 34.5, 146.62, 810.75],
+                    backgroundColor: 'rgba(33, 150, 243, 0.7)'
+                }
+            ];
+            
+            // Chart initializations
+            const ctxBarCO2 = document.getElementById('BarCO2').getContext('2d');
+            const myChartCO2 = new Chart(ctxBarCO2, createBarChartConfig('CO2 Emissions (kg CO2 eq)', co2Datasets));
+            
+            const ctxBarEnergy = document.getElementById('BarEnergy').getContext('2d');
+            const myChartEnergy = new Chart(ctxBarEnergy, createBarChartConfig('Energy Usage (MJ)', energyDatasets));
+            
+            const ctxBarWater = document.getElementById('BarWater').getContext('2d');
+            const myChartWater = new Chart(ctxBarWater, createBarChartConfig('Water Usage (Liters)', waterDatasets));
+        </script>
+
+            
+</section>  

@@ -1,0 +1,273 @@
+{%load static%}
+{% block page_title %}<title>Dashboard</title>{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/tw-elements.min.css' %}">
+{% endblock css_files %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+{% endblock scripts %}
+
+<style type="text/css">
+    .likert ul
+    {
+      
+        margin: 0;
+        padding: 2;
+    }
+
+    .likert li
+    {
+        float: left;
+        text-align: left;
+        list-style-type: none;
+    }
+</style>
+
+<div id = "grid for sections" class = " h-max een grid grid-cols-3">
+
+        <section id='Planning' class="px-1 py-2">
+            <div class="p-8 bg-white shadow rounded-lg h-screen">
+                <h1 class="text-2xl font-bold mb-6 text-center">Circular Procurement Tool</h1>
+                <div class="my-4 max-w-3xl mx-auto bg-white p-8 rounded-lg shadow border border-gray-400">
+                    <div class="mb-8">
+                        <p class="mb-4">
+                            Use this tool to compare the economic, social and environmental impact of different types of isolation gowns. For an overview of variables/metrics that have been considered in the calculation and the sources used, please click <a href='#' class = "text-blue-800 underline">here.</a> 
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-lg font-bold mb-4">1. Gown Comparison:</h2>
+                        <p class="mb-4">
+                            To compare the gowns, please mark the checkboxes of gowns that you would like based on sustainable
+                            parameters. Click the "Edit" button to adjust the cost, wash durability, and select certifications for
+                            each gown.
+                        </p>
+                    </div>
+            
+                    <div>
+                        <h2 class="text-lg font-bold mb-4">2. Portfolio Optimization:</h2>
+                        <p class="mb-4">
+                            To create an optimal portfolio based on combinations of reusable and disposable gowns, please check the
+                            gowns that you would like the algorithm to choose from. Enter the address of your medical center and
+                            operational information for tailored recommendations.
+                        </p>
+                    </div>
+            
+                </div>
+                    
+            </div>
+        </section>
+
+
+        <section id='Gowns' class="px-1 py-2">
+            <div class="p-8 bg-white shadow rounded-lg h-screen"> 
+                <h1 class="text-2xl font-bold mb-6 text-center">Compare gowns</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="py-2">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            Reusable gowns    
+                        </label>
+        
+                        {% for gown in reusable_gowns %}
+                        <div class="max-w-lg mx-auto">
+                            <div class="mb-4">
+                                <label class="bg-grey flex items-center h-10 w-max rounded-lg border shadow border-gray-400">
+                                    <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600" name="selected_gowns" value="{{ gown.id }}">
+                                    <div id='materials'>
+                                        <span class="ml-2 text-gray-700">{{ gown.name }}</span>
+                                    </div>
+                                    <div id='materials'>
+                                        <span class="ml-2 text-gray-700">€{{ gown.cost }} per p.</span>
+                                    </div>
+                                    <div id='materials'>
+                                        <span class="ml-2 text-gray-700">{{ gown.washes }} washes</span>
+                                    </div>
+                                    <div class = "px-3">
+                                        <a class="text-center appearance-none w-full bg-blue-600 text-white font-bold py-1 px-2 rounded leading-tight focus:outline-none focus:bg-white" href="{% url 'gown_edit' gown.id %}">Edit</a>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="py-2">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            Single-use gowns    
+                        </label>
+        
+                        {% for gown in single_use_gowns %}
+                        <div class="mb-4">
+                            <label class="bg-grey flex items-center h-10 w-max rounded-lg border shadow border-gray-400">
+                                <input type="checkbox" class="mx-1 form-checkbox h-5 w-5 text-blue-600" name="selected_gowns" value="{{ gown.id }}">
+                                <div id='materials'>
+                                    <span class="ml-2 text-gray-700">{{ gown.name }}</span>
+                                </div>
+                                <div id='materials'>
+                                    <span class="ml-2 text-gray-700">€{{ gown.cost }} per p.</span>
+                                </div>
+                                <div class = "px-3">
+                                    <a class="text-center appearance-none w-full bg-blue-600 text-white font-bold  py-1 px-2 rounded leading-tight focus:outline-none focus:bg-white" href="{% url 'gown_edit' gown.id %}">Edit</a>
+                                </div>
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+        
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Compare Gowns
+                    </button>
+
+                </form>    
+            </div>
+        </section>
+
+        <section id='Operations' class="px-1 py-2">
+            <div class="p-8 bg-white shadow rounded-lg h-screen">
+                <h1 class="text-2xl font-bold mb-6 text-center">Portfolio optimization</h1>
+                <div class = "py-2">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                        Planning period    
+                    </label>
+                        <div class="inline-block relative w-64">
+                            <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                            <option>3 months</option>
+                            <option>6 months</option>
+                            <option>12 months</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                </div>
+                <div class="py-2 flex flex-wrap -mx-3">
+                    
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                        Gowns per week used
+                      </label>
+                      <input class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="350">
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                        Gowns per day used
+                      </label>
+                      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="50">
+                    </div>
+                    
+                </div>
+
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                        Laundry pick-ups
+                      </label>
+                      <input class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="2">
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                        Days until return
+                      </label>
+                      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="2">
+                    </div>
+                    
+                </div>
+
+                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    Healthcare organization location
+                </label>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                City
+                            </label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Amsterdam">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                Postcode
+                            </label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="1012 AB">
+                        </div>
+
+                        <div class="w-full px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                Street, house number
+                            </label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Stationsplein">
+                        </div>
+                    </div>
+                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    Laundry location
+                </label>
+                    <div class="flex flex-wrap mb-6 -mx-3">
+                        
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                City
+                            </label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Amsterdam">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                ZIP code
+                            </label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="1012 AB">
+                        </div>
+
+                        <div class="w-full px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                Street, house number
+                            </label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Stationsplein">
+                        </div>
+                    </div>
+
+                    <div class=" bg-white rounded-lg  w-full max-w-md">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                            Resuable gowns in porfolio    
+                        </label>
+                        <div class="mb-4">
+                          <input type="range" id="price-range" class="w-full blue-600 " min="0" max="100" value="50" oninput="updatePrice(this.value)">
+                        </div>
+                        <div class="flex justify-between text-gray-500">
+                          <span id="minPrice">0%</span>
+                          <span id="maxPrice">100%</span>
+                        </div>
+                    </div>
+                      
+                      <script>
+                        function updatePrice(value) {
+                          document.getElementById("minPrice").textContent = value + "%" ;
+                        }
+                      </script>
+
+                    <div>
+                        <a class=" text-center appearance-none block w-full bg-blue-600 text-white font-bold uppercase rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" href="http://localhost:8000/emissions/calc/">Optimize portfolio</a>
+                    </div>
+            </div>
+        </section>
+
+
+
+
+
+</div>
+
+
+
+
+
