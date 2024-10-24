@@ -1,0 +1,136 @@
+{%load static%}
+{% block page_title %}<title>Dashboard</title>{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/tw-elements.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/rangesliders.css' %}">
+{% endblock css_files %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="{% static 'djf_surveys/css/tailwindcss-3.3.1.js' %}"></script>
+<script src="{% static 'djf_surveys/css/tailwindcss-plugin-3.3.1.js' %}"></script>
+<script src="{% static 'djf_surveys/te-starter/js/tw-elements.umd.min.js' %}"></script>
+{% endblock scripts %}
+
+{% block content %}
+<body class = 'bg-cyan-400'>
+<div class ="grid h-screen grid-rows-2 grid-cols-2">
+    <div id="specs" class="flex flex-col justify-center items-center h-full">
+        <div class="mb-8">
+            <input type="number" class="w-full p-4 pr-12 text-sm border-gray-500 rounded-lg shadow-sm">
+        </div>
+        <div class="mb-8">
+            <input type="number" class="w-full p-4 pr-12 text-sm border-red-100 rounded-lg shadow-sm">
+        </div>
+        <div class="mb-8">
+            <input type="number" class="w-full p-4 pr-12 text-sm border-gray-500 rounded-lg shadow-sm">
+        </div>
+    </div>
+    <div id="sliders" class="flex flex-col justify-center items-center h-full">
+        <div class="slidecontainer mb-8 px-3">
+            <input type="range" min="1" max="100" value="50" class="slider bg-green-200" id="CostRange">
+            <p>Cost: <span id="Cost"></span></p>
+        </div>
+        <div class="slidecontainer mb-8 px-3">
+            <input type="range" min="1" max="100" value="50" class="slider" id="EmissionRange">
+            <p>Emissions: <span id="Emissions"></span></p>
+        </div>
+        <div class="slidecontainer mb-8 px-3">
+            <input type="range" min="1" max="100" value="50" class="slider" id="StockRange">
+            <p>Warehouse stock: <span id="Stock"></span></p>
+        </div>
+    </div>
+    
+    <div id="StockChart" class="col-span-2">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+</body>
+
+{% endblock content %}
+
+<script>
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ["Cost", "Emissions", "Inventory"],
+            datasets: [{
+                label: 'Series 1',
+                data: [0, 100, 0],
+                fill: false,
+                borderColor: '#2196f3',
+                backgroundColor: '#2196f3',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    max: 120,
+                    min: 1,                    
+                    ticks: {
+                        steps: 12,
+                        stepSize: 10,
+                    }
+                }
+            }
+        }
+    });
+
+    // Get the range slider elements
+    var costRangeSlider = document.getElementById('CostRange');
+    var emissionRangeSlider = document.getElementById('EmissionRange');
+    var stockRangeSlider = document.getElementById('StockRange');
+
+    costRangeSlider.addEventListener('input', function() {
+        myChart.data.datasets[0].data[0] = parseInt(this.value);
+        myChart.update();
+    });
+
+    emissionRangeSlider.addEventListener('input', function() {
+        myChart.data.datasets[0].data[1] = parseInt(this.value);
+        myChart.update();
+    });
+
+    stockRangeSlider.addEventListener('input', function() {
+        myChart.data.datasets[0].data[2] = parseInt(this.value);
+        myChart.update();
+    });
+</script>
+
+<script>
+    var slider1 = document.getElementById("CostRange");
+    var output1 = document.getElementById("Cost");
+    output1.innerHTML = slider1.value;
+    
+    slider1.oninput = function() {
+      output1.innerHTML = this.value;
+    }
+    
+</script>
+<script>
+    var slider2 = document.getElementById("EmissionRange");
+    var output2 = document.getElementById("Emissions");
+    output2.innerHTML = slider2.value;
+    
+    slider2.oninput = function() {
+      output2.innerHTML = this.value;
+    }
+</script>
+<script>
+    var slider3 = document.getElementById("StockRange");
+    var output3 = document.getElementById("Stock");
+    output3.innerHTML = slider3.value;
+    
+    slider3.oninput = function() {
+      output3.innerHTML = this.value;
+    }
+</script>
+

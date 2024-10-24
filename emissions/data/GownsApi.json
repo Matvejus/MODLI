@@ -1,0 +1,56 @@
+[{
+    "gowns": [
+        {
+            "name": "gown_1",
+            "reusable": 0,
+            "impacts": {
+                "envpars": ["CO2EQ", "WATER", "ENERGY", "MONEY"],
+                "stages": ["NEWARRIVALS", "LAUNDRY", "LOST", "EOL", "ARRIVALMOM"],
+                "params": [
+                    [10, 2, 20, 0.5],
+                    [0, 0, 0, 0],
+                    [1, 1, 1, 0],
+                    [4, 0, -10, -0.1],
+                    [100, 0, 100, 10]
+                ]
+            }
+        },
+        {
+            "name": "gown_2",
+            "reusable": 1,
+            "impacts": {
+                "envpars": ["CO2EQ", "WATER", "ENERGY", "MONEY"],
+                "stages": ["NEWARRIVALS", "LAUNDRY", "LOST", "EOL", "ARRIVALMOM"],
+                "params": [
+                    [30, 100, 20, 20],
+                    [1, 1, 1, 0.4],
+                    [1, 1, 1, 0],
+                    [-10, -40, -10, -1],
+                    [100, 0, 100, 10]
+                ]
+            }
+        },
+        {
+            "name": "gown_3",
+            "reusable": 1,
+            "impacts": {
+                "envpars": ["CO2EQ", "WATER", "ENERGY", "MONEY"],
+                "stages": ["NEWARRIVALS", "LAUNDRY", "LOST", "EOL", "ARRIVALMOM"],
+                "params": [
+                    [40, 20, 30, 10],
+                    [1, 1, 0.5, 0.3],
+                    [1, 1, 1, 0],
+                    [4, 0, -10, -0.1],
+                    [100, 0, 100, 10]
+                ]
+            }
+        }
+    ],
+    "specs": {
+        "usage_per_week": 1000,
+        "pickups_per_week": 2,
+        "usage_between_pickup": 500,  
+        "loss_percentage": 0.001,
+        "optimizer": ["MONEY", "CO2EQ"] 
+    }
+}]

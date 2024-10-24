@@ -1,0 +1,107 @@
+{%load static%}
+{% block page_title %}<title>Dashboard</title>{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/tw-elements.min.css' %}">
+{% endblock css_files %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+{% endblock scripts %}
+
+{% block content %}
+
+
+<section id='Scenarios' class="grid px-2 gap-6 pt-5">
+    <div x-data="{ openTab: 1 }" class="col-span-2 w-full">
+        <div class='px-2 flex justify-between gap-8'>
+            <!-- Div for Scenario 1 -->
+            <div class="w-1/2" @click="openTab = 1" :class="{ 'border border-blue-500 rounded-lg shadow-m': openTab === 1 }">
+                <div class="bg-white shadow rounded-lg p-4">
+                    <div class='flex flex-col justify-center items-center'>
+                        <span class="text-4xl font-bold">Lowest Emissions</span>
+                        <div class='flex mt-4'>
+                            <div class="rounded-lg border shadow border-gray-400 bg-white p-2 mx-2">
+                                <span class="text-lg">Reusable: Cotton 300pcs</span>
+                            </div>
+                            <div class="rounded-lg border shadow border-gray-400 bg-white p-2 mx-2">
+                                <span class="text-lg">Disposable: PET 250pcs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Div for Scenario 2 -->
+            <div class="w-1/2" @click="openTab = 2" :class="{ 'border border-blue-500 rounded-lg shadow-m': openTab === 2 }">
+                <div class="bg-white shadow rounded-lg p-4">
+                    <div class='flex flex-col justify-center items-center'>
+                        <span class="text-4xl font-bold">Lowest Cost</span>
+                        <div class='flex mt-4'>
+                            <div class="rounded-lg border shadow border-gray-400 bg-white p-2 mx-2">
+                                <span class="text-lg">Reusable: Lyocell 250pcs</span>
+                            </div>
+                            <div class="rounded-lg border shadow border-gray-400 bg-white p-2 mx-2">
+                                <span class="text-lg">Disposable: r-PET 500pcs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div x-show="openTab === 1">
+                <div id="scenario1Content">
+                    {% include "components\scenario1.html" %}
+                </div>
+            </div>
+            <div x-show="openTab === 2">
+                <div id="scenario2Content">
+                    {% include "components\scenario2.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </section>
+
+    <!-- Dynamic Content Area -->
+   
+
+
+
+<script>
+    function loadScenarioContent(scenario, targetId) {
+        fetch(`/${scenario}/`)  // Make sure URL is correct
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById(targetId).innerHTML = html;
+            })
+            .catch(error => console.error('Error loading the scenario:', error));
+    }
+    
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('scenarioLoader', () => ({
+            openTab: 1,
+            loadContent() {
+                const scenario = (this.openTab === 1) ? 'scenario1' : 'scenario2';
+                const targetId = (this.openTab === 1) ? 'scenario1Content' : 'scenario2Content';
+                loadScenarioContent(scenario, targetId);
+            }
+        }));
+    });
+    </script>
+    
+
+
+{% endblock content %}
