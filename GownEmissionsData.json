@@ -1,0 +1,429 @@
+[
+    {
+        "model": "emissions.gown",
+        "pk": 1,
+        "fields": {
+            "name": "Organic Cotton",
+            "reusable": false,
+            "cost": 0,
+            "weight": 0,
+            "washes": 0,
+            "comfort": 0,
+            "hygine": 0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 2,
+        "fields": {
+            "name": "Cotton",
+            "reusable": false,
+            "cost": 0,
+            "weight": 0,
+            "washes": 0,
+            "comfort": 0,
+            "hygine": 0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 3,
+        "fields": {
+            "name": "Polyester",
+            "reusable": false,
+            "cost": 0,
+            "weight": 0,
+            "washes": 0,
+            "comfort": 0,
+            "hygine": 0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 4,
+        "fields": {
+            "name": "PolyPropelene",
+            "reusable": false,
+            "cost": 0,
+            "weight": 0,
+            "washes": 0,
+            "comfort": 0,
+            "hygine": 0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 5,
+        "fields": {
+            "name": "Recycled Cotton",
+            "reusable": true,
+            "cost": 0,
+            "weight": 0,
+            "washes": 0,
+            "comfort": 0,
+            "hygine": 0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 6,
+        "fields": {
+            "name": "Recycled Polyester",
+            "reusable": true,
+            "cost": 0,
+            "weight": 0,
+            "washes": 0,
+            "comfort": 0,
+            "hygine": 0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 7,
+        "fields": {
+            "name": "Lyocell",
+            "reusable": false,
+            "cost": 0,
+            "weight": 0,
+            "washes": 0,
+            "comfort": 0,
+            "hygine": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 1,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "CO2",
+            "fibers": 0.805479855029434,
+            "yarn_production": 1.401086248703718,
+            "fabric_production": 2.4298672890165034,
+            "finishing": 1.4890755654966785,
+            "manufacturing": 0.07470981087641164,
+            "packaging": 0.0,
+            "transport": 0.7856029181771834,
+            "use": 0.6876637261192857
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 2,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "ENERGY",
+            "fibers": 8.722533275933788,
+            "yarn_production": 17.95471128375034,
+            "fabric_production": 29.837683759440026,
+            "finishing": 19.555964087001993,
+            "manufacturing": -1.1352599069470253,
+            "packaging": 0.0,
+            "transport": 10.970270215669814,
+            "use": 9.294261915415824
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 3,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "WATER",
+            "fibers": 388.73528615557353,
+            "yarn_production": 24.99579439145171,
+            "fabric_production": 33.395491919295935,
+            "finishing": 127.75217164756722,
+            "manufacturing": 2.709365972786599,
+            "packaging": 0.0,
+            "transport": 1.5789324134395502,
+            "use": 14.429483877238757
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 4,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "CO2",
+            "fibers": 2.1688269238985476,
+            "yarn_production": 3.668706344513815,
+            "fabric_production": 5.120841743416273,
+            "finishing": 2.1736435239906835,
+            "manufacturing": 0.40108000313462944,
+            "packaging": 0,
+            "transport": 1.0288047688188287,
+            "use": 0.6838141384654275
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 5,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "ENERGY",
+            "fibers": 15.053943179078729,
+            "yarn_production": 29.913702569466864,
+            "fabric_production": 44.029364327853735,
+            "finishing": 27.311912291576434,
+            "manufacturing": 0.5859535768924292,
+            "packaging": 0,
+            "transport": 13.820320510481904,
+            "use": 9.251743226608063
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 6,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "WATER",
+            "fibers": 1237.0148142776918,
+            "yarn_production": 9.072699024998755,
+            "fabric_production": 14.499627067289234,
+            "finishing": 139.88492710919004,
+            "manufacturing": 0.41761361722306134,
+            "packaging": 0,
+            "transport": 1.6780939741927792,
+            "use": 9.406178351956854
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 7,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "CO2",
+            "fibers": 4.266476535711696,
+            "yarn_production": 3.668706344513815,
+            "fabric_production": 5.120841743416273,
+            "finishing": 0.9174792932341603,
+            "manufacturing": 0.40108000313462944,
+            "packaging": 0,
+            "transport": 0.9265835026169779,
+            "use": 0.6501944688062005
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 8,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "ENERGY",
+            "fibers": 80.2518343682378,
+            "yarn_production": 29.913702569466864,
+            "fabric_production": 44.029364327853735,
+            "finishing": 11.892615620809556,
+            "manufacturing": 0.5859535768924292,
+            "packaging": 0,
+            "transport": 12.718784724243491,
+            "use": 8.674406630080938
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 9,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "WATER",
+            "fibers": 53.74317824070267,
+            "yarn_production": 9.072699024998755,
+            "fabric_production": 14.499627067289234,
+            "finishing": 7.550292396814531,
+            "manufacturing": 0.41761361722306134,
+            "packaging": 0,
+            "transport": 1.6840971608351871,
+            "use": 9.384411439354125
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 10,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "CO2",
+            "fibers": 2.48,
+            "yarn_production": 0,
+            "fabric_production": 0.48,
+            "finishing": 0,
+            "manufacturing": 0.19,
+            "packaging": 0,
+            "transport": 0.83,
+            "use": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 11,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "ENERGY",
+            "fibers": 75.3,
+            "yarn_production": 0,
+            "fabric_production": 5,
+            "finishing": 0,
+            "manufacturing": 0.1,
+            "packaging": 0,
+            "transport": 11.4,
+            "use": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 12,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "WATER",
+            "fibers": 21.6,
+            "yarn_production": 0,
+            "fabric_production": 3.5,
+            "finishing": 0,
+            "manufacturing": 0,
+            "packaging": 0,
+            "transport": 1.5,
+            "use": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 13,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "CO2",
+            "fibers": 0.75,
+            "yarn_production": 1.95,
+            "fabric_production": 3.09,
+            "finishing": 0.69,
+            "manufacturing": 0.15,
+            "packaging": 0,
+            "transport": 0.48,
+            "use": 0.69
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 14,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "ENERGY",
+            "fibers": 7.4,
+            "yarn_production": 19.9,
+            "fabric_production": 32.2,
+            "finishing": 9.9,
+            "manufacturing": -0.8,
+            "packaging": 0,
+            "transport": 6.7,
+            "use": 9.3
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 15,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "WATER",
+            "fibers": 200.8,
+            "yarn_production": 11.6,
+            "fabric_production": 17.5,
+            "finishing": 6.6,
+            "manufacturing": 0.8,
+            "packaging": 0,
+            "transport": 1.1,
+            "use": 14.4
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 16,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "CO2",
+            "fibers": 0.97,
+            "yarn_production": 1.4,
+            "fabric_production": 2.43,
+            "finishing": 1.09,
+            "manufacturing": 0.4,
+            "packaging": 0,
+            "transport": 0.82,
+            "use": 0.65
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 17,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "ENERGY",
+            "fibers": 15.4,
+            "yarn_production": 18,
+            "fabric_production": 29.8,
+            "finishing": 14.5,
+            "manufacturing": 0.6,
+            "packaging": 0,
+            "transport": 11.6,
+            "use": 8.7
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 18,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "WATER",
+            "fibers": 16,
+            "yarn_production": 25,
+            "fabric_production": 33.4,
+            "finishing": 69.7,
+            "manufacturing": 0.4,
+            "packaging": 0,
+            "transport": 1.7,
+            "use": 9.4
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 19,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "CO2",
+            "fibers": 3.16,
+            "yarn_production": 1.95,
+            "fabric_production": 3.09,
+            "finishing": 2.64,
+            "manufacturing": 0.17,
+            "packaging": 0,
+            "transport": 0.5,
+            "use": 0.68
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 20,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "ENERGY",
+            "fibers": 42,
+            "yarn_production": 19.9,
+            "fabric_production": 32.2,
+            "finishing": 32.7,
+            "manufacturing": -0.3,
+            "packaging": 0,
+            "transport": 6.9,
+            "use": 9.3
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 21,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "WATER",
+            "fibers": 263,
+            "yarn_production": 11.6,
+            "fabric_production": 17.5,
+            "finishing": 24.7,
+            "manufacturing": 1.3,
+            "packaging": 0,
+            "transport": 1.1,
+            "use": 9.4
+        }
+    }
+]

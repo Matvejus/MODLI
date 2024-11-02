@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .forms import GownForm, GownSelectionForm, GownFormReusable
-from .models import Gown, Emissions, Specification
+from .models import Gown, Emissions
 from .OPT import GownOptimizer
 from .serializers import GownSerializer, GownDetailSerializer, EmissionSerializer
 
