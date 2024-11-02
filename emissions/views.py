@@ -178,7 +178,7 @@ def optimize_gowns(request):
 
             # Hardcoded specifications
             specifications = {
-                "usage_per_week": 1000,
+                "usage_per_week": 1400,
                 "pickups_per_week": 2,
                 "optimizer": ["MONEY"],
                 "loss_percentage": 0.001

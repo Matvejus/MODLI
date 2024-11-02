@@ -205,16 +205,42 @@ class GownOptimizer:
         infeasible_constraints = [c.constrName for c in self.md.getConstrs() if c.IISConstr]
         return {"status": "infeasible", "infeasible_constraints": infeasible_constraints}
 
+    # def get_optimization_results(self):
+    #     results = {}
+    #     for x in self.Options:
+    #         usage_values = [int(self.md.getVal(self.dv[Stages.USAGE][x, t])) for t in self.Time]
+    #         new_arrivals = [(t, int(self.md.getVal(self.dv[Stages.NEWARRIVALS][x,t]))) for t in self.Time if self.md.getVal(self.dv[Stages.NEWARRIVALS][x,t]) > 0]
+    #         total_impact = {cs.name: self.md.getVal(self.cv["TOTAL"][x][cs.name]) for cs in Envpar}
+            
+    #         results[x.Name] = {
+    #             "usage_values": usage_values,
+    #             "new_arrivals": new_arrivals,
+    #             "total_impact": total_impact
+    #         }
+    #     return {"status": "optimal", "results": results}
+    
+
     def get_optimization_results(self):
         results = {}
         for x in self.Options:
             usage_values = [int(self.md.getVal(self.dv[Stages.USAGE][x, t])) for t in self.Time]
             new_arrivals = [(t, int(self.md.getVal(self.dv[Stages.NEWARRIVALS][x,t]))) for t in self.Time if self.md.getVal(self.dv[Stages.NEWARRIVALS][x,t]) > 0]
             total_impact = {cs.name: self.md.getVal(self.cv["TOTAL"][x][cs.name]) for cs in Envpar}
-            
+                
+                # New code to calculate impacts per stage
+            stage_impacts = {}
+            for st in Stages:
+                stage_impacts[st.name] = {}
+                for cs in Envpar:
+                        # Evaluate the quicksum expression to get a numerical value
+                    stage_impacts[st.name][cs.name] = self.md.getVal(quicksum(self.dv[st][x, t] * get_impact(x, st, cs) for t in self.Time))
+
             results[x.Name] = {
                 "usage_values": usage_values,
                 "new_arrivals": new_arrivals,
-                "total_impact": total_impact
+                "Impacts": {
+                    "stages": stage_impacts,  # Include impacts per stage
+                    "total_impact": total_impact
+                }
             }
         return {"status": "optimal", "results": results}
