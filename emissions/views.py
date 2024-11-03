@@ -241,9 +241,11 @@ class GownEmissionsAPIView(APIView):
             cost = gown.cost
 
             gowns_data.append({
-                "gown": gown.name,
+                "gown": gown.id,
+                "name": gown.name,
+                "reusable": gown.reusable,
                 "emissions": {
-                    "Co2": total_co2,
+                    "CO2": total_co2,
                     "Energy": total_energy,
                     "Water": total_water,
                     "Cost": cost,
@@ -251,6 +253,7 @@ class GownEmissionsAPIView(APIView):
             })
 
         return Response(gowns_data)
+
     
 def gown_emissions_view(request):
     # Create an instance of the API view
