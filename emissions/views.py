@@ -227,3 +227,40 @@ def optimize_gowns_api(request):
     except Exception as e:
         logger.exception(f"Error in optimize_gowns_api: {str(e)}")
         return Response({'error': f'Optimization error: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+class GownEmissionsAPIView(APIView):
+    def get(self, request):
+        gowns_data = []
+        gowns = Gown.objects.all()
+        
+        for gown in gowns:
+            emissions = Emissions.objects.filter(gown=gown)
+            total_co2 = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.CO2)
+            total_energy = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.ENERGY)
+            total_water = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.WATER)
+            cost = gown.cost
+
+            gowns_data.append({
+                "gown": gown.name,
+                "emissions": {
+                    "Co2": total_co2,
+                    "Energy": total_energy,
+                    "Water": total_water,
+                    "Cost": cost,
+                }
+            })
+
+        return Response(gowns_data)
+    
+def gown_emissions_view(request):
+    # Create an instance of the API view
+    api_view = GownEmissionsAPIView.as_view()
+    
+    # Call the API view to get the response
+    response = api_view(request)
+    
+    # Extract the data from the response
+    gowns_data = response.data
+    
+    # Render the template with the data
+    return render(request, 'gown_emissions.html', {'gowns': gowns_data})

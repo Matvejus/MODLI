@@ -1,0 +1,34 @@
+<!-- emissions/templates/emissions/gown_emissions.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gown Emissions</title>
+</head>
+<body>
+    <h1>Gown Emissions Data</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Gown Name</th>
+                <th>CO2 Emissions</th>
+                <th>Energy Emissions</th>
+                <th>Water Emissions</th>
+                <th>Total Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for gown in gowns %}
+            <tr>
+                <td>{{ gown.gown }}</td>
+                <td>{{ gown.emissions.Co2 }}</td>
+                <td>{{ gown.emissions.Energy }}</td>
+                <td>{{ gown.emissions.Water }}</td>
+                <td>{{ gown.emissions.Cost }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
