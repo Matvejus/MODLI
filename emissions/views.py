@@ -219,6 +219,7 @@ def optimize_gowns_api(request):
         optimizer = GownOptimizer(gown_data, specifications)
         results = optimizer.optimize()
 
+        print(results)
         # Return the results as JSON response
         return Response({'results': results}, status=status.HTTP_200_OK)
 
@@ -251,7 +252,6 @@ class GownEmissionsAPIView(APIView):
                     "Cost": cost,
                 }
             })
-
         return Response(gowns_data)
 
     
