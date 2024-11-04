@@ -15,7 +15,6 @@ urlpatterns = [
     path('gowns/<int:pk>/', views.gown_detail, name='gown_detail'),
     path('gowns/<int:pk>/emissions/', views.gown_emissions, name='gown_emissions'),
     path('api/opt/', views.optimize_gowns_api, name='optimize_gowns_api'),
-    path('api/debug/', views.optimize_gowns, name='optimize_gowns'),
     path('gown_emissions/', views.GownEmissionsAPIView.as_view(), name='gown_emissions'),
 
 ]

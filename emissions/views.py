@@ -155,49 +155,21 @@ def gown_detail(request, pk):
     except Gown.DoesNotExist:
         return Response(status=404)
 
-    serializer = GownDetailSerializer(gown)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        serializer = GownDetailSerializer(gown)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = GownDetailSerializer(gown, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
 
 @api_view(['GET'])
 def gown_emissions(request, pk):
     emissions = Emissions.objects.filter(gown_id=pk)
     serializer = EmissionSerializer(emissions, many=True)
     return Response(serializer.data)
-
-
-
-def read_mock_gowns():
-    with open('C:\DEV\Programms\modli_py\emissions\data\MockGowns.json', 'r') as file:
-        return json.load(file)
-
-def optimize_gowns(request):
-    if request.method == 'POST':
-        try:
-            # Read mock gowns data
-            gown_data = read_mock_gowns()
-
-            # Hardcoded specifications
-            specifications = {
-                "usage_per_week": 1400,
-                "pickups_per_week": 2,
-                "optimizer": ["MONEY"],
-                "loss_percentage": 0.001
-            }
-
-
-            # Create and run the optimizer
-            optimizer = GownOptimizer(gown_data, specifications)
-            results = optimizer.optimize()
-
-            return render(request, 'optimize_test.html', {'results': results})
-
-        except Exception as e:
-            logger.exception(f"Error in optimize_gowns: {str(e)}")
-            error_message = f'Optimization error: {str(e)}'
-            return render(request, 'optimize_test.html', {'error': error_message})
-    
-    # If it's a GET request, just render the form
-    return render(request, 'optimize_test.html')
 
 
 @api_view(['POST'])
@@ -219,7 +191,6 @@ def optimize_gowns_api(request):
         optimizer = GownOptimizer(gown_data, specifications)
         results = optimizer.optimize()
 
-        print(results)
         # Return the results as JSON response
         return Response({'results': results}, status=status.HTTP_200_OK)
 
