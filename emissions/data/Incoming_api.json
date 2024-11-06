@@ -1,0 +1,56 @@
+{
+    "gowns": [
+      {
+        "name": "PolyPropelene",
+        "reusable": 1,
+        "impacts": {
+          "envpars": ["CO2EQ", "WATER", "ENERGY", "MONEY"],
+          "stages": ["NEWARRIVALS", "LAUNDRY", "LOST", "EOL", "ARRIVALMOM"],
+          "params": [
+            [3.98, 26.6, 91.8, 3],
+            [1, 1, 0.5, 0.3],
+            [1, 1, 1, 0],
+            [4, 0, -10, -0.1],
+            [100, 0, 100, 10]
+          ]
+        }
+      },
+      {
+        "name": "Polyester",
+        "reusable": 0,
+        "impacts": {
+          "envpars": ["CO2EQ", "WATER", "ENERGY", "MONEY"],
+          "stages": ["NEWARRIVALS", "LAUNDRY", "LOST", "EOL", "ARRIVALMOM"],
+          "params": [
+            [15.951361891433752, 96.35191894721757, 188.0666618175848, 11.8],
+            [0, 0, 0, 0],
+            [1, 1, 1, 0],
+            [4, 0, -10, -0.1],
+            [100, 0, 100, 10]
+          ]
+        }
+      },
+      {
+        "name": "Cotton",
+        "reusable": 1,
+        "impacts": {
+          "envpars": ["CO2EQ", "WATER", "ENERGY", "MONEY"],
+          "stages": ["NEWARRIVALS", "LAUNDRY", "LOST", "EOL", "ARRIVALMOM"],
+          "params": [
+            [15.245717446238205, 1411.9739534225425, 139.96693968195817, 6],
+            [1, 1, 0.5, 0.3],
+            [1, 1, 1, 0],
+            [4, 0, -10, -0.1],
+            [100, 0, 100, 10]
+          ]
+        }
+      }
+    ],
+    "specifications": {
+      "usage_per_week": 1000,
+      "pickups_per_week": 2,
+      "optimizer": ["WATER"],
+      "loss_percentage": 1
+    }
+  }
+  
