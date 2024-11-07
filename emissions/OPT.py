@@ -1,5 +1,6 @@
 import pyscipopt as ps
 from pyscipopt import quicksum
+from pyscipopt import Model, SCIP_PARAMSETTING
 from enum import Enum
 import itertools
 
@@ -24,18 +25,22 @@ Accountables = [Stages.NEWARRIVALS, Stages.LAUNDRY, Stages.LOST, Stages.EOL, Sta
 LARGEVALUE = 10000
 
 class Gown:
-    def __init__(self, name, reusable, impacts):
+    def __init__(self, name, reusable, impacts,eol=50):
         self.Name = name
         self.Reusable = reusable
         self.Impacts = impacts
+        self.Eol = eol
 
 class Specs:
-    def __init__(self, usage_per_week, pickups_per_week, optimizer=[Envpar.MONEY], loss_percentage=0.001):
+    def __init__(self, usage_per_week, pickups_per_week, optimizer=[Envpar.MONEY], 
+                 loss_percentage=0.001, reusable_min=0.6,reusable_max=1):
         self.usage_per_week = usage_per_week
         self.pickups_per_week = pickups_per_week
         self.usage_between_pickup = self.usage_per_week / self.pickups_per_week
         self.loss_percentage = loss_percentage
         self.optimizer = optimizer
+        self.reusable_min = reusable_min
+        self.reusable_max = reusable_max
 
 def varsList(*lsts):
     if len(lsts) > 1:
@@ -127,7 +132,7 @@ class GownOptimizer:
                 self.md.addCons(self.dv[Stages.NEWARRIVALS][x, t] <= self.dv[Stages.ARRIVALMOM][x, t] * LARGEVALUE,
                                 name=f"NEWARRIVALS_limit_{x.Name}_{t}")
 
-        for t in self.Time:
+        for t in self.Time[1:]:
             self.md.addCons(quicksum(self.dv[Stages.USAGE][x, t] for x in self.Options) == self.Specifications.usage_between_pickup,
                             name=f"USAGE_total_{t}")
 
@@ -155,6 +160,7 @@ class GownOptimizer:
                 )
 
     def balance_reusable(self, mn, mx):
+        mn = self.Specifications.reusable_min; mx = self.Specifications.reusable_max
         if mn > 1 or (mx < mn):
             mn, mx = 0.1, 0.9
 
@@ -180,6 +186,14 @@ class GownOptimizer:
                                              self.Specifications.loss_percentage * self.dv[Stages.USAGE][x, t - tx - 1] 
                                              for tx in range(0, 9)) >= 0,
                                     name=f"GOWN_LOSS_{x.Name}_{t}")
+    
+    def estimate_eol(self):
+        for x in self.Options:
+            EolExp = x.Eol
+            for t in self.Time:
+                if t % EolExp == EolExp-1:
+                    self.md.addCons(quicksum(EolExp*(self.dv[Stages.EOL][x,t-tx]+self.dv[Stages.LOST][x,t-tx])-self.dv[Stages.USAGE][x,t-tx] 
+                                             for tx in range(1,x.Eol)) >= 0, name=f"EOL_{x.Name}_{t}")
 
     def optimize(self):
         self.initial_settings()
@@ -188,6 +202,7 @@ class GownOptimizer:
         self.balance_reusable(0.6, 1)
         self.build_buffer()
         self.estimate_gown_loss()
+        self.estimate_eol()
 
         self.md.setObjective(quicksum(self.cv["TOTAL"][x][cs] for cs in self.Specifications.optimizer for x in self.Options), 'minimize')
         self.md.setParam('limits/time', 20)

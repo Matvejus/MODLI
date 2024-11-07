@@ -148,6 +148,13 @@ def gown_list(request):
     serializer = GownSerializer(gowns, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def selected_gowns_emissions(request):
+    gown_ids = request.GET.get('ids', '').split(',')
+    gowns = Gown.objects.filter(id__in=gown_ids)
+    serializer = GownSerializer(gowns, many=True)
+    return Response(serializer.data)
+
 @api_view(['GET', 'POST'])
 def gown_detail(request, pk):
     try:
@@ -190,7 +197,6 @@ def optimize_gowns_api(request):
         # Create and run the optimizer
         optimizer = GownOptimizer(gown_data, specifications)
         results = optimizer.optimize()
-
         # Return the results as JSON response
         return Response({'results': results}, status=status.HTTP_200_OK)
 
