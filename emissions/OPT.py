@@ -1,6 +1,6 @@
 import pyscipopt as ps
+from pyscipopt import SCIP_PARAMSETTING
 from pyscipopt import quicksum
-from pyscipopt import Model, SCIP_PARAMSETTING
 from enum import Enum
 import itertools
 
@@ -22,7 +22,7 @@ class Stages(Enum):
 
 Accountables = [Stages.NEWARRIVALS, Stages.LAUNDRY, Stages.LOST, Stages.EOL, Stages.ARRIVALMOM]
 
-LARGEVALUE = 10000
+LARGEVALUE = 100000
 
 class Gown:
     def __init__(self, name, reusable, impacts,eol=50):
@@ -120,11 +120,13 @@ class GownOptimizer:
                                 self.dv[Stages.LAUNDRY][x, t] + 
                                 self.dv[Stages.NEWARRIVALS][x, t],
                                 name=f"HOSPITAL_balance_{x.Name}_{t}")
+                
                 self.md.addCons(self.dv[Stages.USAGE][x, t] == 
                                 self.dv[Stages.LOST][x, t + 1] + 
                                 self.dv[Stages.LAUNDRY][x, t + 1] + 
                                 self.dv[Stages.EOL][x, t + 1],
                                 name=f"USAGE_balance_{x.Name}_{t}")
+                
                 self.md.addCons(self.dv[Stages.USAGE][x, t] <= self.dv[Stages.HOSPITAL][x, t],
                                 name=f"USAGE_limit_{x.Name}_{t}")
                 self.md.addCons(self.dv[Stages.LAUNDRY][x, t + 1] <= self.dv[Stages.USAGE][x, t] * x.Reusable,
@@ -159,7 +161,7 @@ class GownOptimizer:
                              for st in Stages for t in self.Time)
                 )
 
-    def balance_reusable(self, mn, mx):
+    def balance_reusable(self):
         mn = self.Specifications.reusable_min; mx = self.Specifications.reusable_max
         if mn > 1 or (mx < mn):
             mn, mx = 0.1, 0.9
@@ -172,11 +174,10 @@ class GownOptimizer:
                         name="BALANCE_disposable")
 
     def build_buffer(self, factor=10):
-        for t in self.Time:
-            if t > 1:
-                self.md.addCons(quicksum(self.dv[Stages.HOSPITAL][x, t] for x in self.Options) >= 
-                                factor * self.Specifications.usage_between_pickup,
-                                name=f"BUFFER_{t}")
+        for t in self.Time[1:]:
+            self.md.addCons(quicksum(self.dv[Stages.HOSPITAL][x, t] for x in self.Options) >= 
+                            factor * self.Specifications.usage_between_pickup,
+                            name=f"BUFFER_{t}")
 
     def estimate_gown_loss(self):
         for x in self.Options:
@@ -186,7 +187,7 @@ class GownOptimizer:
                                              self.Specifications.loss_percentage * self.dv[Stages.USAGE][x, t - tx - 1] 
                                              for tx in range(0, 9)) >= 0,
                                     name=f"GOWN_LOSS_{x.Name}_{t}")
-    
+
     def estimate_eol(self):
         for x in self.Options:
             EolExp = x.Eol
@@ -199,12 +200,13 @@ class GownOptimizer:
         self.initial_settings()
         self.gown_flow()
         self.calculate_costs()
-        self.balance_reusable(0.6, 1)
+        self.balance_reusable()
         self.build_buffer()
         self.estimate_gown_loss()
         self.estimate_eol()
 
         self.md.setObjective(quicksum(self.cv["TOTAL"][x][cs] for cs in self.Specifications.optimizer for x in self.Options), 'minimize')
+        self.md.setHeuristics(SCIP_PARAMSETTING.AGGRESSIVE)
         self.md.setParam('limits/time', 20)
 
         self.md.optimize()
@@ -220,42 +222,16 @@ class GownOptimizer:
         infeasible_constraints = [c.constrName for c in self.md.getConstrs() if c.IISConstr]
         return {"status": "infeasible", "infeasible_constraints": infeasible_constraints}
 
-    # def get_optimization_results(self):
-    #     results = {}
-    #     for x in self.Options:
-    #         usage_values = [int(self.md.getVal(self.dv[Stages.USAGE][x, t])) for t in self.Time]
-    #         new_arrivals = [(t, int(self.md.getVal(self.dv[Stages.NEWARRIVALS][x,t]))) for t in self.Time if self.md.getVal(self.dv[Stages.NEWARRIVALS][x,t]) > 0]
-    #         total_impact = {cs.name: self.md.getVal(self.cv["TOTAL"][x][cs.name]) for cs in Envpar}
-            
-    #         results[x.Name] = {
-    #             "usage_values": usage_values,
-    #             "new_arrivals": new_arrivals,
-    #             "total_impact": total_impact
-    #         }
-    #     return {"status": "optimal", "results": results}
-    
-
     def get_optimization_results(self):
         results = {}
         for x in self.Options:
             usage_values = [int(self.md.getVal(self.dv[Stages.USAGE][x, t])) for t in self.Time]
             new_arrivals = [(t, int(self.md.getVal(self.dv[Stages.NEWARRIVALS][x,t]))) for t in self.Time if self.md.getVal(self.dv[Stages.NEWARRIVALS][x,t]) > 0]
             total_impact = {cs.name: self.md.getVal(self.cv["TOTAL"][x][cs.name]) for cs in Envpar}
-                
-                # New code to calculate impacts per stage
-            stage_impacts = {}
-            for st in Stages:
-                stage_impacts[st.name] = {}
-                for cs in Envpar:
-                        # Evaluate the quicksum expression to get a numerical value
-                    stage_impacts[st.name][cs.name] = self.md.getVal(quicksum(self.dv[st][x, t] * get_impact(x, st, cs) for t in self.Time))
-
+            
             results[x.Name] = {
                 "usage_values": usage_values,
                 "new_arrivals": new_arrivals,
-                "Impacts": {
-                    "stages": stage_impacts,  # Include impacts per stage
-                    "total_impact": total_impact
-                }
+                "total_impact": total_impact
             }
         return {"status": "optimal", "results": results}
