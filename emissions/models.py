@@ -40,7 +40,7 @@ class Gown(models.Model):
 class Emissions(models.Model):
 
     class EmissionStage(models.TextChoices):
-        CO2= "Co2", _("kg CO2 eq")
+        CO2 = "Co2", _("kg CO2 eq")
         ENERGY = "ENERGY", _("Energy use in MJ")
         WATER = "WATER", _("Water consumption in Liters")
 
