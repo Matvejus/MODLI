@@ -20,7 +20,6 @@ from .serializers import GownSerializer, GownDetailSerializer, EmissionSerialize
 
 
 
-
 @api_view(['GET'])
 def gown_list(request):
     gowns = Gown.objects.all()
@@ -31,7 +30,7 @@ def gown_list(request):
 def selected_gowns_emissions(request):
     gown_ids = request.GET.get('ids', '').split(',')
     gowns = Gown.objects.filter(id__in=gown_ids)
-    serializer = GownSerializer(gowns, many=True)
+    serializer = GownSerializer(gowns, many=True)     
     return Response(serializer.data)
 
 @api_view(['GET', 'POST'])
@@ -82,7 +81,6 @@ def optimize_gowns_api(request):
     except json.JSONDecodeError:
         return Response({'error': 'Invalid JSON data'}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
-        logger.exception(f"Error in optimize_gowns_api: {str(e)}")
         return Response({'error': f'Optimization error: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 class GownEmissionsAPIView(APIView):
@@ -110,16 +108,3 @@ class GownEmissionsAPIView(APIView):
             })
         return Response(gowns_data)
 
-    
-def gown_emissions_view(request):
-    # Create an instance of the API view
-    api_view = GownEmissionsAPIView.as_view()
-    
-    # Call the API view to get the response
-    response = api_view(request)
-    
-    # Extract the data from the response
-    gowns_data = response.data
-    
-    # Render the template with the data
-    return render(request, 'gown_emissions.html', {'gowns': gowns_data})
