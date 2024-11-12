@@ -4,12 +4,12 @@
         "pk": 1,
         "fields": {
             "name": "Organic Cotton",
-            "reusable": false,
-            "cost": 0,
-            "weight": 0,
-            "washes": 0,
-            "comfort": 0,
-            "hygine": 0
+            "reusable": true,
+            "cost": 4.5,
+            "weight": 176,
+            "washes": 50,
+            "comfort": 5,
+            "hygine": 3
         }
     },
     {
@@ -17,12 +17,12 @@
         "pk": 2,
         "fields": {
             "name": "Cotton",
-            "reusable": false,
-            "cost": 0,
-            "weight": 0,
-            "washes": 0,
-            "comfort": 0,
-            "hygine": 0
+            "reusable": true,
+            "cost": 4.2,
+            "weight": 180,
+            "washes": 65,
+            "comfort": 5,
+            "hygine": 4
         }
     },
     {
@@ -31,8 +31,8 @@
         "fields": {
             "name": "Polyester",
             "reusable": false,
-            "cost": 0,
-            "weight": 0,
+            "cost": 2.6,
+            "weight": 193,
             "washes": 0,
             "comfort": 0,
             "hygine": 0
@@ -44,11 +44,11 @@
         "fields": {
             "name": "PolyPropelene",
             "reusable": false,
-            "cost": 0,
-            "weight": 0,
+            "cost": 2.8,
+            "weight": 223,
             "washes": 0,
-            "comfort": 0,
-            "hygine": 0
+            "comfort": 3,
+            "hygine": 5
         }
     },
     {
@@ -57,11 +57,11 @@
         "fields": {
             "name": "Recycled Cotton",
             "reusable": true,
-            "cost": 0,
-            "weight": 0,
-            "washes": 0,
-            "comfort": 0,
-            "hygine": 0
+            "cost": 4.8,
+            "weight": 168,
+            "washes": 47,
+            "comfort": 5,
+            "hygine": 3
         }
     },
     {
@@ -70,11 +70,11 @@
         "fields": {
             "name": "Recycled Polyester",
             "reusable": true,
-            "cost": 0,
-            "weight": 0,
-            "washes": 0,
-            "comfort": 0,
-            "hygine": 0
+            "cost": 3.7,
+            "weight": 242,
+            "washes": 70,
+            "comfort": 4,
+            "hygine": 4
         }
     },
     {
@@ -82,12 +82,12 @@
         "pk": 7,
         "fields": {
             "name": "Lyocell",
-            "reusable": false,
-            "cost": 0,
-            "weight": 0,
-            "washes": 0,
-            "comfort": 0,
-            "hygine": 0
+            "reusable": true,
+            "cost": 3.9,
+            "weight": 234,
+            "washes": 87,
+            "comfort": 4,
+            "hygine": 5
         }
     },
     {

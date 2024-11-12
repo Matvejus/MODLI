@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: modli_back
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app  # Mount the current directory to /app in the container
+      - ./db.sqlite3:/app/db.sqlite3  # Persist the SQLite database file
+    environment:
+      - DJANGO_SETTINGS_MODULE=MODLI.settings  # Specify your Django settings module
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py loaddata GownEmissionsData.json &&
+             python manage.py runserver 0.0.0.0:8000"  # Start the Django development server after setup

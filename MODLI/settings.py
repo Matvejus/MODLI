@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-5gc4046-t-xdrpa8y&%0=h#k(^wrq=3+-7f)6jx(o*%0=9(k=f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '159.65.192.81', 'modli.online']
 
 
 
@@ -61,6 +61,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Next.js dev server
+    "https://modlishad.vercel.app",  # Next.js dev server
 ]
 
 ROOT_URLCONF = 'MODLI.urls'

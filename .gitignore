@@ -56,3 +56,5 @@ scip.set
 *.cnf
 *.sol
 *.out
+
+keys
