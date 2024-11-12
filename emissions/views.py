@@ -76,6 +76,7 @@ def optimize_gowns_api(request):
         optimizer = GownOptimizer(gown_data, specifications)
         results = optimizer.optimize()
         # Return the results as JSON response
+        print(results)
         return Response({'results': results}, status=status.HTTP_200_OK)
 
     except json.JSONDecodeError:

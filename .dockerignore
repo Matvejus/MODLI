@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+venv/
+env/
+modli_env/
+*.env
+*.swp
+*.swo
+*.DS_Store
+.idea/
+.vscode/
+keys
