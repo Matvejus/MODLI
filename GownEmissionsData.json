@@ -96,14 +96,14 @@
         "fields": {
             "gown": 1,
             "emission_stage": "CO2",
-            "fibers": 0.805479855029434,
-            "yarn_production": 1.401086248703718,
-            "fabric_production": 2.4298672890165034,
-            "finishing": 1.4890755654966785,
-            "manufacturing": 0.07470981087641164,
+            "fibers": 0.806,
+            "yarn_production": 1.40,
+            "fabric_production": 2.43,
+            "finishing": 1.49,
+            "manufacturing": 0.0747,
             "packaging": 0.0,
-            "transport": 0.7856029181771834,
-            "use": 0.6876637261192857
+            "transport": 0.786,
+            "use": 0.688
         }
     },
     {
@@ -112,14 +112,14 @@
         "fields": {
             "gown": 1,
             "emission_stage": "ENERGY",
-            "fibers": 8.722533275933788,
-            "yarn_production": 17.95471128375034,
-            "fabric_production": 29.837683759440026,
-            "finishing": 19.555964087001993,
-            "manufacturing": -1.1352599069470253,
+            "fibers": 8.72,
+            "yarn_production": 17.96,
+            "fabric_production": 29.8,
+            "finishing": 19.6,
+            "manufacturing": -1.13,
             "packaging": 0.0,
-            "transport": 10.970270215669814,
-            "use": 9.294261915415824
+            "transport": 10.9,
+            "use": 9.29
         }
     },
     {
