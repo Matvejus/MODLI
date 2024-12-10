@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
-from .models import Gown, Emissions
+from .models import Gown, Emissions, Certification
 from .OPT import GownOptimizer
 from .serializers import GownSerializer, GownDetailSerializer, EmissionSerializer
 
@@ -30,8 +30,10 @@ def gown_list(request):
 def selected_gowns_emissions(request):
     gown_ids = request.GET.get('ids', '').split(',')
     gowns = Gown.objects.filter(id__in=gown_ids)
-    serializer = GownSerializer(gowns, many=True)     
+    serializer = GownSerializer(gowns, many=True)
+    print(serializer.data)     
     return Response(serializer.data)
+
 
 @api_view(['GET', 'POST'])
 def gown_detail(request, pk):
