@@ -16,7 +16,7 @@ from rest_framework.views import APIView
 
 from .models import Gown, Emissions, Certification
 from .OPT import GownOptimizer
-from .serializers import GownSerializer, GownDetailSerializer, EmissionSerializer
+from .serializers import GownSerializer, GownDetailSerializer, EmissionSerializer, CertificationSerializer
 
 
 
@@ -30,12 +30,11 @@ def gown_list(request):
 def selected_gowns_emissions(request):
     gown_ids = request.GET.get('ids', '').split(',')
     gowns = Gown.objects.filter(id__in=gown_ids)
-    serializer = GownSerializer(gowns, many=True)
-    print(serializer.data)     
+    serializer = GownSerializer(gowns, many=True)    
     return Response(serializer.data)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'PUT'])
 def gown_detail(request, pk):
     try:
         gown = Gown.objects.get(pk=pk)
@@ -45,7 +44,8 @@ def gown_detail(request, pk):
     if request.method == 'GET':
         serializer = GownDetailSerializer(gown)
         return Response(serializer.data)
-    elif request.method == 'POST':
+
+    elif request.method == 'PUT':
         serializer = GownDetailSerializer(gown, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -78,7 +78,6 @@ def optimize_gowns_api(request):
         optimizer = GownOptimizer(gown_data, specifications)
         results = optimizer.optimize()
         # Return the results as JSON response
-        print(results)
         return Response({'results': results}, status=status.HTTP_200_OK)
 
     except json.JSONDecodeError:
@@ -111,3 +110,8 @@ class GownEmissionsAPIView(APIView):
             })
         return Response(gowns_data)
 
+@api_view(['GET'])
+def all_certificates(request):
+    certificates = Certification.objects.all()
+    serializer = CertificationSerializer(certificates, many=True)
+    return Response(serializer.data)

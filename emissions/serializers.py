@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Gown, Emissions
+from .models import Gown, Emissions, Certification
 
 
 class EmissionImpactSerializer(serializers.Serializer):
@@ -12,7 +12,7 @@ class GownSerializer(serializers.ModelSerializer):
     certificates = serializers.StringRelatedField(many=True)
     class Meta:
         model = Gown
-        fields = ['id', 'name', 'cost', 'washes', 'reusable', 'comfort', 'hygine', 'certificates', 'emission_impacts']
+        fields = ['id', 'name', 'cost', 'laundry_cost', 'washes', 'reusable', 'comfort', 'hygine', 'certificates', 'emission_impacts']
 
     def get_emission_impacts(self, obj):
         emissions = Emissions.objects.filter(gown=obj)
@@ -33,13 +33,20 @@ class GownSerializer(serializers.ModelSerializer):
 
 
 class GownDetailSerializer(serializers.ModelSerializer):
-    certificates = serializers.StringRelatedField(many=True)
+    certificates = serializers.PrimaryKeyRelatedField(
+        many=True, 
+        queryset=Certification.objects.all()
+    )
     class Meta:
         model = Gown
-        fields = ['name', 'reusable', 'cost', 'washes', 'comfort', 'hygine', 'certificates']
+        fields = ['name', 'reusable', 'cost', 'laundry_cost', 'washes', 'comfort', 'hygine', 'certificates']
 
 class EmissionSerializer(serializers.ModelSerializer):
     gown = serializers.StringRelatedField()
     class Meta:
         model = Emissions
-        fields = ['gown', 'emission_stage', 'fibers', 'yarn_production', 'fabric_production', 'finishing', 'manufacturing', 'packaging', 'transport', 'use', 'total']
+        fields = ['gown', 'emission_stage', 'fibers', 'yarn_production', 'fabric_production', 'finishing', 'production', 'packaging', 'transport', 'use', 'total']
+class CertificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Certification
+        fields = ['id', 'name']
