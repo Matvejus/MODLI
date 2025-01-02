@@ -1,0 +1,1166 @@
+[
+    {
+        "model": "emissions.gown",
+        "pk": 1,
+        "fields": {
+            "name": "Lyocell",
+            "reusable": true,
+            "cost": 0,
+            "weight": 300,
+            "washes": 50,
+            "comfort": 4,
+            "hygine": 5,
+            "source": "Anton"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 1,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 2,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "CO2",
+            "production": 3.453,
+            "use": 0.00408,
+            "lost": -0.363,
+            "eol": -0.363,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 3,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "Energy",
+            "production": 40.05,
+            "use": 0.0558,
+            "lost": -5.142,
+            "eol": -5.142,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 4,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "Water",
+            "production": 92.88,
+            "use": 2.82,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 2,
+        "fields": {
+            "name": "Org Cotton",
+            "reusable": true,
+            "cost": 0,
+            "weight": 300,
+            "washes": 50,
+            "comfort": 5,
+            "hygine": 3,
+            "source": "Anton"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 5,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 6,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "CO2",
+            "production": 4.368,
+            "use": 0.00414,
+            "lost": -0.366,
+            "eol": -0.366,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 7,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "Energy",
+            "production": 39.21,
+            "use": 0.0558,
+            "lost": -5.175,
+            "eol": -5.175,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 8,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "Water",
+            "production": 416.58,
+            "use": 4.32,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 3,
+        "fields": {
+            "name": "Cotton GOTS",
+            "reusable": true,
+            "cost": 0,
+            "weight": 300,
+            "washes": 65,
+            "comfort": 5,
+            "hygine": 4,
+            "source": "Anton"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 9,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 10,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "CO2",
+            "production": 2.094,
+            "use": 0.00414,
+            "lost": -0.366,
+            "eol": -0.366,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 11,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "Energy",
+            "production": 25.77,
+            "use": 0.0558,
+            "lost": -5.175,
+            "eol": -5.175,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 12,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "Water",
+            "production": 169.38,
+            "use": 4.32,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 4,
+        "fields": {
+            "name": "R-Cotton",
+            "reusable": true,
+            "cost": 0,
+            "weight": 300,
+            "washes": 50,
+            "comfort": 5,
+            "hygine": 3,
+            "source": "Anton"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 13,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 14,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "CO2",
+            "production": 2.133,
+            "use": 0.00414,
+            "lost": -0.366,
+            "eol": -0.366,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 15,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "Energy",
+            "production": 22.56,
+            "use": 0.0558,
+            "lost": -5.175,
+            "eol": -5.175,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 16,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "Water",
+            "production": 67.08,
+            "use": 4.32,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 5,
+        "fields": {
+            "name": "Polyester",
+            "reusable": true,
+            "cost": 0,
+            "weight": 300,
+            "washes": 50,
+            "comfort": 4,
+            "hygine": 4,
+            "source": "Anton"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 17,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 18,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "CO2",
+            "production": 4.59,
+            "use": 0.0039,
+            "lost": 0.1194,
+            "eol": -0.276,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 19,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "Energy",
+            "production": 53.82,
+            "use": 0.0522,
+            "lost": -8.0151,
+            "eol": -17.04,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 20,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "Water",
+            "production": 23.28,
+            "use": 2.82,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 6,
+        "fields": {
+            "name": "r-Polyester",
+            "reusable": true,
+            "cost": 0,
+            "weight": 300,
+            "washes": 50,
+            "comfort": 4,
+            "hygine": 4,
+            "source": "Anton"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 21,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 22,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "CO2",
+            "production": 2.136,
+            "use": 0.0039,
+            "lost": 0.1194,
+            "eol": -0.276,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 23,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "Energy",
+            "production": 26.94,
+            "use": 0.0522,
+            "lost": -8.0151,
+            "eol": -17.04,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 24,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "Water",
+            "production": 40.98,
+            "use": 2.82,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 7,
+        "fields": {
+            "name": "PP-disposable",
+            "reusable": false,
+            "cost": 0,
+            "weight": 40,
+            "washes": 1,
+            "comfort": 1,
+            "hygine": 3,
+            "source": "Anton"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 25,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 26,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "CO2",
+            "production": 0.1592,
+            "use": 0.0,
+            "lost": -0.01352,
+            "eol": 0.00984,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 27,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "Energy",
+            "production": 3.672,
+            "use": 0.0,
+            "lost": -1.9672,
+            "eol": -1.756,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 28,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "Water",
+            "production": 1.164,
+            "use": 0.0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 8,
+        "fields": {
+            "name": "PET-Elastane (82-18)",
+            "reusable": true,
+            "cost": 0,
+            "weight": 230,
+            "washes": 50,
+            "comfort": 3,
+            "hygine": 3,
+            "source": "By-Wire"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 29,
+        "fields": {
+            "gown": 8,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 30,
+        "fields": {
+            "gown": 8,
+            "emission_stage": "CO2",
+            "production": 1.02,
+            "use": 0.004457743,
+            "lost": 0.089848085,
+            "eol": 0.089848085,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 31,
+        "fields": {
+            "gown": 8,
+            "emission_stage": "Energy",
+            "production": 34.85,
+            "use": 0.075530479,
+            "lost": -6.460357799,
+            "eol": -6.460357799,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 32,
+        "fields": {
+            "gown": 8,
+            "emission_stage": "Water",
+            "production": 0.0,
+            "use": 1.4619375,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 9,
+        "fields": {
+            "name": "PET-PE (65-35)",
+            "reusable": true,
+            "cost": 0,
+            "weight": 65,
+            "washes": 50,
+            "comfort": 3,
+            "hygine": 3,
+            "source": "By-Wire"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 33,
+        "fields": {
+            "gown": 9,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 34,
+        "fields": {
+            "gown": 9,
+            "emission_stage": "CO2",
+            "production": 0.55,
+            "use": 0.001259797,
+            "lost": 0.005591858,
+            "eol": 0.005591858,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 35,
+        "fields": {
+            "gown": 9,
+            "emission_stage": "Energy",
+            "production": 15.39,
+            "use": 0.02134557,
+            "lost": -2.296214333,
+            "eol": -2.296214333,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 36,
+        "fields": {
+            "gown": 9,
+            "emission_stage": "Water",
+            "production": 0.0,
+            "use": 0.41315625,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 10,
+        "fields": {
+            "name": "PET-Elastane (65-35)",
+            "reusable": true,
+            "cost": 0,
+            "weight": 145,
+            "washes": 50,
+            "comfort": 3,
+            "hygine": 3,
+            "source": "By-Wire"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 37,
+        "fields": {
+            "gown": 10,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 38,
+        "fields": {
+            "gown": 10,
+            "emission_stage": "CO2",
+            "production": 0.78,
+            "use": 0.002810316,
+            "lost": 0.05469447,
+            "eol": -0.059155411,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 39,
+        "fields": {
+            "gown": 10,
+            "emission_stage": "Energy",
+            "production": 24.94,
+            "use": 0.047617041,
+            "lost": -4.239602188,
+            "eol": -7.255611876,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 40,
+        "fields": {
+            "gown": 10,
+            "emission_stage": "Water",
+            "production": 0.0,
+            "use": 0.92165625,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 11,
+        "fields": {
+            "name": "PET-Cotton (65-35)",
+            "reusable": true,
+            "cost": 0,
+            "weight": 160,
+            "washes": 50,
+            "comfort": 3,
+            "hygine": 3,
+            "source": "By-Wire"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 41,
+        "fields": {
+            "gown": 11,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 42,
+        "fields": {
+            "gown": 11,
+            "emission_stage": "CO2",
+            "production": 1.53,
+            "use": 0.003101039,
+            "lost": -0.047541538,
+            "eol": -0.025956249,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 43,
+        "fields": {
+            "gown": 11,
+            "emission_stage": "Energy",
+            "production": 32.46,
+            "use": 0.052542942,
+            "lost": -4.27902218,
+            "eol": -3.769680732,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 44,
+        "fields": {
+            "gown": 11,
+            "emission_stage": "Water",
+            "production": 0.0,
+            "use": 1.017,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 12,
+        "fields": {
+            "name": "PET-Elastane (65-35)",
+            "reusable": true,
+            "cost": 0,
+            "weight": 190,
+            "washes": 50,
+            "comfort": 3,
+            "hygine": 3,
+            "source": "By-Wire"
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 45,
+        "fields": {
+            "gown": 12,
+            "emission_stage": "Cost",
+            "production": 0,
+            "use": 0,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 46,
+        "fields": {
+            "gown": 12,
+            "emission_stage": "CO2",
+            "production": 0.65,
+            "use": 0.003682483,
+            "lost": 0.071668616,
+            "eol": -0.077513987,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 47,
+        "fields": {
+            "gown": 12,
+            "emission_stage": "Energy",
+            "production": 25.64,
+            "use": 0.062394744,
+            "lost": -5.555340798,
+            "eol": -9.507353492,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "emissions.emissions",
+        "pk": 48,
+        "fields": {
+            "gown": 12,
+            "emission_stage": "Water",
+            "production": 0.0,
+            "use": 1.2076875,
+            "lost": 0,
+            "eol": 0,
+            "fibers": 0,
+            "yarn_production": 0,
+            "fabric_production": 0,
+            "finishing": 0,
+            "packaging": 0,
+            "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    }
+]

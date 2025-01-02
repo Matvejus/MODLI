@@ -1,0 +1,66 @@
+[
+    {
+        "model": "emissions.certification",
+        "pk": 1,
+        "fields": {
+            "name": "Fairtrade Textile Production Standard",
+            "description": "A certification that ensures fair trade practices in textile production."
+        }
+    },
+    {
+        "model": "emissions.certification",
+        "pk": 2,
+        "fields": {
+            "name": "Fair for Life Kleding",
+            "description": "A certification for fair trade and social responsibility in the textile industry."
+        }
+    },
+    {
+        "model": "emissions.certification",
+        "pk": 3,
+        "fields": {
+            "name": "Fair Wear Foundation",
+            "description": "A non-profit organization that works to improve labor conditions in the garment industry."
+        }
+    },
+    {
+        "model": "emissions.certification",
+        "pk": 4,
+        "fields": {
+            "name": "OEKO-TEX Made in Green",
+            "description": "A traceable product label for textiles tested for harmful substances."
+        }
+    }
+]    {
+        "model": "emissions.certification",
+        "pk": 1,
+        "fields": {
+            "name": "Fairtrade Textile Production Standard",
+            "description": "A certification that ensures fair trade practices in textile production."
+        }
+    },
+    {
+        "model": "emissions.certification",
+        "pk": 2,
+        "fields": {
+            "name": "Fair for Life Kleding",
+            "description": "A certification for fair trade and social responsibility in the textile industry."
+        }
+    },
+    {
+        "model": "emissions.certification",
+        "pk": 3,
+        "fields": {
+            "name": "Fair Wear Foundation",
+            "description": "A non-profit organization that works to improve labor conditions in the garment industry."
+        }
+    },
+    {
+        "model": "emissions.certification",
+        "pk": 4,
+        "fields": {
+            "name": "OEKO-TEX Made in Green",
+            "description": "A traceable product label for textiles tested for harmful substances."
+        }
+    }
+]
