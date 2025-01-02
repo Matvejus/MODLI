@@ -6,7 +6,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Certification(models.Model):
     name = models.CharField(max_length=100)
-    description = models.CharField(max_length=2555)
+    description = models.TextField()
 
     def __str__(self):
         return self.name
@@ -15,11 +15,11 @@ class Gown(models.Model):
 
     name = models.CharField(max_length = 100)
     reusable = models.BooleanField()
-    cost  = models.FloatField(blank = False, null = False, verbose_name="Cost per piece")
-    laundry_cost  = models.FloatField(blank = False, null = False, verbose_name="Cost per wash")
-    weight = models.FloatField(blank = False, null = False, verbose_name="Weight in grams")
+    cost  = models.FloatField(blank = True, null = True, verbose_name="Cost per piece")
+    laundry_cost  = models.FloatField(blank = True, null = True, verbose_name="Cost per wash")
+    weight = models.FloatField(blank = True, null = True, verbose_name="Weight in grams")
     certificates = models.ManyToManyField(Certification, blank=True, verbose_name='Sustainability certificates')
-    washes = models.IntegerField(blank = False, null = False)
+    washes = models.IntegerField(blank = True, null = True)
     comfort = models.IntegerField(
         validators=[
             MinValueValidator(0, message='0 - comofort is not included in the optimization.'),

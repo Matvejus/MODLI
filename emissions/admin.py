@@ -1,6 +1,12 @@
 from django.contrib import admin
 from .models import Gown, Certification,  Emissions
 
-admin.site.register(Gown)
 admin.site.register(Certification)
-admin.site.register(Emissions)
+
+class EmissionsInline(admin.TabularInline):
+    model = Emissions
+    extra = 0  # Number of empty forms to display
+
+@admin.register(Gown)
+class GownAdmin(admin.ModelAdmin):
+    inlines = [EmissionsInline]

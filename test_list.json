@@ -86,6 +86,17 @@
         }
     },
     {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
         "model": "emissions.gown",
         "pk": 2,
         "fields": {
@@ -169,6 +180,17 @@
             "finishing": 0,
             "packaging": 0,
             "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
         }
     },
     {
@@ -258,6 +280,17 @@
         }
     },
     {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
         "model": "emissions.gown",
         "pk": 4,
         "fields": {
@@ -341,6 +374,17 @@
             "finishing": 0,
             "packaging": 0,
             "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
         }
     },
     {
@@ -430,6 +474,17 @@
         }
     },
     {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
         "model": "emissions.gown",
         "pk": 6,
         "fields": {
@@ -513,6 +568,17 @@
             "finishing": 0,
             "packaging": 0,
             "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
         }
     },
     {
@@ -602,6 +668,17 @@
         }
     },
     {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
         "model": "emissions.gown",
         "pk": 8,
         "fields": {
@@ -685,6 +762,17 @@
             "finishing": 0,
             "packaging": 0,
             "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
         }
     },
     {
@@ -774,6 +862,17 @@
         }
     },
     {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
         "model": "emissions.gown",
         "pk": 10,
         "fields": {
@@ -857,6 +956,17 @@
             "finishing": 0,
             "packaging": 0,
             "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
         }
     },
     {
@@ -946,6 +1056,17 @@
         }
     },
     {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    },
+    {
         "model": "emissions.gown",
         "pk": 12,
         "fields": {
@@ -1029,6 +1150,17 @@
             "finishing": 0,
             "packaging": 0,
             "transport": 0
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
         }
     }
 ]
