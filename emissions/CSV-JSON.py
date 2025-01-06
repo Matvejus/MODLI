@@ -62,20 +62,6 @@ for idx, row in gdf.iterrows():
         lsts.append(emission_entry)
         pk_counter += 1
     
-    superuser = {
-        "model": "auth.user",
-        "pk": 1,
-        "fields": {
-            "username": "admin",
-            "password": "pbkdf2_sha256$720000$SmdFgVgn4eYgVXhvDE2s3q$eFKhqSuGcwRbORQFNKSBqrFbuTwhJj8gEKUWx4MxfKE=",
-            "is_superuser": True,
-            "is_staff": True,
-            "is_active": True
-        }
-    }
-
-    lsts.append(superuser)
-
 with open("test_list.json", "w") as final:
     json.dump(lsts, final, indent=4)
 

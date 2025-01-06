@@ -1,0 +1,46 @@
+[ 
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "username": "matvey.mochalov@hva.nl",
+        "password": "pbkdf2_sha256$720000$CbtTz4EV8rH7wkOw5cywjW$bwdCAqLDKBAsOfd4AqtYzhS6LbBvUbKO82Z0HPFmnYE=",
+        "is_superuser": true,
+        "is_staff": true,
+        "is_active": true
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "username": "z.m.p.ingen-housz@hva.nl",
+        "password": "pbkdf2_sha256$720000$dyWwYKetUGGHVJ9n7cfbY1$II8CR4h466MWFn/alhaeLSZANo9AUH/dx8dXLroSeyY=",
+        "is_superuser": true,
+        "is_staff": true,
+        "is_active": true
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+        "username": "r.lambers2@hva.nl",
+        "password": "pbkdf2_sha256$720000$kCEj9DqD3U05E1f9qCTt7H$HoSSkDE/p7gxcAXq8fLUHR2oIYZbU4YVjQk5Wxl3XZg=",
+        "is_superuser": true,
+        "is_staff": true,
+        "is_active": true
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+        "username": "q.v.nguyen@hva.nl",
+        "password": "pbkdf2_sha256$720000$5Jxtnor6M03XHhbe36nmM9$ywLvvULLLL3P6RIwl7gg1kznZ4YZXKS2kPVMBwD2le8=",
+        "is_superuser": true,
+        "is_staff": true,
+        "is_active": true
+    }
+}
+]
