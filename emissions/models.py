@@ -15,8 +15,8 @@ class Gown(models.Model):
 
     name = models.CharField(max_length = 100)
     reusable = models.BooleanField()
-    cost  = models.FloatField(blank = True, null = True, verbose_name="Cost per piece")
-    laundry_cost  = models.FloatField(blank = True, null = True, verbose_name="Cost per wash")
+    cost  = models.FloatField(blank = True, null = True, verbose_name="Cost per piece €")
+    laundry_cost  = models.FloatField(blank = True, null = True, verbose_name="Cost per wash €")
     weight = models.FloatField(blank = True, null = True, verbose_name="Weight in grams")
     certificates = models.ManyToManyField(Certification, blank=True, verbose_name='Sustainability certificates')
     washes = models.IntegerField(blank = True, null = True)
@@ -46,6 +46,7 @@ class Emissions(models.Model):
         ENERGY = "Energy", _("Energy use in MJ")
         WATER = "Water", _("Water consumption in Liters")
         COST = "Cost", _("Cost")
+        FTE = "FTE",_("Local FTE")
 
     gown = models.ForeignKey('Gown', on_delete=models.CASCADE)
     emission_stage = models.CharField(max_length=255, choices=EmissionStage.choices)
