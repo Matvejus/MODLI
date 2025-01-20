@@ -49,4 +49,4 @@ class EmissionSerializer(serializers.ModelSerializer):
 class CertificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Certification
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'description']

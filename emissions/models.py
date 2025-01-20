@@ -23,14 +23,14 @@ class Gown(models.Model):
     comfort = models.IntegerField(
         validators=[
             MinValueValidator(0, message='0 - comofort is not included in the optimization.'),
-            MaxValueValidator(5)
+            MaxValueValidator(6, message='6 - Not applicable')
         ],
         verbose_name="Comfort level (likert scale)"
     )
     hygine = models.IntegerField(
         validators=[
             MinValueValidator(0, message='0 - hygine is not included in the optimization.'),
-            MaxValueValidator(5)
+            MaxValueValidator(6, message='6 - Not applicable')
         ],
         verbose_name="Hygine level (likert scale)"
     )

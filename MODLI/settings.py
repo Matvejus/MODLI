@@ -64,6 +64,11 @@ CORS_ALLOWED_ORIGINS = [
     "https://modlishad.vercel.app",  # Next.js dev server
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://modli.online',
+    'http://modli.online',  
+]
+
 ROOT_URLCONF = 'MODLI.urls'
 
 TEMPLATES = [

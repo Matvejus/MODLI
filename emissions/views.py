@@ -115,3 +115,11 @@ def all_certificates(request):
     certificates = Certification.objects.all()
     serializer = CertificationSerializer(certificates, many=True)
     return Response(serializer.data)
+
+class CertificationCreateView(APIView):
+    def post(self, request, format=None):
+        serializer = CertificationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
