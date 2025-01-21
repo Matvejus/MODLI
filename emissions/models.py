@@ -13,11 +13,21 @@ class Certification(models.Model):
 
 class Gown(models.Model):
 
+    class GownType(models.TextChoices):
+        BIO = "Bio", _("Bio")
+        REC = "Recycled", _("Recycled")
+        REG = "Regular", _("Regular")
+
     name = models.CharField(max_length = 100)
+    visible = models.BooleanField(help_text="Indicates if the gown is visible on the front-end.")
+    type = models.CharField(max_length=255, choices = GownType.choices)
     reusable = models.BooleanField()
+    woven = models.BooleanField()
     cost  = models.FloatField(blank = True, null = True, verbose_name="Cost per piece €")
     laundry_cost  = models.FloatField(blank = True, null = True, verbose_name="Cost per wash €")
     weight = models.FloatField(blank = True, null = True, verbose_name="Weight in grams")
+    fte_local = models.FloatField(blank = True, null = True, verbose_name="Local FTE")
+    fte_local_extra = models.FloatField(blank = True, null = True, verbose_name="Local FTE-extra")
     certificates = models.ManyToManyField(Certification, blank=True, verbose_name='Sustainability certificates')
     washes = models.IntegerField(blank = True, null = True)
     comfort = models.IntegerField(
@@ -46,7 +56,7 @@ class Emissions(models.Model):
         ENERGY = "Energy", _("Energy use in MJ")
         WATER = "Water", _("Water consumption in Liters")
         COST = "Cost", _("Cost")
-        FTE = "FTE",_("Local FTE")
+        RECIPE = "RECIPE",_("RECIPE score")
 
     gown = models.ForeignKey('Gown', on_delete=models.CASCADE)
     emission_stage = models.CharField(max_length=255, choices=EmissionStage.choices)
@@ -69,3 +79,29 @@ class Emissions(models.Model):
 
     def __str__(self):
         return f"{self.gown} {self.emission_stage}"
+    
+
+class EmissionsNew(models.Model):
+    class EmissionStageNew(models.TextChoices):
+        PROD = "Production", _("Production")
+        USE = "Use", _("Use phase")
+        LOST = "Lost", _("Lost")
+        EOL = "EOL", _("End Of life")
+    
+    class EmissionsSubStage(models.TextChoices):
+        TOTAL = "Total", _("Total emissions")
+        RAW = "Raw", _("Raw")
+        ADVANCED = "Advanced", _("Advanced")
+        TRANSPORT = "Transport", _("Transport")
+
+    gown = models.ForeignKey('Gown', on_delete=models.CASCADE)
+    emission_stage = models.CharField(max_length=255, choices=EmissionStageNew.choices)
+    emission_substage = models.CharField(max_length=255, choices=EmissionsSubStage.choices)
+    cost = models.CharField(max_length=255, null=True, blank=True)
+    co2 = models.CharField(max_length=255, null=True, blank=True)
+    energy = models.CharField(max_length=255, null=True, blank=True)
+    water = models.CharField(max_length=255, null=True, blank=True)
+    recipe = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.gown} {self.emission_stage} {self.emission_substage}"

@@ -1,5 +1,6 @@
 import json
 import pandas as pd
+import os
 
 keydict = {
     "modeloptions": ["emissions.gown", "emissions.emissions"],
@@ -15,6 +16,7 @@ def get_gowns(loc=False):
     gowndf = pd.read_csv(location, header=0, sep=";")
     return gowndf
 
+
 # Read the CSV data
 gdf = get_gowns()
 lsts = []
@@ -27,33 +29,42 @@ for idx, row in gdf.iterrows():
         "pk": idx + 1, 
         "fields": {
             "name": row["Gown"],
-            "reusable": row["Reusable"] == "TRUE", 
+            "reusable": row["Reusable"], 
             "cost": row["Price"],
             "weight": row["Weight"],
             "washes": row["Longevity"],
             "comfort": row["Comfort"],
-            "hygine": row["Hygiene"]
+            "hygine": row["Hygiene"],
+            "source": row["Main Source"]
         }
     }
     lsts.append(gown_entry)
 
-    for emission_stage in ["COST", "CO2", "ENERGY", "WATER"]:
+    for emission_stage in ["Cost", "CO2", "Energy", "Water"]:
         emission_entry = {
             "model": "emissions.emissions",
             "pk": pk_counter,
             "fields": {
                 "gown": idx + 1,
                 "emission_stage": emission_stage,
-                "fibers": row[f"Production-{emission_stage}"],
-                "yarn_production": row[f"Use-{emission_stage}"],
-                "fabric_production": row[f"LOST-{emission_stage}"],
-                "finishing": row[f"EOL-{emission_stage}"]
+                "production": row[f"Production-{emission_stage}"],
+                "use": row[f"Use-{emission_stage}"],
+                "lost": row[f"LOST-{emission_stage}"],
+                "eol": row[f"EOL-{emission_stage}"],
+                "fibers": 0,
+                "yarn_production": 0,
+                "fabric_production": 0,
+                "finishing": 0,
+                "packaging": 0,
+                "transport": 0,
             }
         }
         lsts.append(emission_entry)
         pk_counter += 1
-
+    
 with open("test_list.json", "w") as final:
     json.dump(lsts, final, indent=4)
+
+# print(json.dumps(lsts, indent=4))
 
 
