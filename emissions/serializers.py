@@ -12,7 +12,7 @@ class GownSerializer(serializers.ModelSerializer):
     certificates = serializers.StringRelatedField(many=True)
     class Meta:
         model = Gown
-        fields = ['id', 'name', 'cost', 'laundry_cost', 'washes', 'reusable', 'comfort', 'hygine', 'certificates', 'emission_impacts']
+        fields = ['id', 'name', 'cost', 'laundry_cost', 'washes', 'reusable', 'visible', 'comfort', 'hygine', 'certificates', 'emission_impacts']
 
     def get_emission_impacts(self, obj):
         emissions = Emissions.objects.filter(gown=obj)
