@@ -49,7 +49,7 @@ for idx, row in data.iterrows():
     fixture.append(gown_entry)
 
     # Add Emissions entries
-    for stage in ["Production", "Use", "LOST", "EOL"]:
+    for stage in ["Production", "Use", "Lost", "EOL"]:
         for substage, prefix in {
             "Total": "Total",
             "Raw": "Raw",

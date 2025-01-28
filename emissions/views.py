@@ -85,30 +85,30 @@ def optimize_gowns_api(request):
     except Exception as e:
         return Response({'error': f'Optimization error: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-class GownEmissionsAPIView(APIView):
-    def get(self, request):
-        gowns_data = []
-        gowns = Gown.objects.all()
+# class GownEmissionsAPIView(APIView):
+#     def get(self, request):
+#         gowns_data = []
+#         gowns = Gown.objects.all()
         
-        for gown in gowns:
-            emissions = Emissions.objects.filter(gown=gown)
-            total_co2 = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.CO2)
-            total_energy = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.ENERGY)
-            total_water = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.WATER)
-            cost = gown.cost
+#         for gown in gowns:
+#             emissions = Emissions.objects.filter(gown=gown)
+#             total_co2 = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.CO2)
+#             total_energy = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.ENERGY)
+#             total_water = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.WATER)
+#             cost = gown.cost
 
-            gowns_data.append({
-                "gown": gown.id,
-                "name": gown.name,
-                "reusable": gown.reusable,
-                "emissions": {
-                    "CO2": total_co2,
-                    "Energy": total_energy,
-                    "Water": total_water,
-                    "Cost": cost,
-                }
-            })
-        return Response(gowns_data)
+#             gowns_data.append({
+#                 "gown": gown.id,
+#                 "name": gown.name,
+#                 "reusable": gown.reusable,
+#                 "emissions": {
+#                     "CO2": total_co2,
+#                     "Energy": total_energy,
+#                     "Water": total_water,
+#                     "Cost": cost,
+#                 }
+#             })
+#         return Response(gowns_data)
 
 @api_view(['GET'])
 def all_certificates(request):

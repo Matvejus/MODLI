@@ -19,12 +19,14 @@ class Gown(models.Model):
         REG = "Regular", _("Regular")
 
     name = models.CharField(max_length = 100)
-    visible = models.BooleanField(help_text="Indicates if the gown is visible on the front-end.")
+    visible = models.BooleanField(blank = True, null = True, help_text="Indicates if the gown is visible on the front-end.")
     type = models.CharField(max_length=255, choices = GownType.choices)
     reusable = models.BooleanField()
-    woven = models.BooleanField()
+    woven = models.BooleanField(blank = True, null = True)
     cost  = models.FloatField(blank = True, null = True, verbose_name="Cost per piece €")
     laundry_cost  = models.FloatField(blank = True, null = True, verbose_name="Cost per wash €")
+    waste_cost  = models.FloatField(blank = True, null = True, verbose_name="Waste cost penalty €")
+    residual_value  = models.FloatField(blank = True, null = True, verbose_name="Residual value €")
     weight = models.FloatField(blank = True, null = True, verbose_name="Weight in grams")
     fte_local = models.FloatField(blank = True, null = True, verbose_name="Local FTE")
     fte_local_extra = models.FloatField(blank = True, null = True, verbose_name="Local FTE-extra")
@@ -85,7 +87,7 @@ class EmissionsNew(models.Model):
     class EmissionStageNew(models.TextChoices):
         PROD = "Production", _("Production")
         USE = "Use", _("Use phase")
-        LOST = "Lost", _("Lost")
+        LOST = "LOST", _("Lost")
         EOL = "EOL", _("End Of life")
     
     class EmissionsSubStage(models.TextChoices):

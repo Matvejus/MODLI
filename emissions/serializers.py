@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Gown, Emissions, Certification
+from .models import Gown, Emissions, Certification, EmissionsNew
 
 
 class EmissionImpactSerializer(serializers.Serializer):
@@ -7,28 +7,36 @@ class EmissionImpactSerializer(serializers.Serializer):
     Energy = serializers.FloatField()
     Water = serializers.FloatField()
     Cost = serializers.FloatField()
+
 class GownSerializer(serializers.ModelSerializer):
     emission_impacts = serializers.SerializerMethodField()
     certificates = serializers.StringRelatedField(many=True)
     class Meta:
         model = Gown
-        fields = ['id', 'name', 'cost', 'laundry_cost', 'washes', 'reusable', 'visible', 'comfort', 'hygine', 'certificates', 'emission_impacts']
+        fields = ['id', 'name', 'cost', 'laundry_cost', 'residual_value', 'waste_cost', 'washes', 'reusable', 'fte_local', 'fte_local_extra',
+                  'visible', 'comfort', 'hygine', 'certificates', 'emission_impacts',]
 
     def get_emission_impacts(self, obj):
-        emissions = Emissions.objects.filter(gown=obj)
+        emissions = EmissionsNew.objects.filter(gown=obj)
 
         total_emissions = {
-            'CO2': sum(e.total for e in emissions if e.emission_stage == Emissions.EmissionStage.CO2),
-            'Energy': sum(e.total for e in emissions if e.emission_stage == Emissions.EmissionStage.ENERGY),
-            'Water': sum(e.total for e in emissions if e.emission_stage == Emissions.EmissionStage.WATER),
-            'Cost': obj.cost
+            'CO2': sum(float(e.co2) for e in emissions if e.co2 is not None),
+            'Energy': sum(float(e.energy) for e in emissions if e.energy is not None),
+            'Water': sum(float(e.water) for e in emissions if e.water is not None),
+            'purchase_cost': sum(float(e.cost) for e in emissions if e.cost is not None),
+            'recipe': sum(float(e.recipe) for e in emissions if e.recipe is not None),
+            'production_costs': sum(float(e.cost) for e in emissions if e.emission_stage == 'Production'),
+            'use_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'Use'),
+            'lost_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'LOST'),
+            'eol_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'EOL'),
         }
 
         # Adjust emissions and cost if the gown is reusable
         if obj.reusable and obj.washes > 0:
-            total_emissions = {key: value / obj.washes for key, value in total_emissions.items()}
+            total_emissions = {key: value / obj.washes if key != 'recipe' else value for key, value in total_emissions.items()}
 
         return total_emissions
+    
 
 
 
