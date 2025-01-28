@@ -29,6 +29,8 @@ class GownSerializer(serializers.ModelSerializer):
             'use_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'Use'),
             'lost_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'LOST'),
             'eol_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'EOL'),
+            'laundry_cost': obj.laundry_cost if obj.laundry_cost is not None else 0,
+            'waste': obj.waste_cost if obj.waste_cost is not None else 0,
         }
 
         # Adjust emissions and cost if the gown is reusable
@@ -47,7 +49,7 @@ class GownDetailSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = Gown
-        fields = ['name', 'reusable', 'cost', 'laundry_cost', 'washes', 'comfort', 'hygine', 'certificates']
+        fields = ['name', 'reusable', 'cost', 'laundry_cost', 'residual_value', 'waste_cost', 'washes', 'comfort', 'hygine', 'certificates']
 
 class EmissionSerializer(serializers.ModelSerializer):
     gown = serializers.StringRelatedField()

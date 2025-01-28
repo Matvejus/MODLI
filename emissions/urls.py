@@ -14,5 +14,6 @@ urlpatterns = [
     # path('gown_emissions/', views.GownEmissionsAPIView.as_view(), name='gown_emissions'),
     path('api/selected-gowns-emissions/', views.selected_gowns_emissions, name='selected_gowns_emissions'),
     path('certificates/', views.all_certificates, name='all_certificates'),
-    path('api/certifications/', views.CertificationCreateView.as_view(), name='certification-create'),
+    path('api/certifications/', views.CertificationView.as_view(), name='certification-create'),
+    path('api/certifications/<int:pk>/', views.CertificationView.as_view(), name='certification-update-delete'),
 ]
