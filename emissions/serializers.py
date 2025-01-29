@@ -49,7 +49,8 @@ class GownDetailSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = Gown
-        fields = ['name', 'reusable', 'cost', 'laundry_cost', 'residual_value', 'waste_cost', 'washes', 'comfort', 'hygine', 'certificates']
+        fields = ['name', 'reusable', 'cost', 'laundry_cost', 'residual_value', 'waste_cost', 'washes', 'comfort', 'hygine', 'certificates', 'fte_local',
+                   'fte_local_extra']
 
 class EmissionSerializer(serializers.ModelSerializer):
     gown = serializers.StringRelatedField()
