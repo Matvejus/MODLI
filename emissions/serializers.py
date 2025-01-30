@@ -20,27 +20,23 @@ class GownSerializer(serializers.ModelSerializer):
         emissions = EmissionsNew.objects.filter(gown=obj)
 
         total_emissions = {
-            'CO2': sum(float(e.co2) for e in emissions if e.co2 is not None),
+            'CO2': sum(float(e.co2) for e in emissions if e.co2 is not None ),
             'Energy': sum(float(e.energy) for e in emissions if e.energy is not None),
             'Water': sum(float(e.water) for e in emissions if e.water is not None),
             'purchase_cost': sum(float(e.cost) for e in emissions if e.cost is not None),
-            'recipe': sum(float(e.recipe) for e in emissions if e.recipe is not None),
-            'production_costs': sum(float(e.cost) for e in emissions if e.emission_stage == 'Production'),
+            # 'recipe': sum(float(e.recipe) for e in emissions if e.recipe is not None),
+            # 'production_costs': sum(float(e.cost) for e in emissions if e.emission_stage == 'Production'),
             'use_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'Use'),
             'lost_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'LOST'),
             'eol_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'EOL'),
-            'laundry_cost': obj.laundry_cost if obj.laundry_cost is not None else 0,
             'waste': obj.waste_cost if obj.waste_cost is not None else 0,
+            'residual_value': obj.residual_value if obj.residual_value is not None else 0,
         }
 
         # Adjust emissions and cost if the gown is reusable
-        if obj.reusable and obj.washes > 0:
-            total_emissions = {key: value / obj.washes if key != 'recipe' else value for key, value in total_emissions.items()}
-
+        if obj.reusable and obj.washes > 0 and any(key in ['purchase_cost', 'CO2', 'Energy', 'Water', 'residual_value'] for key in total_emissions):
+            total_emissions = {key: value / obj.washes for key, value in total_emissions.items()}
         return total_emissions
-    
-
-
 
 class GownDetailSerializer(serializers.ModelSerializer):
     certificates = serializers.PrimaryKeyRelatedField(
