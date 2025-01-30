@@ -1,0 +1,1250 @@
+[
+    {
+        "model": "emissions.gown",
+        "pk": 1,
+        "fields": {
+            "name": "Lyocell",
+            "visible": true,
+            "type": "Regular",
+            "reusable": true,
+            "woven": true,
+            "cost": 6.0,
+            "laundry_cost": null,
+            "weight": 300,
+            "fte_local": 1,
+            "fte_local_extra": 0,
+            "washes": 80,
+            "comfort": 4,
+            "hygine": 5,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 1,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 6.0,
+            "co2": 3.248504084,
+            "energy": 52.35477153,
+            "water": 150.07224,
+            "recipe": 0.0643051
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 2,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 2.566405489,
+            "energy": 41.10339,
+            "water": 116.18864,
+            "recipe": 0.050061492
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 3,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 0.45,
+            "energy": 7.66,
+            "water": 21.44,
+            "recipe": 0.01
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 4,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.23,
+            "energy": 3.59,
+            "water": 12.45,
+            "recipe": 0.01
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 5,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.5,
+            "co2": 0.0,
+            "energy": 0.06,
+            "water": 2.82,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 6,
+        "fields": {
+            "gown": 1,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": -0.2,
+            "energy": -2.83,
+            "water": -7.87,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 2,
+        "fields": {
+            "name": "Org Cotton",
+            "visible": true,
+            "type": "Bio",
+            "reusable": true,
+            "woven": true,
+            "cost": 6.0,
+            "laundry_cost": null,
+            "weight": 300,
+            "fte_local": 1,
+            "fte_local_extra": 0,
+            "washes": 80,
+            "comfort": 5,
+            "hygine": 3,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 7,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 6.0,
+            "co2": 2.719586856,
+            "energy": 45.19691253,
+            "water": 472.3326,
+            "recipe": 0.071210622
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 8,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 0.086713437,
+            "energy": 1.43921976,
+            "water": 179.79468,
+            "recipe": 0.010203767
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 9,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 2.4,
+            "energy": 40.17,
+            "water": 280.09,
+            "recipe": 0.06
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 10,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.23,
+            "energy": 3.59,
+            "water": 12.45,
+            "recipe": 0.01
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 11,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.5,
+            "co2": 0.0,
+            "energy": 0.06,
+            "water": 4.32,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 12,
+        "fields": {
+            "gown": 2,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": -0.2,
+            "energy": -2.85,
+            "water": -7.83,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 3,
+        "fields": {
+            "name": "Cotton GOTS",
+            "visible": true,
+            "type": "Regular",
+            "reusable": true,
+            "woven": true,
+            "cost": 6.0,
+            "laundry_cost": null,
+            "weight": 300,
+            "fte_local": 1,
+            "fte_local_extra": 0,
+            "washes": 80,
+            "comfort": 5,
+            "hygine": 4,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 13,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 6.0,
+            "co2": 3.130995117,
+            "energy": 51.20502534,
+            "water": 476.06044,
+            "recipe": 0.080927834
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 14,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 0.301920113,
+            "energy": 4.5840918,
+            "water": 173.236,
+            "recipe": 0.015334819
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 15,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 2.6,
+            "energy": 43.03,
+            "water": 290.38,
+            "recipe": 0.06
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 16,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.23,
+            "energy": 3.59,
+            "water": 12.45,
+            "recipe": 0.01
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 17,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.5,
+            "co2": 0.0,
+            "energy": 0.06,
+            "water": 4.32,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 18,
+        "fields": {
+            "gown": 3,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": -0.2,
+            "energy": -2.85,
+            "water": -7.83,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 4,
+        "fields": {
+            "name": "R-Cotton",
+            "visible": true,
+            "type": "Recycled",
+            "reusable": true,
+            "woven": true,
+            "cost": 6.0,
+            "laundry_cost": null,
+            "weight": 300,
+            "fte_local": 1,
+            "fte_local_extra": 0,
+            "washes": 80,
+            "comfort": 5,
+            "hygine": 3,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 19,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 6.0,
+            "co2": 3.064757878,
+            "energy": 50.24724654,
+            "water": 481.436,
+            "recipe": 0.079811653
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 20,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 0.199753859,
+            "energy": 3.0345975,
+            "water": 185.76456,
+            "recipe": 0.012913807
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 21,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 2.64,
+            "energy": 43.62,
+            "water": 283.23,
+            "recipe": 0.06
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 22,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.23,
+            "energy": 3.59,
+            "water": 12.45,
+            "recipe": 0.01
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 23,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.5,
+            "co2": 0.0,
+            "energy": 0.06,
+            "water": 4.32,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 24,
+        "fields": {
+            "gown": 4,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": -0.2,
+            "energy": -2.85,
+            "water": -7.83,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 5,
+        "fields": {
+            "name": "Polyester",
+            "visible": true,
+            "type": "Regular",
+            "reusable": true,
+            "woven": true,
+            "cost": 6.0,
+            "laundry_cost": null,
+            "weight": 300,
+            "fte_local": 1,
+            "fte_local_extra": 0,
+            "washes": 80,
+            "comfort": 4,
+            "hygine": 4,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 25,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 6.0,
+            "co2": 5.038409626,
+            "energy": 91.31739033,
+            "water": 256.63032,
+            "recipe": 0.109802936
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 26,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 0.657,
+            "energy": 22.20021,
+            "water": 46.8,
+            "recipe": 0.018516365
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 27,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 4.15,
+            "energy": 65.53,
+            "water": 197.35,
+            "recipe": 0.09
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 28,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.23,
+            "energy": 3.59,
+            "water": 12.45,
+            "recipe": 0.01
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 29,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.5,
+            "co2": 0.0,
+            "energy": 0.05,
+            "water": 2.82,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 30,
+        "fields": {
+            "gown": 5,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": 0.24,
+            "energy": -4.41,
+            "water": 1.43,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 6,
+        "fields": {
+            "name": "r-Polyester",
+            "visible": true,
+            "type": "Recycled",
+            "reusable": true,
+            "woven": true,
+            "cost": 6.0,
+            "laundry_cost": null,
+            "weight": 300,
+            "fte_local": 1,
+            "fte_local_extra": 0,
+            "washes": 80,
+            "comfort": 4,
+            "hygine": 4,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 31,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 6.0,
+            "co2": 4.76040143,
+            "energy": 74.08109523,
+            "water": 230.94668,
+            "recipe": 0.102696044
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 32,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 0.378991805,
+            "energy": 4.9639149,
+            "water": 21.1,
+            "recipe": 0.011409473
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 33,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 4.15,
+            "energy": 65.53,
+            "water": 197.35,
+            "recipe": 0.09
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 34,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.23,
+            "energy": 3.59,
+            "water": 12.45,
+            "recipe": 0.01
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 35,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.5,
+            "co2": 0.0,
+            "energy": 0.05,
+            "water": 2.82,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 36,
+        "fields": {
+            "gown": 6,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": 0.37,
+            "energy": -4.41,
+            "water": 5.42,
+            "recipe": 0.01
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 7,
+        "fields": {
+            "name": "PP-disposable",
+            "visible": true,
+            "type": "Regular",
+            "reusable": false,
+            "woven": false,
+            "cost": 0.81,
+            "laundry_cost": null,
+            "weight": 40,
+            "fte_local": 0,
+            "fte_local_extra": 0,
+            "washes": 1,
+            "comfort": 1,
+            "hygine": 3,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 37,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 0.81,
+            "co2": 0.160800253,
+            "energy": 7.05909952,
+            "water": 16.9,
+            "recipe": 0.005116059
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 38,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 0.0652,
+            "energy": 3.2902,
+            "water": 7.62,
+            "recipe": 0.002209835
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 39,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 0.07,
+            "energy": 3.29,
+            "water": 7.62,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 40,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.03,
+            "energy": 0.48,
+            "water": 1.66,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 41,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": 0.0,
+            "energy": 0.0,
+            "water": 0.0,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 42,
+        "fields": {
+            "gown": 7,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": 0.05,
+            "energy": -1.08,
+            "water": 0.12,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 8,
+        "fields": {
+            "name": "PET-Elastane (82-18)",
+            "visible": true,
+            "type": "Regular",
+            "reusable": true,
+            "woven": true,
+            "cost": 6.0,
+            "laundry_cost": null,
+            "weight": 230,
+            "fte_local": 1,
+            "fte_local_extra": 0,
+            "washes": 80,
+            "comfort": 3,
+            "hygine": 3,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 43,
+        "fields": {
+            "gown": 8,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 6.0,
+            "co2": 3.643100166,
+            "energy": 59.87820518,
+            "water": 172.9048,
+            "recipe": 0.074724758
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 44,
+        "fields": {
+            "gown": 8,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 0.456395516,
+            "energy": 6.804491999,
+            "water": 25.4,
+            "recipe": 0.011852305
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 45,
+        "fields": {
+            "gown": 8,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 3.01,
+            "energy": 50.32,
+            "water": 147.45,
+            "recipe": 0.06
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 46,
+        "fields": {
+            "gown": 8,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.17,
+            "energy": 2.75,
+            "water": 9.54,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 47,
+        "fields": {
+            "gown": 8,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.5,
+            "co2": 0.0,
+            "energy": 0.08,
+            "water": 1.46,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 48,
+        "fields": {
+            "gown": 8,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": 0.3,
+            "energy": -3.55,
+            "water": 4.07,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 9,
+        "fields": {
+            "name": "PET-PE (65-35)",
+            "visible": true,
+            "type": "Regular",
+            "reusable": true,
+            "woven": false,
+            "cost": 6.0,
+            "laundry_cost": null,
+            "weight": 65,
+            "fte_local": 1,
+            "fte_local_extra": 0,
+            "washes": 80,
+            "comfort": 3,
+            "hygine": 3,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 49,
+        "fields": {
+            "gown": 9,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 6.0,
+            "co2": 0.916827311,
+            "energy": 16.64855013,
+            "water": 45.1,
+            "recipe": 0.019124967
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 50,
+        "fields": {
+            "gown": 9,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 0.094324679,
+            "energy": 2.625713932,
+            "water": 6.73,
+            "recipe": 0.002777956
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 51,
+        "fields": {
+            "gown": 9,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 0.77,
+            "energy": 13.24,
+            "water": 38.38,
+            "recipe": 0.02
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 52,
+        "fields": {
+            "gown": 9,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.05,
+            "energy": 0.78,
+            "water": 2.7,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 53,
+        "fields": {
+            "gown": 9,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.5,
+            "co2": 0.0,
+            "energy": 0.02,
+            "water": 0.41,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 54,
+        "fields": {
+            "gown": 9,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": -0.03,
+            "energy": -3.4,
+            "water": -5.13,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 10,
+        "fields": {
+            "name": "PET-Elastane (65-35)",
+            "visible": true,
+            "type": "Regular",
+            "reusable": true,
+            "woven": true,
+            "cost": 6.0,
+            "laundry_cost": null,
+            "weight": 145,
+            "fte_local": 1,
+            "fte_local_extra": 0,
+            "washes": 80,
+            "comfort": 3,
+            "hygine": 3,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 55,
+        "fields": {
+            "gown": 10,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 6.0,
+            "co2": 2.252077822,
+            "energy": 38.88911579,
+            "water": 109.94092,
+            "recipe": 0.046321414
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 56,
+        "fields": {
+            "gown": 10,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 0.350167298,
+            "energy": 5.60494824,
+            "water": 19.8,
+            "recipe": 0.008687284
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 57,
+        "fields": {
+            "gown": 10,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 1.79,
+            "energy": 31.55,
+            "water": 90.15,
+            "recipe": 0.04
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 58,
+        "fields": {
+            "gown": 10,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.11,
+            "energy": 1.74,
+            "water": 6.02,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 59,
+        "fields": {
+            "gown": 10,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.5,
+            "co2": 0.0,
+            "energy": 0.05,
+            "water": 0.92,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 60,
+        "fields": {
+            "gown": 10,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": -0.06,
+            "energy": -7.26,
+            "water": -10.63,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 11,
+        "fields": {
+            "name": "PET-Cotton (65-35)",
+            "visible": true,
+            "type": "Regular",
+            "reusable": true,
+            "woven": true,
+            "cost": 6.0,
+            "laundry_cost": null,
+            "weight": 160,
+            "fte_local": 1,
+            "fte_local_extra": 0,
+            "washes": 80,
+            "comfort": 3,
+            "hygine": 3,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 61,
+        "fields": {
+            "gown": 11,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 6.0,
+            "co2": 2.28235264,
+            "energy": 36.05249595,
+            "water": 164.9422,
+            "recipe": 0.048839323
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 62,
+        "fields": {
+            "gown": 11,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 0.230153969,
+            "energy": 3.126083176,
+            "water": 41.7,
+            "recipe": 0.007558051
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 63,
+        "fields": {
+            "gown": 11,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 1.93,
+            "energy": 31.01,
+            "water": 123.23,
+            "recipe": 0.04
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 64,
+        "fields": {
+            "gown": 11,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.12,
+            "energy": 1.91,
+            "water": 6.64,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 65,
+        "fields": {
+            "gown": 11,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.5,
+            "co2": 0.0,
+            "energy": 0.05,
+            "water": 1.02,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 66,
+        "fields": {
+            "gown": 11,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": -0.13,
+            "energy": -6.49,
+            "water": -11.55,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.gown",
+        "pk": 12,
+        "fields": {
+            "name": "PET-Elastane (65-35)",
+            "visible": true,
+            "type": "Regular",
+            "reusable": true,
+            "woven": true,
+            "cost": 6.0,
+            "laundry_cost": null,
+            "weight": 190,
+            "fte_local": 1,
+            "fte_local_extra": 0,
+            "washes": 80,
+            "comfort": 3,
+            "hygine": 3,
+            "source": "Roel"
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 67,
+        "fields": {
+            "gown": 12,
+            "emission_stage": "Production",
+            "emission_substage": "Total",
+            "cost": 6.0,
+            "co2": 3.047596401,
+            "energy": 52.50434434,
+            "water": 149.52116,
+            "recipe": 0.063093518
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 68,
+        "fields": {
+            "gown": 12,
+            "emission_stage": "Production",
+            "emission_substage": "Raw",
+            "cost": 0.0,
+            "co2": 0.555437783,
+            "energy": 8.890607554,
+            "water": 31.4,
+            "recipe": 0.01377983
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 69,
+        "fields": {
+            "gown": 12,
+            "emission_stage": "Production",
+            "emission_substage": "Advanced",
+            "cost": 0.0,
+            "co2": 2.35,
+            "energy": 41.34,
+            "water": 118.12,
+            "recipe": 0.05
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 70,
+        "fields": {
+            "gown": 12,
+            "emission_stage": "Production",
+            "emission_substage": "Transport",
+            "cost": 0.0,
+            "co2": 0.14,
+            "energy": 2.27,
+            "water": 7.88,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 71,
+        "fields": {
+            "gown": 12,
+            "emission_stage": "Use",
+            "emission_substage": "Total",
+            "cost": 0.5,
+            "co2": 0.0,
+            "energy": 0.06,
+            "water": 1.21,
+            "recipe": 0.0
+        }
+    },
+    {
+        "model": "emissions.emissionsnew",
+        "pk": 72,
+        "fields": {
+            "gown": 12,
+            "emission_stage": "EOL",
+            "emission_substage": "Total",
+            "cost": 0.0,
+            "co2": -0.08,
+            "energy": -9.51,
+            "water": -13.93,
+            "recipe": 0.0
+        }
+    }
+]

@@ -10,7 +10,7 @@ import os
 
 def get_gowns(loc=False):
     if not loc:
-        location = "emissions\data\EvertyhingCombined2.csv"
+        location = "emissions\data\AllDataVariables.csv"
     else:
         location = loc
     gowndf = pd.read_csv(location, header=0, sep=";")
@@ -39,7 +39,7 @@ for idx, row in data.iterrows():
             "laundry_cost": None,  # Set to None or calculate if available
             "weight": row["Weight"],
             "fte_local": row["Local FTE"],
-            "fte_local_extra": row["Local FTE-Extra"],
+            "fte_local_extra": 0,
             "washes": row["Longevity"],
             "comfort": row["Comfort"],
             "hygine": row["Hygiene"],
@@ -78,7 +78,7 @@ for idx, row in data.iterrows():
     gown_pk_counter += 1
 
 # Save the fixture to a JSON file
-with open("test_list_2.json", "w") as final:
+with open("test_list_3.json", "w") as final:
     json.dump(fixture, final, indent=4)
 
 
