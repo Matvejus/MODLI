@@ -30,7 +30,8 @@ def gown_list(request):
 def selected_gowns_emissions(request):
     gown_ids = request.GET.get('ids', '').split(',')
     gowns = Gown.objects.filter(id__in=gown_ids)
-    serializer = GownSerializer(gowns, many=True)    
+    serializer = GownSerializer(gowns, many=True)
+    print(serializer.data)    
     return Response(serializer.data)
 
 

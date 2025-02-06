@@ -10,10 +10,10 @@ import os
 
 def get_gowns(loc=False):
     if not loc:
-        location = "emissions\data\AllDataVariables.csv"
+        location = r"emissions\data\NewVariables.csv"
     else:
         location = loc
-    gowndf = pd.read_csv(location, header=0, sep=";")
+    gowndf = pd.read_csv(location, header=0, sep=",")
     return gowndf
 
 
