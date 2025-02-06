@@ -15,7 +15,8 @@ class GownSerializer(serializers.ModelSerializer):
         model = Gown
         fields = ['id', 'name', 'cost', 'laundry_cost', 'residual_value', 'waste_cost', 'washes', 'reusable', 'fte_local', 'fte_local_extra',
                   'visible', 'comfort', 'hygine', 'certificates', 'emission_impacts',]
-
+        
+        
     def get_emission_impacts(self, obj):
         emissions = EmissionsNew.objects.filter(gown=obj)
 
@@ -33,29 +34,26 @@ class GownSerializer(serializers.ModelSerializer):
             'residual_value': obj.residual_value * 100 if obj.residual_value is not None else 0,
         }
 
-        total_emissions["CO2"] = (
-            sum(float(e.co2) for e in emissions if e.emission_stage == 'Production' and e.emission_substage == 'Total') +
-            sum(float(e.co2) for e in emissions if e.emission_substage == "USE") * obj.washes -
-            sum(float(e.co2) for e in emissions if e.emission_substage == "EOL")
-        )
+        total_emissions["CO2"] = self.calculate_total_emissions(emissions, 'co2', obj)
         # Calculate total emissions for Energy
-        total_emissions["Energy"] = (
-            sum(float(e.energy) for e in emissions if e.emission_stage == 'Production' and e.emission_substage == 'Total' and e.energy is not None) +
-            sum(float(e.energy) for e in emissions if e.emission_substage == "USE" and e.energy is not None) * obj.washes -
-            sum(float(e.energy) for e in emissions if e.emission_substage == "EOL" and e.energy is not None)
-        )
+        total_emissions["Energy"] = self.calculate_total_emissions(emissions, 'energy', obj)
         # Calculate total emissions for Water
-        total_emissions["Water"] = (
-            sum(float(e.water) for e in emissions if e.emission_stage == 'Production' and e.emission_substage == 'Total') +
-            sum(float(e.water) for e in emissions if e.emission_substage == "USE") * obj.washes -
-            sum(float(e.water) for e in emissions if e.emission_substage == "EOL")
-        )
+        total_emissions["Water"] = self.calculate_total_emissions(emissions, 'water', obj)
 
         # Adjust emissions and cost if the gown is reusable
         if obj.reusable and obj.washes > 0 and any(key in ['purchase_cost', 'CO2', 'Energy', 'Water', 'residual_value'] for key in total_emissions):
             total_emissions = {key: value / obj.washes for key, value in total_emissions.items()}
 
         return total_emissions
+    
+    def calculate_total_emissions(self, emissions, emission_type, obj):
+        return (
+            sum(float(getattr(e, emission_type)) for e in emissions if e.emission_stage == 'Production' and e.emission_substage == 'Total') +
+            sum(float(getattr(e, emission_type)) for e in emissions if e.emission_substage == "USE") * obj.washes -
+            sum(float(getattr(e, emission_type)) for e in emissions if e.emission_substage == "EOL")
+        )
+
+
 
 class GownDetailSerializer(serializers.ModelSerializer):
     certificates = serializers.PrimaryKeyRelatedField(
