@@ -51,36 +51,36 @@ class Gown(models.Model):
     def __str__(self):
         return self.name
 
-class Emissions(models.Model):
+# class Emissions(models.Model):
 
-    class EmissionStage(models.TextChoices):
-        CO2 = "CO2", _("kg CO2 eq")
-        ENERGY = "Energy", _("Energy use in MJ")
-        WATER = "Water", _("Water consumption in Liters")
-        COST = "Cost", _("Cost")
-        RECIPE = "RECIPE",_("RECIPE score")
+#     class EmissionStage(models.TextChoices):
+#         CO2 = "CO2", _("kg CO2 eq")
+#         ENERGY = "Energy", _("Energy use in MJ")
+#         WATER = "Water", _("Water consumption in Liters")
+#         COST = "Cost", _("Cost")
+#         RECIPE = "RECIPE",_("RECIPE score")
 
-    gown = models.ForeignKey('Gown', on_delete=models.CASCADE)
-    emission_stage = models.CharField(max_length=255, choices=EmissionStage.choices)
-    fibers = models.FloatField(blank=True, null=True)
-    yarn_production = models.FloatField(blank=True, null=True)
-    fabric_production = models.FloatField(blank=True, null=True)
-    finishing = models.FloatField(blank=True, null=True)
-    production = models.FloatField(blank=True, null=True)
-    packaging = models.FloatField(blank=True, null=True)
-    transport = models.FloatField(blank=True, null=True)
-    use = models.FloatField(blank=True, null=True)
-    lost = models.FloatField(blank=True, null=True)
-    eol = models.FloatField(blank=True, null=True)
+#     gown = models.ForeignKey('Gown', on_delete=models.CASCADE)
+#     emission_stage = models.CharField(max_length=255, choices=EmissionStage.choices)
+#     fibers = models.FloatField(blank=True, null=True)
+#     yarn_production = models.FloatField(blank=True, null=True)
+#     fabric_production = models.FloatField(blank=True, null=True)
+#     finishing = models.FloatField(blank=True, null=True)
+#     production = models.FloatField(blank=True, null=True)
+#     packaging = models.FloatField(blank=True, null=True)
+#     transport = models.FloatField(blank=True, null=True)
+#     use = models.FloatField(blank=True, null=True)
+#     lost = models.FloatField(blank=True, null=True)
+#     eol = models.FloatField(blank=True, null=True)
 
-    @property
-    def total(self):
-        return (self.fibers + self.yarn_production + self.fabric_production +
-                self.finishing + self.production + self.packaging +
-                self.transport + self.use)
+#     @property
+#     def total(self):
+#         return (self.fibers + self.yarn_production + self.fabric_production +
+#                 self.finishing + self.production + self.packaging +
+#                 self.transport + self.use)
 
-    def __str__(self):
-        return f"{self.gown} {self.emission_stage}"
+#     def __str__(self):
+#         return f"{self.gown} {self.emission_stage}"
     
 
 class EmissionsNew(models.Model):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Gown, Certification,  Emissions, EmissionsNew
+from .models import Gown, Certification, EmissionsNew
 
 admin.site.register(Certification)
 
