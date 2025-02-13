@@ -7,12 +7,15 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+import logging
+logger = logging.getLogger(__name__)
 
 from .models import Gown, Emissions, Certification
 from .OPT import GownOptimizer
@@ -36,21 +39,74 @@ def selected_gowns_emissions(request):
 
 @api_view(['GET', 'PUT'])
 def gown_detail(request, pk):
-    try:
-        gown = Gown.objects.get(pk=pk)
-    except Gown.DoesNotExist:
-        return Response(status=404)
+    # Ensure the user has a session key
+    if not request.session.session_key:
+        request.session.create()  
+
+    session_key = f"user_{request.session.session_key}_gown_{pk}"
 
     if request.method == 'GET':
-        serializer = GownDetailSerializer(gown)
-        return Response(serializer.data)
+        # Check if modified data exists in the session
+        if session_key in request.session:
+            return Response(request.session[session_key])
+
+        # Otherwise, fetch the gown from DB
+        try:
+            gown = Gown.objects.get(pk=pk)
+            serializer = GownDetailSerializer(gown)
+            return Response(serializer.data)
+        except Gown.DoesNotExist:
+            return Response(status=404)
 
     elif request.method == 'PUT':
-        serializer = GownDetailSerializer(gown, data=request.data)
+        serializer = GownDetailSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            request.session[session_key] = serializer.data
+            request.session.modified = True
+            request.session.save()  # Ensure session is stored
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
+
+@api_view(['GET'])
+@ensure_csrf_cookie
+def get_gown_session(request, gown_id):
+    if not request.session.session_key:
+        request.session.create()
+    
+    session_key = f"gown_{gown_id}"
+    gown_data = request.session.get(session_key)
+
+    print(f"Session key: {request.session.session_key}")
+    print(f"Session data: {dict(request.session)}")
+
+    if gown_data:
+        return Response(gown_data, status=200)
+    
+    try:
+        gown = Gown.objects.get(pk=gown_id)
+        serializer = GownDetailSerializer(gown)
+        gown_data = serializer.data
+        request.session[session_key] = gown_data  
+        request.session.modified = True  # Ensure session is saved
+        return Response(gown_data, status=200)
+    except Gown.DoesNotExist:
+        return Response({"error": "Gown not found"}, status=404)
+    
+@api_view(['POST'])
+@ensure_csrf_cookie
+def save_gown_session(request, gown_id):
+    if not request.session.session_key:
+        request.session.create()
+    
+    data = request.data
+    session_key = f"gown_{gown_id}"
+    request.session[session_key] = data
+    request.session.modified = True
+    request.session.save()  # Force save
+
+    print(f"Session after saving: {dict(request.session)}")  # Debugging log
+    return Response({"message": "Gown data saved in session"}, status=200)
+
 
 @api_view(['GET'])
 def gown_emissions(request, pk):
