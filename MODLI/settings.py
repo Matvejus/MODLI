@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,14 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5gc4046-t-xdrpa8y&%0=h#k(^wrq=3+-7f)6jx(o*%0=9(k=f'
+SECRET_KEY = "XUY"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '159.65.192.81', 'modli.online']
-
-
 
 # Application definition
 
@@ -60,14 +60,15 @@ MIDDLEWARE = [
 ]
 
 
-
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_AGE = 86400  # 1 day
-SESSION_SAVE_EVERY_REQUEST = False  # Save session on each request
-SESSION_COOKIE_SECURE = False  # Set to True if using HTTPS
-SESSION_COOKIE_HTTPONLY = True  # 
-# SESSION_COOKIE_SAMESITE = 'Lax'  # Or 'None' if you need cross-site cookies
-# SESSION_COOKIE_NAME = 'sessionid'  # Default session cookie name
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 14  # 14 days
+SESSION_SAVE_EVERY_REQUEST = True
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+}
 
 
 
@@ -80,7 +81,20 @@ CORS_ALLOW_CREDENTIALS = True  # Allow cookies to be sent
 
 CSRF_TRUSTED_ORIGINS = [
     'https://modli.online',
-    'http://modli.online',  
+    'http://modli.online',
+    "http://localhost:3000"
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
 ]
 
 ROOT_URLCONF = 'MODLI.urls'
@@ -121,9 +135,6 @@ CACHES = {
         'LOCATION': BASE_DIR / 'cache',
     }
 }
-
-SESSION_COOKIE_AGE = 86400  # 1 day
-SESSION_SAVE_EVERY_REQUEST = True  # Save session on each request
 
 
 # Password validation
