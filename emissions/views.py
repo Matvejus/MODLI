@@ -49,8 +49,7 @@ def get_token_from_request(request):
     return None
 
 def decode_token(token):
-    try:    
-        print(token)
+    try:
         return jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
     except jwt.ExpiredSignatureError:
         print("Token expired")
@@ -70,10 +69,15 @@ def gown_detail(request, pk):
         return Response({"error": "Invalid or expired token"}, status=401)
 
     session_key = f"user_{payload.get('sub')}_gown_{pk}"
+    print(f"Session key: {session_key}")
+
+    # Log the entire session before retrieval
+    print(f"Current session data: {request.session.items()}")  # Debugging line
 
     if request.method == 'GET':
         # Check if modified data exists in the session
         gown_data = request.session.get(session_key)
+        print(f"Retrieved gown data from session: {gown_data}")  # Debugging line
         if gown_data:
             return Response(gown_data)
 
@@ -81,7 +85,11 @@ def gown_detail(request, pk):
         try:
             gown = Gown.objects.get(pk=pk)
             serializer = GownDetailSerializer(gown)
-            return Response(serializer.data)
+            gown_data = serializer.data
+            request.session[session_key] = gown_data
+            request.session.modified = True
+            print(f"Saved gown data to session: {gown_data}")  # Debugging line
+            return Response(gown_data)
         except Gown.DoesNotExist:
             return Response({"error": "Gown not found"}, status=404)
 
@@ -90,34 +98,9 @@ def gown_detail(request, pk):
         if serializer.is_valid():
             request.session[session_key] = serializer.data
             request.session.modified = True
+            print(f"Saved gown data to session: {serializer.data}")  # Debugging line
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
-
-@api_view(['GET'])
-def get_gown_session(request, gown_id):
-    token = get_token_from_request(request)
-    if not token:
-        return Response({"error": "No token provided"}, status=401)
-
-    payload = decode_token(token)
-    if not payload:
-        return Response({"error": "Invalid or expired token"}, status=401)
-
-    session_key = f"user_{payload.get('sub')}_gown_{gown_id}"
-    gown_data = request.session.get(session_key)
-
-    if gown_data:
-        return Response(gown_data, status=200)
-    
-    try:
-        gown = Gown.objects.get(pk=gown_id)
-        serializer = GownDetailSerializer(gown)
-        gown_data = serializer.data
-        request.session[session_key] = gown_data
-        request.session.modified = True
-        return Response(gown_data, status=200)
-    except Gown.DoesNotExist:
-        return Response({"error": "Gown not found"}, status=404)
 
 @api_view(['POST'])
 def save_gown_session(request, gown_id):
@@ -130,8 +113,10 @@ def save_gown_session(request, gown_id):
         return Response({"error": "Invalid or expired token"}, status=401)
 
     session_key = f"user_{payload.get('sub')}_gown_{gown_id}"
+    print(f"Session key for saving: {session_key}")
     request.session[session_key] = request.data
     request.session.modified = True
+    print(f"Data saved to session: {request.data}")  # Debugging line
 
     return Response({"message": "Gown data saved in session"}, status=200)
 
