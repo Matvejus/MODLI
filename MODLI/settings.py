@@ -96,6 +96,13 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
+
 ROOT_URLCONF = 'MODLI.urls'
 
 TEMPLATES = [
