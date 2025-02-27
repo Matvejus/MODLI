@@ -97,8 +97,8 @@ class EmissionsNew(models.Model):
         TRANSPORT = "Transport", _("Transport")
 
     gown = models.ForeignKey('Gown', on_delete=models.CASCADE)
-    emission_stage = models.FloatField(max_length=255, choices=EmissionStageNew.choices)
-    emission_substage = models.FloatField(max_length=255, choices=EmissionsSubStage.choices)
+    emission_stage = models.CharField(max_length=255, choices=EmissionStageNew.choices)
+    emission_substage = models.CharField(max_length=255, choices=EmissionsSubStage.choices)
     cost = models.FloatField(max_length=255, null=True, blank=True)
     co2 = models.FloatField(max_length=255, null=True, blank=True)
     energy = models.FloatField(max_length=255, null=True, blank=True)

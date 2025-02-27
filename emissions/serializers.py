@@ -21,15 +21,10 @@ class GownSerializer(serializers.ModelSerializer):
         emissions = EmissionsNew.objects.filter(gown=obj)
 
         total_emissions = {
-            'CO2': sum(e.co2 for e in emissions if e.co2 is not None ),
-            'Energy': sum(e.energy for e in emissions if e.energy is not None),
-            'Water': sum(e.water for e in emissions if e.water is not None),
-            'purchase_cost': sum(e.cost for e in emissions if e.cost is not None),
-            'recipe': sum(e.recipe for e in emissions if e.recipe is not None),
-            # 'production_costs': sum(float(e.cost) for e in emissions if e.emission_stage == 'Production'),
-            'use_cost': sum(e.cost for e in emissions if e.emission_stage == 'Use'),
-            'lost_cost': sum(e.cost for e in emissions if e.emission_stage == 'LOST'),
-            'eol_cost': sum(e.cost for e in emissions if e.emission_stage == 'EOL'),
+            'purchase_cost': sum(float(e.cost) for e in emissions if e.cost is not None),
+            'use_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'Use'),
+            'lost_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'LOST'),
+            'eol_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'EOL'),
             'waste': obj.waste_cost if obj.waste_cost is not None else 0,
             'residual_value': obj.residual_value * 100 if obj.residual_value is not None else 0,
         }
@@ -49,8 +44,8 @@ class GownSerializer(serializers.ModelSerializer):
     def calculate_total_emissions(self, emissions, emission_type, obj):
         return (
             sum(float(getattr(e, emission_type)) for e in emissions if e.emission_stage == 'Production' and e.emission_substage == 'Total') +
-            sum(float(getattr(e, emission_type)) for e in emissions if e.emission_substage == "USE") * obj.washes -
-            sum(float(getattr(e, emission_type)) for e in emissions if e.emission_substage == "EOL")
+            sum(float(getattr(e, emission_type)) for e in emissions if e.emission_stage == "USE") * obj.washes +
+            sum(float(getattr(e, emission_type)) for e in emissions if e.emission_stage == "EOL")
         )
 
 
