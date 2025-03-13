@@ -22,17 +22,43 @@ from .serializers import GownSerializer, GownDetailSerializer, CertificationSeri
 
 @api_view(['GET'])
 def gown_list(request):
+    
+
     gowns = Gown.objects.all()
     serializer = GownSerializer(gowns, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def selected_gowns_emissions(request):
+    print(request.session.session_key)
     gown_ids = request.GET.get('ids', '').split(',')
-    gowns = Gown.objects.filter(id__in=gown_ids)
-    serializer = GownSerializer(gowns, many=True)
-    print(serializer.data)
-    return Response(serializer.data)
+    result = []
+    
+    # Debug: print all session keys
+    
+    for gown_id in gown_ids:
+        if not gown_id: 
+            continue
+            
+        gown_session_key = f"gown_{gown_id}"
+        if gown_session_key in request.session:
+            # Use the session data for this gown
+            gown_data = request.session[gown_session_key]
+            # Ensure the ID is correct
+            gown_data['id'] = gown_id
+            result.append(gown_data)
+        else:
+            # Use database data if no session data exists
+            try:
+                gown = Gown.objects.get(id=gown_id)
+                serializer = GownSerializer(gown)
+                result.append(serializer.data)
+            except Gown.DoesNotExist:
+                print(f"Gown {gown_id} not found in database")
+                # Skip non-existent gowns
+                pass
+    
+    return Response(result)
 
 
 @api_view(['GET', 'POST'])
