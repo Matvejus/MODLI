@@ -35,24 +35,46 @@ def selected_gowns_emissions(request):
     return Response(serializer.data)
 
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET', 'POST'])
 def gown_detail(request, pk):
+    # Ensure session exists
+    if not request.session.session_key:
+        request.session.create()
+    session_key = request.session.session_key
+    
+    # Define a session key for this specific gown
+    gown_session_key = f"gown_{pk}"
+    
     try:
-        gown = Gown.objects.get(pk=pk)
+        # Get the base gown data from the database
+        base_gown = Gown.objects.get(pk=pk)
+        
+        # Check if we have session-specific data for this gown
+        if gown_session_key in request.session:
+            # Use session data but keep the database ID
+            gown_data = request.session[gown_session_key]
+            gown_data['id'] = base_gown.id
+        else:
+            # Initialize session with data from the database
+            serializer = GownDetailSerializer(base_gown)
+            request.session[gown_session_key] = serializer.data
+            gown_data = serializer.data
+            
     except Gown.DoesNotExist:
-        return Response(status=404)
-
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
     if request.method == 'GET':
-        serializer = GownDetailSerializer(gown)
-        print(serializer.data)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        serializer = GownDetailSerializer(gown, data=request.data)
+        return Response(gown_data)
+    
+    elif request.method == 'POST':
+        serializer = GownDetailSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+            # Save the updated data to the session, not the database
+            request.session[gown_session_key] = serializer.validated_data
+            request.session.modified = True  # Mark the session as modified
+            
+            return Response(serializer.validated_data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def gown_emissions(request, pk):
@@ -87,30 +109,6 @@ def optimize_gowns_api(request):
     except Exception as e:
         return Response({'error': f'Optimization error: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-# class GownEmissionsAPIView(APIView):
-#     def get(self, request):
-#         gowns_data = []
-#         gowns = Gown.objects.all()
-        
-#         for gown in gowns:
-#             emissions = Emissions.objects.filter(gown=gown)
-#             total_co2 = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.CO2)
-#             total_energy = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.ENERGY)
-#             total_water = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.WATER)
-#             cost = gown.cost
-
-#             gowns_data.append({
-#                 "gown": gown.id,
-#                 "name": gown.name,
-#                 "reusable": gown.reusable,
-#                 "emissions": {
-#                     "CO2": total_co2,
-#                     "Energy": total_energy,
-#                     "Water": total_water,
-#                     "Cost": cost,
-#                 }
-#             })
-#         return Response(gowns_data)
 
 @api_view(['GET'])
 def all_certificates(request):
