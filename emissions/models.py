@@ -19,7 +19,6 @@ class Gown(models.Model):
         REG = "Regular", _("Regular")
 
     name = models.CharField(max_length = 100)
-    session_key = models.CharField(max_length=40, blank=True, null=True)
     visible = models.BooleanField(blank = True, null = True, help_text="Indicates if the gown is visible on the front-end.")
     type = models.CharField(max_length=255, choices = GownType.choices)
     reusable = models.BooleanField()
