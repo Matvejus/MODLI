@@ -34,42 +34,38 @@ def selected_gowns_emissions(request):
     gown_ids = request.GET.get('ids', '').split(',')
     result = []
     
-    # Debug: print all session keys
-    
     for gown_id in gown_ids:
         if not gown_id:
             continue
             
         gown_session_key = f"gown_{gown_id}"
         if gown_session_key in request.session:
-            # Use the session data for this gown
+            # Get session data
             gown_data = request.session[gown_session_key]
             gown_data['id'] = gown_id
             
             try:
-                # Get the gown object
-                gown = Gown.objects.get(id=gown_id)
+                original_gown = Gown.objects.get(id=gown_id)
                 
-                # Use the serializer to get emissions data
-                serializer = GownSerializer(gown)
+                # Create a merged object - start with original gown
+                # and override with session values
+                merged_gown = original_gown
                 
-                # Add the emission impacts to the gown data
+                # Override properties with session values
+                for key, value in gown_data.items():
+                    if hasattr(merged_gown, key):
+                        if key == 'certificates': 
+                            merged_gown.certificates.set(value)  
+                        else:
+                            setattr(merged_gown, key, value)
+                
+              
+                serializer = GownSerializer(merged_gown, context={'session_data': gown_data})
                 gown_data['emission_impacts'] = serializer.data['emission_impacts']
                 
                 result.append(gown_data)
             except Gown.DoesNotExist:
-                # Handle case when gown doesn't exist
-                gown_data['emission_impacts'] = None
-                result.append(gown_data)
-        else:
-            # Use database data if no session data exists
-            try:
-                gown = Gown.objects.get(id=gown_id)
-                serializer = GownSerializer(gown)
-                result.append(serializer.data)
-            except Gown.DoesNotExist:
                 print(f"Gown {gown_id} not found in database")
-                # Skip non-existent gowns
                 pass
     
     return Response(result)
