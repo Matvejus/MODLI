@@ -37,16 +37,30 @@ def selected_gowns_emissions(request):
     # Debug: print all session keys
     
     for gown_id in gown_ids:
-        if not gown_id: 
+        if not gown_id:
             continue
             
         gown_session_key = f"gown_{gown_id}"
         if gown_session_key in request.session:
             # Use the session data for this gown
             gown_data = request.session[gown_session_key]
-            # Ensure the ID is correct
             gown_data['id'] = gown_id
-            result.append(gown_data)
+            
+            try:
+                # Get the gown object
+                gown = Gown.objects.get(id=gown_id)
+                
+                # Use the serializer to get emissions data
+                serializer = GownSerializer(gown)
+                
+                # Add the emission impacts to the gown data
+                gown_data['emission_impacts'] = serializer.data['emission_impacts']
+                
+                result.append(gown_data)
+            except Gown.DoesNotExist:
+                # Handle case when gown doesn't exist
+                gown_data['emission_impacts'] = None
+                result.append(gown_data)
         else:
             # Use database data if no session data exists
             try:
