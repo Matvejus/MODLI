@@ -55,7 +55,8 @@ def selected_gowns_emissions(request):
                 for key, value in gown_data.items():
                     if hasattr(merged_gown, key):
                         if key == 'certificates': 
-                            merged_gown.certificates.set(value)  
+                            merged_gown.certificates.set(value)
+                            print(value)  
                         else:
                             setattr(merged_gown, key, value)
                 

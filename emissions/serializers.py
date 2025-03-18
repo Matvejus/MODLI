@@ -30,9 +30,10 @@ class GownSerializer(serializers.ModelSerializer):
         residual_value = self.get_attribute_value(obj, 'residual_value')
         washes = self.get_attribute_value(obj, 'washes')
         reusable = self.get_attribute_value(obj, 'reusable')
+        cost = self.get_attribute_value(obj, 'cost')
 
         total_emissions = {
-            'purchase_cost': sum(float(e.cost) for e in emissions if e.cost is not None),
+            'purchase_cost': sum(float(e.cost) for e in emissions if e.cost is not None) + cost,
             'use_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'Use'),
             'lost_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'LOST'),
             'eol_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'EOL'),
