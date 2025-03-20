@@ -93,7 +93,7 @@ def gown_detail(request, pk):
             gown_data['id'] = base_gown.id
         else:
             # Initialize session with data from the database
-            serializer = GownDetailSerializer(base_gown)
+            serializer = GownSerializer(base_gown)
             request.session[gown_session_key] = serializer.data
             gown_data = serializer.data
             
@@ -104,7 +104,7 @@ def gown_detail(request, pk):
         return Response(gown_data)
     
     elif request.method == 'POST':
-        serializer = GownDetailSerializer(data=request.data)
+        serializer = GownSerializer(data=request.data)
         if serializer.is_valid():
             # Save the updated data to the session, not the database
             request.session[gown_session_key] = serializer.validated_data
