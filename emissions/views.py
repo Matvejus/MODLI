@@ -22,8 +22,6 @@ from .serializers import GownSerializer, GownDetailSerializer, CertificationSeri
 
 @api_view(['GET'])
 def gown_list(request):
-    
-
     gowns = Gown.objects.all()
     serializer = GownSerializer(gowns, many=True)
     return Response(serializer.data)
@@ -54,15 +52,15 @@ def selected_gowns_emissions(request):
                 # Override properties with session values
                 for key, value in gown_data.items():
                     if hasattr(merged_gown, key):
-                        if key == 'certificates': 
-                            merged_gown.certificates.set(value)
-                            print(value)  
+                        if key == 'certificates':
+                            merged_gown.certificates.set([cert['id'] for cert in value]) 
                         else:
                             setattr(merged_gown, key, value)
                 
               
                 serializer = GownSerializer(merged_gown, context={'session_data': gown_data})
                 gown_data['emission_impacts'] = serializer.data['emission_impacts']
+                print(gown_data)
                 
                 result.append(gown_data)
             except Gown.DoesNotExist:
@@ -101,16 +99,21 @@ def gown_detail(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
     
     if request.method == 'GET':
+        print(gown_data)
         return Response(gown_data)
     
     elif request.method == 'POST':
         serializer = GownSerializer(data=request.data)
+        print(serializer)
+
         if serializer.is_valid():
             # Save the updated data to the session, not the database
             request.session[gown_session_key] = serializer.validated_data
+            print(serializer.validated_data)
             request.session.modified = True  # Mark the session as modified
             
             return Response(serializer.validated_data)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])

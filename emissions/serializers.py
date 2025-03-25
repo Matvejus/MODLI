@@ -8,10 +8,16 @@ class EmissionImpactSerializer(serializers.Serializer):
     Water = serializers.FloatField()
     Cost = serializers.FloatField()
 
+class CertificationSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=False)
+    class Meta:
+        model = Certification
+        fields = ['id', 'name', 'description']
+        
+
 class GownSerializer(serializers.ModelSerializer):
     emission_impacts = serializers.SerializerMethodField()
-    certificates = serializers.StringRelatedField(many=True)
-    
+    certificates = CertificationSerializer(many=True)
     class Meta:
         model = Gown
         fields = ['id', 'name', 'cost', 'laundry_cost', 'residual_value', 'waste_cost', 'washes', 'reusable', 'fte_local', 'fte_local_extra',
@@ -79,7 +85,3 @@ class GownDetailSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Emissions
 #         fields = ['gown', 'emission_stage', 'fibers', 'yarn_production', 'fabric_production', 'finishing', 'production', 'packaging', 'transport', 'use', 'total']
-class CertificationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Certification
-        fields = ['id', 'name', 'description']
