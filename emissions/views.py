@@ -16,7 +16,7 @@ from rest_framework.views import APIView
 
 from .models import Gown, Certification, EmissionsNew
 from .OPT import GownOptimizer
-from .serializers import GownSerializer, GownDetailSerializer, CertificationSerializer
+from .serializers import GownSerializer, CertificationModel
 
 
 
@@ -28,7 +28,6 @@ def gown_list(request):
 
 @api_view(['GET'])
 def selected_gowns_emissions(request):
-    print(request.session.session_key)
     gown_ids = request.GET.get('ids', '').split(',')
     result = []
     
@@ -60,7 +59,6 @@ def selected_gowns_emissions(request):
               
                 serializer = GownSerializer(merged_gown, context={'session_data': gown_data})
                 gown_data['emission_impacts'] = serializer.data['emission_impacts']
-                print(gown_data)
                 
                 result.append(gown_data)
             except Gown.DoesNotExist:
@@ -99,12 +97,10 @@ def gown_detail(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
     
     if request.method == 'GET':
-        print(gown_data)
         return Response(gown_data)
     
     elif request.method == 'POST':
         serializer = GownSerializer(data=request.data)
-        print(serializer)
 
         if serializer.is_valid():
             # Save the updated data to the session, not the database
@@ -153,12 +149,12 @@ def optimize_gowns_api(request):
 @api_view(['GET'])
 def all_certificates(request):
     certificates = Certification.objects.all()
-    serializer = CertificationSerializer(certificates, many=True)
+    serializer = CertificationModel(certificates, many=True)
     return Response(serializer.data)
 
 class CertificationView(APIView):
     def post(self, request, format=None):
-        serializer = CertificationSerializer(data=request.data)
+        serializer = CertificationModel(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -170,7 +166,7 @@ class CertificationView(APIView):
         except Certification.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        serializer = CertificationSerializer(certification, data=request.data)
+        serializer = CertificationModel(certification, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

@@ -14,7 +14,6 @@ class CertificationSerializer(serializers.ModelSerializer):
         model = Certification
         fields = ['id', 'name', 'description']
         
-
 class GownSerializer(serializers.ModelSerializer):
     emission_impacts = serializers.SerializerMethodField()
     certificates = CertificationSerializer(many=True)
@@ -80,8 +79,9 @@ class GownDetailSerializer(serializers.ModelSerializer):
         model = Gown
         fields = ['name', 'reusable', 'cost', 'laundry_cost', 'residual_value', 'waste_cost', 'washes', 'comfort', 'hygine', 'certificates', 'fte_local', 'fte_local_extra']
 
-# class EmissionSerializer(serializers.ModelSerializer):
-#     gown = serializers.StringRelatedField()
-#     class Meta:
-#         model = Emissions
-#         fields = ['gown', 'emission_stage', 'fibers', 'yarn_production', 'fabric_production', 'finishing', 'production', 'packaging', 'transport', 'use', 'total']
+
+class CertificationModel(serializers.ModelSerializer):
+
+    class Meta:
+        model = Certification
+        fields  = '__all__'
