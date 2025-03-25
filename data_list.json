@@ -3,7 +3,7 @@
         "model": "emissions.gown",
         "pk": 1,
         "fields": {
-            "name": "Lyocell",
+            "name": "100% Lyocell",
             "visible": true,
             "type": "Regular",
             "reusable": true,
@@ -106,7 +106,7 @@
         "model": "emissions.gown",
         "pk": 2,
         "fields": {
-            "name": "Org Cotton",
+            "name": "100% Organic Cotton",
             "visible": true,
             "type": "Bio",
             "reusable": true,
@@ -209,7 +209,7 @@
         "model": "emissions.gown",
         "pk": 3,
         "fields": {
-            "name": "Cotton",
+            "name": "100% Cotton",
             "visible": true,
             "type": "Regular",
             "reusable": true,
@@ -312,7 +312,7 @@
         "model": "emissions.gown",
         "pk": 4,
         "fields": {
-            "name": "R-Cotton",
+            "name": "100% Recycled Cotton",
             "visible": true,
             "type": "Recycled",
             "reusable": true,
@@ -415,7 +415,7 @@
         "model": "emissions.gown",
         "pk": 5,
         "fields": {
-            "name": "Polyester",
+            "name": "100% Polyester",
             "visible": true,
             "type": "Regular",
             "reusable": true,
@@ -518,7 +518,7 @@
         "model": "emissions.gown",
         "pk": 6,
         "fields": {
-            "name": "r-Polyester",
+            "name": "100% Recycled Polyester",
             "visible": true,
             "type": "Recycled",
             "reusable": true,
@@ -621,7 +621,7 @@
         "model": "emissions.gown",
         "pk": 7,
         "fields": {
-            "name": "PP-disposable",
+            "name": "100% Polypropelene (disposable)",
             "visible": true,
             "type": "Regular",
             "reusable": false,
