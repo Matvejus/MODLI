@@ -38,7 +38,7 @@ class GownSerializer(serializers.ModelSerializer):
         cost = self.get_attribute_value(obj, 'cost')
 
         total_emissions = {
-            'purchase_cost': sum(float(e.cost) for e in emissions if e.cost is not None) + cost,
+            'purchase_cost': cost,
             'use_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'Use'),
             'lost_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'LOST'),
             'eol_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'EOL'),
@@ -52,11 +52,11 @@ class GownSerializer(serializers.ModelSerializer):
         total_emissions["Water"] = self.calculate_total_emissions(emissions, 'water', obj, washes)
 
         # Adjust emissions and cost if the gown is reusable
-        if reusable and washes > 0 and any(key in ['purchase_cost', 'CO2', 'Energy', 'Water', 'residual_value'] for key in total_emissions):
+        if reusable and washes > 0 and any(key in ['CO2', 'Energy', 'Water', 'residual_value'] for key in total_emissions):
             total_emissions = {key: value / washes for key, value in total_emissions.items()}
 
         return total_emissions
-    
+          
     def calculate_total_emissions(self, emissions, emission_type, obj, washes=None):
         # Use passed washes if provided, otherwise get from obj
         if washes is None:
