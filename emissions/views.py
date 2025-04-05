@@ -14,9 +14,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
-from .models import Gown, Emissions, Certification
+from .models import Gown, Certification, EmissionsNew
 from .OPT import GownOptimizer
-from .serializers import GownSerializer, GownDetailSerializer, EmissionSerializer, CertificationSerializer
+from .serializers import GownSerializer, CertificationModel
 
 
 
@@ -29,33 +29,93 @@ def gown_list(request):
 @api_view(['GET'])
 def selected_gowns_emissions(request):
     gown_ids = request.GET.get('ids', '').split(',')
-    gowns = Gown.objects.filter(id__in=gown_ids)
-    serializer = GownSerializer(gowns, many=True)    
-    return Response(serializer.data)
+    result = []
+    
+    for gown_id in gown_ids:
+        if not gown_id:
+            continue
+            
+        gown_session_key = f"gown_{gown_id}"
+        if gown_session_key in request.session:
+            # Get session data
+            gown_data = request.session[gown_session_key]
+            gown_data['id'] = gown_id
+            
+            try:
+                original_gown = Gown.objects.get(id=gown_id)
+                
+                # Create a merged object - start with original gown
+                # and override with session values
+                merged_gown = original_gown
+                
+                # Override properties with session values
+                for key, value in gown_data.items():
+                    if hasattr(merged_gown, key):
+                        if key == 'certificates':
+                            merged_gown.certificates.set([cert['id'] for cert in value]) 
+                        else:
+                            setattr(merged_gown, key, value)
+                
+              
+                serializer = GownSerializer(merged_gown, context={'session_data': gown_data})
+                gown_data['emission_impacts'] = serializer.data['emission_impacts']
+                
+                result.append(gown_data)
+            except Gown.DoesNotExist:
+                print(f"Gown {gown_id} not found in database")
+                pass
+    
+    return Response(result)
 
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET', 'POST'])
 def gown_detail(request, pk):
+    # Ensure session exists
+    if not request.session.session_key:
+        request.session.create()
+    session_key = request.session.session_key
+    
+    # Define a session key for this specific gown
+    gown_session_key = f"gown_{pk}"
+    
     try:
-        gown = Gown.objects.get(pk=pk)
+        # Get the base gown data from the database
+        base_gown = Gown.objects.get(pk=pk)
+        
+        # Check if we have session-specific data for this gown
+        if gown_session_key in request.session:
+            # Use session data but keep the database ID
+            gown_data = request.session[gown_session_key]
+            gown_data['id'] = base_gown.id
+        else:
+            # Initialize session with data from the database
+            serializer = GownSerializer(base_gown)
+            request.session[gown_session_key] = serializer.data
+            gown_data = serializer.data
+            
     except Gown.DoesNotExist:
-        return Response(status=404)
-
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
     if request.method == 'GET':
-        serializer = GownDetailSerializer(gown)
-        return Response(serializer.data)
+        return Response(gown_data)
+    
+    elif request.method == 'POST':
+        serializer = GownSerializer(data=request.data)
 
-    elif request.method == 'PUT':
-        serializer = GownDetailSerializer(gown, data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+            # Save the updated data to the session, not the database
+            request.session[gown_session_key] = serializer.validated_data
+            print(serializer.validated_data)
+            request.session.modified = True  # Mark the session as modified
+            
+            return Response(serializer.validated_data)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def gown_emissions(request, pk):
-    emissions = Emissions.objects.filter(gown_id=pk)
-    serializer = EmissionSerializer(emissions, many=True)
+    emissions = EmissionsNew.objects.filter(gown_id=pk)
+    serializer = GownSerializer(emissions, many=True)
     return Response(serializer.data)
 
 
@@ -85,33 +145,38 @@ def optimize_gowns_api(request):
     except Exception as e:
         return Response({'error': f'Optimization error: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-class GownEmissionsAPIView(APIView):
-    def get(self, request):
-        gowns_data = []
-        gowns = Gown.objects.all()
-        
-        for gown in gowns:
-            emissions = Emissions.objects.filter(gown=gown)
-            total_co2 = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.CO2)
-            total_energy = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.ENERGY)
-            total_water = sum(emission.total for emission in emissions if emission.emission_stage == Emissions.EmissionStage.WATER)
-            cost = gown.cost
-
-            gowns_data.append({
-                "gown": gown.id,
-                "name": gown.name,
-                "reusable": gown.reusable,
-                "emissions": {
-                    "CO2": total_co2,
-                    "Energy": total_energy,
-                    "Water": total_water,
-                    "Cost": cost,
-                }
-            })
-        return Response(gowns_data)
 
 @api_view(['GET'])
 def all_certificates(request):
     certificates = Certification.objects.all()
-    serializer = CertificationSerializer(certificates, many=True)
+    serializer = CertificationModel(certificates, many=True)
     return Response(serializer.data)
+
+class CertificationView(APIView):
+    def post(self, request, format=None):
+        serializer = CertificationModel(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk, format=None):
+        try:
+            certification = Certification.objects.get(pk=pk)
+        except Certification.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = CertificationModel(certification, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        try:
+            certification = Certification.objects.get(pk=pk)
+        except Certification.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        certification.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
