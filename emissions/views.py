@@ -22,8 +22,22 @@ from .serializers import GownSerializer, CertificationModel
 
 @api_view(['GET'])
 def gown_list(request):
+    # Ensure session exists
+    if not request.session.session_key:
+        request.session.create()
+    session_key = request.session.session_key
+    
     gowns = Gown.objects.all()
     serializer = GownSerializer(gowns, many=True)
+    
+    for gown in gowns:
+        gown_session_key = f"gown_{gown.pk}"
+        if gown_session_key not in request.session:
+            gown_serializer = GownSerializer(gown)
+            request.session[gown_session_key] = gown_serializer.data
+    
+    request.session.modified = True
+    
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -62,7 +76,7 @@ def selected_gowns_emissions(request):
                 
                 result.append(gown_data)
             except Gown.DoesNotExist:
-                print(f"Gown {gown_id} not found in database")
+                print(f"Gown {gown_id} not found")
                 pass
     
     return Response(result)
