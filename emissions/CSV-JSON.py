@@ -36,14 +36,16 @@ for idx, row in data.iterrows():
             "reusable": row["Reusable"],
             "woven": row["Woven"],
             "cost": row["Price"],  # Convert to float-compatible format
-            "laundry_cost": None,  # Set to None or calculate if available
+            "laundry_cost": 1.25,  # Set to None or calculate if available
             "weight": row["Weight"],
             "fte_local": row["Local FTE"],
             # "fte_local_extra": 0,
             "washes": row["Longevity"],
-            "comfort": row["Comfort"],
-            "hygine": row["Hygiene"],
-            "source": "Roel"  # Replace with a relevant value
+            "comfort": 6,
+            "hygine": 6,
+            "waste_cost": 0,
+            "residual_value": 0.03,
+            "source": "Roel",  # Replace with a relevant value
         }
     }
     fixture.append(gown_entry)
