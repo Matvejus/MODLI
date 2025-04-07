@@ -31,20 +31,20 @@ for idx, row in data.iterrows():
         "pk": gown_pk_counter,
         "fields": {
             "name": row["Gown"],
-            "visible": True,  # Default value; change if needed
+            "visible": True if "100%" in row['Gown'] else False ,  # Default value; change if needed
             "type": row["Type"],
             "reusable": row["Reusable"],
             "woven": row["Woven"],
-            "cost": row["Price"],  # Convert to float-compatible format
-            "laundry_cost": 1.25,  # Set to None or calculate if available
+            "cost": 42 if row["Reusable"] else 0.76,
+            "laundry_cost": 1.25 if row["Reusable"] else 0,  # Set to None or calculate if available
             "weight": row["Weight"],
             "fte_local": row["Local FTE"],
             # "fte_local_extra": 0,
             "washes": row["Longevity"],
-            "comfort": 6,
-            "hygine": 6,
-            "waste_cost": 0,
-            "residual_value": 0.03,
+            "comfort": 0,
+            "hygine": 0,
+            "waste_cost": 0 if row["Reusable"] else 0.05,
+            "residual_value": 0.03 if row['Reusable'] else  0,
             "source": "Roel",  # Replace with a relevant value
         }
     }
@@ -82,5 +82,6 @@ for idx, row in data.iterrows():
 # Save the fixture to a JSON file
 with open("data_list.json", "w") as final:
     json.dump(fixture, final, indent=4)
+    
 
 
