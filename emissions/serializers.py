@@ -43,7 +43,7 @@ class GownSerializer(serializers.ModelSerializer):
             'lost_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'LOST'),
             'eol_cost': sum(float(e.cost) for e in emissions if e.emission_stage == 'EOL'),
             'waste': waste_cost if waste_cost is not None else 0,
-            'residual_value': residual_value * 100 if residual_value is not None else 0,
+            'residual_value': residual_value if residual_value is not None else 0,
         }
 
         # Pass session-modified obj to calculation methods

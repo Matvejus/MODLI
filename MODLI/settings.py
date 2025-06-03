@@ -66,8 +66,9 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 SESSION_COOKIE_SAMESITE = 'Lax'  # or 'None' if cross-site
-SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
+SESSION_COOKIE_SECURE = True  # Set to True in production with HTTPS
 SESSION_COOKIE_HTTPONLY = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
 CSRF_TRUSTED_ORIGINS = [
